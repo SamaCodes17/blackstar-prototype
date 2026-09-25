@@ -2,6 +2,11 @@
 
 ## Executive experience revision
 
+- Added a charcoal/lime visual identity based on the supplied reference screenshots. The original logo is blended into the header using CSS, with no replacement or generated mark.
+- Shodan status distinguishes configured credentials from successful search access. Indexed service observations are retained and version-backed associations support array/object CVE responses; denied API access is reported explicitly.
+- Disconnected graph nodes use a readable grid rather than overlapping, and the interface states when no connections have been established.
+- See `docs/IMPLEMENTATION_STATUS.md` for the exact three-layer scope and remaining intake gaps.
+
 - Replaced the navigation-heavy research dashboard with one decision page. Recommended actions, costs, expected impact and budget adjustment are the primary flow.
 - Promoted an interactive before/after attack graph and a real source-status list with timestamps, manual refresh and optional automatic refresh.
 - Removed Plain/Expert, architecture/methodology walkthroughs, quantum tools, self-checks and raw JSON exports from customer navigation. Retained the numerical capabilities and internal documentation for development.

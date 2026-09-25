@@ -20,7 +20,11 @@ The calculation tests run with `npm test`; `npm run check` adds strict TypeScrip
 
 ### Current executive revision
 
-- All 26 calculation, collector and persistence tests pass. Added financial reconciliation, zero-loss/zero-budget, and annual cost-versus-benefit cases.
+- Reference-inspired charcoal/lime identity and blended original logo checked in the browser. Disconnected seven-node assessments have no overlapping nodes and explicitly state that connections are not established.
+- Shodan tests now cover exact hostname matching, CVE arrays, service observations without CVEs, missing version evidence, and access-denied handling. Total automated test count is now 28.
+- A real key authenticated successfully with Shodan's account endpoint, but live search returned HTTP 403 requiring membership. Successful service ingestion is covered by fixtures; no live Shodan service findings are claimed for this account. The UI reports access blocked.
+
+- Calculation, collector and persistence tests pass. Added financial reconciliation, zero-loss/zero-budget, and annual cost-versus-benefit cases.
 - Browser checks at desktop and narrow mobile widths: one-page layout, no document-level horizontal overflow, and a deliberately scrollable attack map on mobile.
 - Current/With plan changes real stored compromise probabilities; scenario and selected-system controls update the graph details.
 - Zero-budget submission removes funded actions; changing the budget and period recomputes the financial comparison. Restored the sample to its original annual period and budget after checks.

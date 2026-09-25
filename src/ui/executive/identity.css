@@ -1,0 +1,444 @@
+/* Reference-inspired charcoal identity. Layout remains executive-first. */
+.executive-app {
+  --exec-ink: #f1f2e9;
+  --exec-muted: #a0a9ae;
+  --exec-line: #30363b;
+  --accent: #c8f34c;
+  background: #14171b;
+  color-scheme: dark;
+}
+.executive-app .exec-header {
+  background: #101316;
+}
+.executive-app .exec-brand .logo-window img {
+  filter: grayscale(1) contrast(1.3) invert(1);
+  mix-blend-mode: screen;
+}
+.executive-app .exec-header nav a {
+  color: #a6afb4;
+}
+.executive-app .exec-header nav a:first-child,
+.executive-app .exec-header nav a:hover {
+  color: var(--accent);
+}
+.executive-app .exec-button {
+  border-radius: 3px;
+  font-size: 13px;
+}
+.executive-app .exec-button.primary {
+  background: var(--accent);
+  color: #162008;
+  border-color: var(--accent);
+}
+.executive-app .exec-button.primary:hover:not(:disabled) {
+  background: #ddff81;
+}
+.executive-app .exec-button.secondary {
+  background: #1b2025;
+  border-color: #3d454b;
+  color: #d6dedc;
+}
+.executive-app .exec-button.secondary:hover:not(:disabled) {
+  background: #2c3438;
+}
+.executive-app .exec-org-picker select {
+  color: #e0e5df;
+}
+.executive-app select option {
+  background: #1b2025;
+  color: #edf1e5;
+}
+.executive-app .exec-org-picker label,
+.executive-app .exec-kicker {
+  color: #bacb95;
+  letter-spacing: 0.15em;
+}
+.executive-app .exec-kicker {
+  font-family: Consolas, monospace;
+  font-size: 10px;
+}
+.executive-app .exec-org-picker > svg,
+.executive-app .exec-icon-link {
+  color: #9ca8ab;
+}
+.executive-app .exec-prototype-pill {
+  color: var(--accent);
+  border-color: #657734;
+  background: #222a1a;
+}
+.executive-app .exec-page-title h1 {
+  font-size: clamp(28px, 3vw, 42px);
+  letter-spacing: -0.045em;
+}
+.executive-app .exec-assessment-date time {
+  color: #d3dcda;
+}
+.executive-app .exec-confidence-bar {
+  background: #22291c;
+  border: 0;
+  border-left: 3px solid var(--accent);
+  border-radius: 0;
+}
+.executive-app .exec-confidence-bar p {
+  color: #aebc9c;
+  font-size: 12px;
+}
+.executive-app .exec-confidence-bar strong,
+.executive-app .exec-confidence-bar button {
+  color: #d4e8af;
+}
+.executive-app .exec-demo-dot {
+  background: var(--accent);
+}
+.executive-app .exec-card,
+.executive-app .exec-recommendation {
+  border-radius: 4px;
+  box-shadow: none;
+  border: 1px solid #333a3e;
+  background: #1a1e23;
+}
+.executive-app .exec-recommendation {
+  background: radial-gradient(ellipse at top right, #35412555, transparent 65%), #1b211b;
+  border-top: 2px solid #b8de47;
+}
+.executive-app .exec-recommendation::after {
+  border-color: #c8f34c22;
+  box-shadow: none;
+  border-radius: 0;
+  transform: rotate(45deg);
+  top: -105px;
+  right: -95px;
+}
+.executive-app .exec-dark-kicker {
+  color: var(--accent);
+  font-family: Consolas, monospace;
+}
+.executive-app .exec-outline-pill {
+  border-radius: 0;
+  color: #bed58f;
+  border-color: #5f7040;
+}
+.executive-app .exec-investment-amount strong {
+  color: var(--accent);
+}
+.executive-app .exec-investment-amount > span,
+.executive-app .exec-plan-intro,
+.executive-app .exec-action p {
+  color: #a7b1a2;
+}
+.executive-app .exec-plan-intro {
+  font-size: 13px;
+}
+.executive-app .exec-action h3 {
+  font-size: 14px;
+}
+.executive-app .exec-action p {
+  font-size: 12px;
+}
+.executive-app .exec-action-check {
+  border-radius: 2px;
+  background: #c8f34c15;
+  color: var(--accent);
+}
+.executive-app .exec-action > strong {
+  color: #d8e6c4;
+}
+.executive-app .exec-action,
+.executive-app .exec-recommendation-bottom {
+  border-color: #343d31;
+}
+.executive-app .exec-recommendation-bottom {
+  color: #a2b08f;
+}
+.executive-app .exec-recommendation-bottom button {
+  color: var(--accent);
+}
+.executive-app .exec-help {
+  color: #9ca9a9;
+}
+.executive-app .exec-reduction-icon {
+  border-radius: 2px;
+  background: #2b3520;
+  color: var(--accent);
+}
+.executive-app .exec-impact-headline strong {
+  color: var(--accent);
+}
+.executive-app .exec-impact-headline > div > span,
+.executive-app .exec-loss-comparison span {
+  color: #a6b2b5;
+  font-size: 12px;
+}
+.executive-app .exec-loss-track {
+  background: #30363b;
+  height: 7px;
+  border-radius: 0;
+}
+.executive-app .exec-loss-track > span {
+  border-radius: 0;
+  background: #f77d6b;
+}
+.executive-app .after .exec-loss-track > span {
+  background: var(--accent);
+}
+.executive-app .after strong {
+  color: var(--accent);
+}
+.executive-app .exec-avoided {
+  color: #a0abb0;
+  font-size: 12px;
+}
+.executive-app .exec-avoided strong {
+  color: #d9e6c0;
+}
+.executive-app .exec-budget-form {
+  border-color: #343b3e;
+}
+.executive-app .exec-budget-label label {
+  color: #c4d0cb;
+}
+.executive-app .exec-budget-form input[type='range'],
+.executive-app .exec-auto-refresh input {
+  accent-color: var(--accent);
+}
+.executive-app .exec-range-labels,
+.executive-app .exec-budget-bottom label,
+.executive-app .exec-budget-feedback {
+  color: #9ba8ac;
+}
+.executive-app .exec-budget-bottom select {
+  color: #dce7d2;
+}
+.executive-app .exec-map-switch {
+  background: #11161a;
+  border-radius: 2px;
+  border: 1px solid #343e40;
+}
+.executive-app .exec-map-switch button {
+  color: #9caaa8;
+  border-radius: 0;
+}
+.executive-app .exec-map-switch button[aria-pressed='true'] {
+  background: #303c23;
+  color: var(--accent);
+  box-shadow: none;
+}
+.executive-app .exec-map-stage {
+  background-color: #11181b;
+  background-image: radial-gradient(#42505788 0.7px, transparent 0.7px);
+  --path: #f4b36a;
+}
+.executive-app .exec-map-stage.is-defended {
+  --path: #c8f34c;
+}
+.executive-app .exec-map-scroll {
+  max-height: 430px;
+  overflow: auto;
+}
+.executive-app .exec-map-scroll svg {
+  max-height: none;
+}
+.executive-app .exec-map-toolbar select {
+  background: #20272b;
+  color: #d4dfce;
+  border-color: #485447;
+  border-radius: 2px;
+}
+.executive-app .exec-map-node > rect {
+  fill: #202a24;
+  stroke: #566647;
+  rx: 2px;
+}
+.executive-app .exec-map-node.on-route > rect {
+  fill: #302d24;
+  stroke: #ba935d;
+}
+.executive-app .exec-map-node.selected > rect {
+  stroke: var(--accent);
+}
+.executive-app .exec-map-node.protected > rect {
+  fill: #2b361f;
+  stroke: #b9e340;
+}
+.executive-app .exec-map-node:hover > rect {
+  fill: #35412a;
+}
+.executive-app .is-defended .exec-node-value {
+  fill: var(--accent);
+}
+.executive-app .exec-route-caption {
+  background: #0f1316;
+  border-color: #313b37;
+}
+.executive-app .exec-map-detail p,
+.executive-app .exec-map-note,
+.executive-app .exec-map-detail > div:last-child span {
+  color: #9ba8a9;
+}
+.executive-app .exec-map-detail .exec-selected-host {
+  color: #69cfca;
+}
+.executive-app .exec-map-detail strong {
+  color: #dbeac3;
+}
+.executive-app .exec-count {
+  color: var(--accent);
+  background: #262e1d;
+  border-color: #5b6d32;
+  border-radius: 0;
+  font-family: Consolas, monospace;
+}
+.executive-app .exec-source-intro,
+.executive-app .exec-feed-copy small,
+.executive-app .exec-feed-copy time,
+.executive-app .exec-source-footer p,
+.executive-app .exec-auto-refresh {
+  color: #9faab0;
+}
+.executive-app .exec-feed-copy strong {
+  font-size: 12px;
+}
+.executive-app .exec-feed-copy small {
+  font-size: 10px;
+}
+.exec-credit-note {
+  display: block;
+  margin-top: 9px;
+  color: #a6afb4;
+  font-size: 10px;
+  line-height: 1.5;
+}
+.executive-app .exec-feed,
+.executive-app .exec-source-footer {
+  border-color: #30383c;
+}
+.executive-app .exec-feed:hover {
+  background: #232b2d;
+}
+.executive-app .exec-feed-icon {
+  border-radius: 2px;
+  background: #252b30;
+  border-color: #3d474a;
+  color: #9caeb0;
+}
+.executive-app .exec-feed-icon.live {
+  color: var(--accent);
+  background: #28311f;
+  border-color: #4c6035;
+}
+.executive-app .exec-feed-icon.snapshot {
+  color: #e5bd77;
+  background: #302b20;
+  border-color: #655438;
+}
+.executive-app .exec-feed-status {
+  color: #aab6bb;
+  background: #2c3338;
+  border: 1px solid #465158;
+  border-radius: 0;
+}
+.executive-app .exec-feed-status.live {
+  color: var(--accent);
+  background: #28311f;
+  border-color: #546d2e;
+}
+.executive-app .exec-feed-status.snapshot,
+.executive-app .exec-feed-status.preview {
+  color: #edbc73;
+  background: #32291e;
+  border-color: #715735;
+}
+.executive-app .exec-next-step {
+  background: #1e251b;
+  border-color: #3c4830;
+  border-radius: 3px;
+}
+.executive-app .exec-next-icon {
+  color: var(--accent);
+  background: #303c23;
+  border-radius: 2px;
+}
+.executive-app .exec-next-step p:not(.exec-kicker) {
+  color: #a3b197;
+  font-size: 12px;
+}
+.executive-app .exec-footer {
+  color: #84969b;
+}
+.executive-app .exec-offline {
+  color: #e7d2a4;
+  background: #342c1e;
+  border-color: #756244;
+}
+.executive-app .exec-offline button {
+  color: #edd091;
+}
+.executive-app .modal {
+  background: #1a2025;
+  color: #e7eee2;
+  border: 1px solid #435049;
+  border-radius: 4px;
+}
+.executive-app .modal > header {
+  border-color: #35413e;
+}
+.executive-app .modal .icon-button {
+  color: #b9c7c5;
+}
+.executive-app .exec-source-detail dl,
+.executive-app .exec-estimate-explainer dl,
+.executive-app .exec-source-detail dl > div,
+.executive-app .exec-estimate-explainer dl > div,
+.executive-app .exec-inputs-form details,
+.executive-app .exec-control-inputs fieldset {
+  border-color: #3b4841;
+}
+.executive-app .exec-source-detail dt,
+.executive-app .exec-estimate-explainer dt,
+.executive-app .exec-small,
+.executive-app .exec-source-evidence p,
+.executive-app .exec-inputs-form > p,
+.executive-app .exec-inputs-form details > p,
+.executive-app .exec-input-field small,
+.executive-app .exec-control-inputs label {
+  color: #a4b4ac;
+}
+.executive-app .exec-source-evidence ul,
+.executive-app .exec-inputs-form summary {
+  color: #c6dfaa;
+}
+.executive-app .exec-inputs-form input,
+.executive-app .onboarding-form input,
+.executive-app .onboarding-form select {
+  background: #121a1d;
+  border-color: #455449;
+  color: #e0e9d6;
+}
+.executive-app .modal .muted,
+.executive-app .onboarding-form label {
+  color: #a9b8b0;
+}
+.executive-app .modal .note {
+  background: #253127;
+  border-color: #485b40;
+  color: #c6d4b7;
+}
+.executive-app .exec-brief {
+  color-scheme: light;
+  color: #172b2b;
+}
+.executive-app .exec-brief .exec-kicker {
+  color: #657851;
+}
+@media (max-width: 850px) {
+  .executive-app .exec-header nav {
+    border-color: #333d3e;
+  }
+}
+@media print {
+  .executive-app {
+    background: #fff;
+    color: #172b2b;
+    color-scheme: light;
+  }
+}

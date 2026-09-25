@@ -36,14 +36,31 @@ export function AttackMap({ org, output }: { org: Organization; output: Output }
     depth[id] = Math.max(0, ...org.edges.filter((e) => e.to === id).map((e) => depth[e.from] + 1));
   const maxDepth = Math.max(0, ...Object.values(depth));
   const width = Math.max(740, (maxDepth + 1) * 190);
+  const disconnected = org.edges.length === 0;
+  const columns = Math.min(3, ids.length);
+  const largestGroup = Math.max(
+    ...ids.map((id) => ids.filter((other) => depth[other] === depth[id]).length),
+  );
+  const height = Math.max(
+    344,
+    disconnected ? Math.ceil(ids.length / columns) * 110 + 70 : largestGroup * 110 + 116,
+  );
   const positions = new Map(
-    ids.map((id) => {
+    ids.map((id, i) => {
       const group = ids.filter((x) => depth[x] === depth[id]);
       return [
         id,
         {
-          x: maxDepth ? 94 + depth[id] * ((width - 188) / maxDepth) : width / 2,
-          y: 58 + ((group.indexOf(id) + 0.5) / group.length) * 228,
+          x: disconnected
+            ? columns === 1
+              ? width / 2
+              : 94 + (i % columns) * ((width - 188) / (columns - 1))
+            : maxDepth
+              ? 94 + depth[id] * ((width - 188) / maxDepth)
+              : width / 2,
+          y: disconnected
+            ? 80 + Math.floor(i / columns) * 110
+            : 58 + ((group.indexOf(id) + 0.5) / group.length) * (height - 116),
         },
       ];
     }),
@@ -68,7 +85,9 @@ export function AttackMap({ org, output }: { org: Organization; output: Output }
           <p className="exec-kicker">
             <GitBranch size={14} /> SEE THE EXPOSURE
           </p>
-          <h2 id="map-heading">How an attack could spread</h2>
+          <h2 id="map-heading">
+            {disconnected ? 'Systems in your assessment' : 'How an attack could spread'}
+          </h2>
         </div>
         <div className="exec-map-switch" aria-label="Compare attack map">
           <button aria-pressed={!defended} onClick={() => setDefended(false)}>
@@ -97,13 +116,17 @@ export function AttackMap({ org, output }: { org: Organization; output: Output }
           </label>
           <span className="exec-map-legend">
             <i />
-            {defended ? 'Route after investment' : 'Modeled attack route'}
+            {disconnected
+              ? 'No mapped connections'
+              : defended
+                ? 'Route after investment'
+                : 'Modeled attack route'}
           </span>
         </div>
         <div className="exec-map-scroll" tabIndex={0} aria-label="Scrollable attack graph">
           <svg
-            viewBox={`0 0 ${width} 344`}
-            style={{ minWidth: width }}
+            viewBox={`0 0 ${width} ${height}`}
+            style={{ minWidth: width, height }}
             role="group"
             aria-label={`${defended ? 'With recommended plan' : 'Current'} attack graph. Select a system to see its business impact.`}
           >
@@ -179,7 +202,7 @@ export function AttackMap({ org, output }: { org: Organization; output: Output }
           </svg>
         </div>
         <div className="exec-route-caption">
-          <span>SCENARIO ROUTE</span>
+          <span>{disconnected ? 'MODELED ENTRY' : 'SCENARIO ROUTE'}</span>
           <p>
             {route.length
               ? route.map((id, i) => (
@@ -207,8 +230,10 @@ export function AttackMap({ org, output }: { org: Organization; output: Output }
         </div>
       </div>
       <p className="exec-map-note">
-        Illustrative paths, not a detected attack. Connections and probabilities need validation
-        with your team. Select any system to explore.
+        {disconnected
+          ? 'No connections have been established between these systems. The map shows separate assets, not an observed attack path.'
+          : 'Illustrative paths, not a detected attack. Connections and probabilities need validation with your team.'}{' '}
+        Select any system to explore.
       </p>
     </section>
   );
