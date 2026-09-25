@@ -21,6 +21,8 @@ npm start          # serve built assets using the same local API
 
 Optional settings are documented in `.env.example`. Copy it to `.env` for optional third-party keys. `.env`, SQLite databases, logs and browser test artifacts are excluded from Git.
 
+For Shodan, set `SHODAN_API_KEY` in the local `.env` and restart the service. Never paste the key into the UI or commit it. A valid key is not sufficient unless the account permits filtered search; these requests may consume query credits. The source panel distinguishes missing configuration, denied access, and successful retrieval. See [Shodan's API requirements](https://developer.shodan.io/api) and [the three-layer implementation status](docs/IMPLEMENTATION_STATUS.md).
+
 ## Architecture
 
 ```text

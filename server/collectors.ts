@@ -1,4 +1,5 @@
 import { domainToASCII } from 'node:url';
+import { isIP } from 'node:net';
 import { cache, cached } from './store';
 import { assumed, classify } from './seed';
 import type { Organization, ScanStatus } from '../src/core/types';
@@ -116,7 +117,8 @@ export async function scan(
     count: number,
     message: string,
     dataAt?: string,
-  ) => scans.push({ collector, status: state, count, message, checkedAt, dataAt });
+    issue?: ScanStatus['issue'],
+  ) => scans.push({ collector, status: state, count, message, checkedAt, dataAt, issue });
   try {
     const result = await adapters.discover(org.domain);
     cache(org.id, 'ct', result);
@@ -163,42 +165,113 @@ export async function scan(
       old?.at ?? input.scans.find((s) => s.collector === 'Certificate transparency')?.dataAt,
     );
   }
-  if (process.env.SHODAN_API_KEY) {
+  if (process.env.SHODAN_API_KEY?.trim()) {
     try {
       const data = await adapters.read(
         `https://api.shodan.io/shodan/host/search?key=${encodeURIComponent(process.env.SHODAN_API_KEY)}&query=${encodeURIComponent('hostname:' + org.domain)}`,
       );
+      if (!Array.isArray(data.matches)) throw new Error('Invalid service-index response');
       let matches = 0;
+      for (const asset of org.assets) asset.services = [];
       for (const service of data.matches ?? []) {
-        const asset = org.assets.find((a) => service.hostnames?.includes(a.hostname));
-        // Only a third-party exact hostname match and explicit CVE record creates an association.
-        const cve = Object.keys(service.vulns ?? {}).find((c) => /^CVE-\d{4}-\d{4,}$/.test(c));
-        if (asset && cve && service.product && service.version) {
-          if (asset.cve !== cve) {
-            delete asset.epss;
-            delete asset.kev;
-            delete asset.cvss;
+        if (
+          !service ||
+          typeof service !== 'object' ||
+          typeof service.ip_str !== 'string' ||
+          !isIP(service.ip_str) ||
+          !Number.isInteger(service.port) ||
+          service.port < 1 ||
+          service.port > 65535
+        )
+          continue;
+        const hostnames = Array.isArray(service.hostnames)
+          ? service.hostnames
+              .filter((name: unknown): name is string => typeof name === 'string')
+              .map((name: string) => name.toLowerCase().replace(/\.$/, ''))
+          : [];
+        const assets = org.assets.filter((a) => hostnames.includes(a.hostname.toLowerCase()));
+        const cves = (
+          Array.isArray(service.vulns) ? service.vulns : Object.keys(service.vulns ?? {})
+        ).filter(
+          (c: unknown): c is string => typeof c === 'string' && /^CVE-\d{4}-\d{4,}$/.test(c),
+        );
+        for (const asset of assets) {
+          if (
+            typeof service.ip_str === 'string' &&
+            isIP(service.ip_str) &&
+            Number.isInteger(service.port) &&
+            service.port > 0 &&
+            service.port <= 65535 &&
+            asset.services!.length < 20
+          ) {
+            asset.services!.push({
+              ip: service.ip_str,
+              port: service.port,
+              transport: service.transport === 'udp' ? 'udp' : 'tcp',
+              product: typeof service.product === 'string' ? service.product : undefined,
+              version: typeof service.version === 'string' ? service.version : undefined,
+              observedAt:
+                typeof service.timestamp === 'string' &&
+                Number.isFinite(Date.parse(service.timestamp))
+                  ? service.timestamp
+                  : undefined,
+              retrievedAt: checkedAt,
+              cves,
+            });
+            matches++;
           }
-          asset.cve = cve;
-          asset.product = `${service.product} ${service.version}`;
-          asset.findingTag = 'CITED';
-          changed.add(asset.id);
-          matches++;
+          // Only a third-party exact hostname match and explicit CVE record creates an association.
+          const cve = cves[0];
+          if (
+            cve &&
+            typeof service.product === 'string' &&
+            service.product &&
+            typeof service.version === 'string' &&
+            service.version
+          ) {
+            if (asset.cve !== cve) {
+              delete asset.epss;
+              delete asset.kev;
+              delete asset.cvss;
+            }
+            asset.cve = cve;
+            asset.product = `${service.product} ${service.version}`;
+            asset.findingTag = 'CITED';
+            changed.add(asset.id);
+          }
         }
       }
       status(
         'Service / CVE correlation',
         'LIVE',
         matches,
-        'Third-party indexed hostname, product and version association; not independently verified on target.',
+        'Shodan indexed services matched to modeled hostnames. Version-backed CVE associations are third-party observations, not independently verified on target. One search page; not an exhaustive inventory.',
         checkedAt,
       );
-    } catch {
+    } catch (cause) {
+      const httpCode =
+        cause instanceof Error
+          ? cause.message.match(/^Public index responded (\d{3})$/)?.[1]
+          : undefined;
+      const issue =
+        httpCode === '401' || httpCode === '403'
+          ? 'ACCESS_DENIED'
+          : httpCode === '429'
+            ? 'RATE_LIMITED'
+            : undefined;
       status(
         'Service / CVE correlation',
-        'SNAPSHOT',
-        0,
-        'Third-party service unavailable. Retaining prior findings; no new correlation claimed.',
+        org.assets.some((a) => a.services?.length || a.findingTag === 'CITED')
+          ? 'SNAPSHOT'
+          : 'UNAVAILABLE',
+        org.assets.reduce((sum, a) => sum + (a.services?.length ?? 0), 0),
+        issue === 'ACCESS_DENIED'
+          ? 'Shodan rejected search access. Check key validity and account membership/search permissions. A configured key alone does not grant search access. Retaining prior evidence.'
+          : issue === 'RATE_LIMITED'
+            ? 'Shodan temporarily rate-limited the lookup. Retaining prior evidence; try again later.'
+            : 'Third-party service unavailable. Retaining prior findings; no new correlation claimed.',
+        undefined,
+        issue,
       );
     }
   } else

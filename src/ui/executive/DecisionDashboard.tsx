@@ -281,7 +281,14 @@ export function DecisionDashboard({
       </section>
       <div className="exec-evidence-grid">
         <AttackMap key={org.id} org={org} output={output} />
-        <LiveSources org={org} busy={busy} offline={offline} refresh={refresh} update={update} />
+        <LiveSources
+          org={org}
+          busy={busy}
+          offline={offline}
+          refresh={refresh}
+          update={update}
+          shodanConfigured={state.integrations?.shodanConfigured}
+        />
       </div>
       <section className="exec-next-step">
         <div className="exec-next-icon">

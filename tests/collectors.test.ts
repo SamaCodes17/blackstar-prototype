@@ -5,6 +5,83 @@ const { scan } = await import('../server/collectors');
 const { exampleOrganization, createOrganization } = await import('../server/seed');
 const { save, getOrg, getOutput, timeline } = await import('../server/store');
 const { compute } = await import('../src/core/pipeline');
+
+test('Shodan saves indexed services, supports CVE arrays, and requires exact host and version evidence', async () => {
+  const previous = process.env.SHODAN_API_KEY;
+  process.env.SHODAN_API_KEY = 'test-fixture-not-a-real-key';
+  try {
+    const org = exampleOrganization();
+    const banner = {
+      ip_str: '192.0.2.44',
+      port: 443,
+      transport: 'tcp',
+      product: 'Example server',
+      version: '1.2',
+      timestamp: '2026-09-25T12:00:00Z',
+      vulns: ['CVE-2024-12345'],
+    };
+    const result = await scan(org, {
+      discover: async () => ({ names: org.inventory, source: 'https://crt.sh/' }),
+      read: async (url) => {
+        if (url.includes('api.shodan.io'))
+          return {
+            matches: [
+              null,
+              { ...banner, hostnames: [org.assets[0].hostname + '.evil.example'] },
+              { ...banner, hostnames: [org.assets[1].hostname], version: undefined },
+              { ...banner, hostnames: [org.assets[0].hostname.toUpperCase() + '.'] },
+              { ...banner, hostnames: [org.assets[2].hostname], vulns: undefined },
+            ],
+          };
+        if (url.includes('first.org')) return { data: [] };
+        if (url.includes('cisa.gov')) return { vulnerabilities: [] };
+        return { totalResults: 1 };
+      },
+    });
+    assert.equal(result.org.assets[0].services?.length, 1);
+    assert.equal(result.org.assets[0].services?.[0].port, 443);
+    assert.equal(result.org.assets[0].services?.[0].observedAt, banner.timestamp);
+    assert.equal(result.org.assets[0].cve, 'CVE-2024-12345');
+    assert.equal(result.org.assets[0].findingTag, 'CITED');
+    assert.equal(result.org.assets[1].cve, undefined);
+    assert.equal(result.org.assets[2].services?.length, 1);
+    assert.equal(result.org.assets[2].cve, undefined);
+    assert.equal(
+      result.org.scans.find((s) => s.collector === 'Service / CVE correlation')?.count,
+      3,
+    );
+    assert.ok(!JSON.stringify(result).includes('test-fixture-not-a-real-key'));
+  } finally {
+    if (previous === undefined) delete process.env.SHODAN_API_KEY;
+    else process.env.SHODAN_API_KEY = previous;
+  }
+});
+
+test('Shodan authentication failure claims unavailable, not a successful live lookup', async () => {
+  const previous = process.env.SHODAN_API_KEY;
+  process.env.SHODAN_API_KEY = 'test-fixture-not-a-real-key';
+  try {
+    const org = exampleOrganization();
+    const result = await scan(org, {
+      discover: async () => ({ names: org.inventory, source: 'https://crt.sh/' }),
+      read: async () => {
+        throw new Error('Public index responded 401');
+      },
+    });
+    assert.equal(
+      result.org.scans.find((s) => s.collector === 'Service / CVE correlation')?.status,
+      'UNAVAILABLE',
+    );
+    assert.equal(result.org.assets[0].findingTag, 'PREVIEW');
+    assert.equal(
+      result.org.scans.find((s) => s.collector === 'Service / CVE correlation')?.issue,
+      'ACCESS_DENIED',
+    );
+  } finally {
+    if (previous === undefined) delete process.env.SHODAN_API_KEY;
+    else process.env.SHODAN_API_KEY = previous;
+  }
+});
 test('offline collectors preserve last good evidence and distinguish snapshot from live', async () => {
   const org = exampleOrganization(),
     before = structuredClone(org);

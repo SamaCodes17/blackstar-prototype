@@ -51,6 +51,7 @@ for (const org of organizations())
   if (!getOutput(org.id).derivation)
     commit(org, 'Output contract refreshed after prototype update');
 const state = (id: string): State => ({
+  integrations: { shodanConfigured: Boolean(process.env.SHODAN_API_KEY?.trim()) },
   org: getOrg(id),
   output: getOutput(id),
   timeline: timeline(id),

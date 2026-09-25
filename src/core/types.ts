@@ -29,6 +29,16 @@ export interface Asset {
   kev?: boolean;
   findingTag?: Tag;
   product?: string;
+  services?: {
+    ip: string;
+    port: number;
+    transport: string;
+    product?: string;
+    version?: string;
+    observedAt?: string;
+    retrievedAt: string;
+    cves: string[];
+  }[];
 }
 export interface Edge {
   from: string;
@@ -67,6 +77,7 @@ export interface Assumptions {
   downstream: Fact;
 }
 export interface ScanStatus {
+  issue?: 'ACCESS_DENIED' | 'RATE_LIMITED';
   collector: string;
   status: 'LIVE' | 'SNAPSHOT' | 'PREVIEW' | 'UNAVAILABLE';
   checkedAt: string;
@@ -174,6 +185,7 @@ export interface Output {
   blast: { entry: string; probabilities: number[]; loss: number }[];
 }
 export interface State {
+  integrations?: { shodanConfigured: boolean };
   org: Organization;
   output: Output;
   timeline: Timeline[];

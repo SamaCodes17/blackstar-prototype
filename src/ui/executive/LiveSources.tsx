@@ -30,8 +30,8 @@ const feeds = [
   },
   {
     key: 'Service / CVE correlation',
-    name: 'Exposed service findings',
-    detail: 'Version & vulnerability matching',
+    name: 'Shodan service intelligence',
+    detail: 'Indexed ports, software & versions',
     url: 'https://www.shodan.io/',
   },
 ];
@@ -52,34 +52,46 @@ export function LiveSources({
   offline,
   refresh,
   update,
+  shodanConfigured,
 }: {
   org: Organization;
   busy: boolean;
   offline: boolean;
   refresh: () => Promise<boolean>;
   update: (body: unknown) => Promise<boolean>;
+  shodanConfigured?: boolean;
 }) {
   const [detail, setDetail] = useState<(typeof feeds)[number]>();
   const [refreshing, setRefreshing] = useState(false);
   const live = offline
     ? 0
-    : feeds.filter((feed) => org.scans.some((s) => s.collector === feed.key && s.status === 'LIVE'))
-        .length;
+    : feeds.filter(
+        (feed) =>
+          !(feed.key === 'Service / CVE correlation' && shodanConfigured === false) &&
+          org.scans.some((s) => s.collector === feed.key && s.status === 'LIVE'),
+      ).length;
   const record = org.scans.find((s) => s.collector === detail?.key);
+  const needsKey = (key: string) =>
+    key === 'Service / CVE correlation' && shodanConfigured === false;
   const noMatches = org.scans.some((s) => s.collector === 'Vulnerability intelligence');
   const noMatchFor = (key: string) =>
     noMatches && ['FIRST EPSS', 'CISA KEV', 'NVD / CVE'].includes(key);
-  const explanation = !record
-    ? detail && noMatchFor(detail.key)
-      ? 'No matched vulnerabilities are available to look up for this assessment. Your security team should verify software versions first.'
-      : 'This source has not been checked for this assessment. Refresh sources to request current public information.'
-    : record.status === 'LIVE'
-      ? 'Public information was retrieved successfully at the time below. This is a source check, not evidence of an incident at your organization.'
-      : record.status === 'SNAPSHOT'
-        ? 'Using previously saved information. A current source response is unavailable; retained values can include example assumptions.'
-        : record.status === 'PREVIEW'
-          ? 'Only illustrative findings are available. No verified service vulnerability is claimed. Ask your security team to validate the systems and software versions.'
-          : 'This source currently has no usable information for the assessment. Risk estimates still rely on the stated assumptions.';
+  const explanation =
+    detail && needsKey(detail.key)
+      ? 'Shodan is not connected. The organization administrator needs to configure the server-side API key. No live Shodan findings are claimed; any stored example associations remain illustrative.'
+      : detail?.key === 'Service / CVE correlation' && record?.issue
+        ? record.message
+        : !record
+          ? detail && noMatchFor(detail.key)
+            ? 'No matched vulnerabilities are available to look up for this assessment. Your security team should verify software versions first.'
+            : 'This source has not been checked for this assessment. Refresh sources to request current public information.'
+          : record.status === 'LIVE'
+            ? 'Public information was retrieved successfully at the time below. This is a source check, not evidence of an incident at your organization.'
+            : record.status === 'SNAPSHOT'
+              ? 'Using previously saved information. A current source response is unavailable; retained values can include example assumptions.'
+              : record.status === 'PREVIEW'
+                ? 'Only illustrative findings are available. No verified service vulnerability is claimed. Ask your security team to validate the systems and software versions.'
+                : 'This source currently has no usable information for the assessment. Risk estimates still rely on the stated assumptions.';
   return (
     <section className="exec-sources exec-card" id="sources" aria-labelledby="sources-heading">
       <header className="exec-section-head">
@@ -125,7 +137,17 @@ export function LiveSources({
                 )}
               </span>
               <span className={`exec-feed-status ${status?.toLowerCase() ?? ''}`}>
-                {!scan && noMatchFor(feed.key) ? 'No match' : feedStatus(status)}
+                {scan?.issue === 'ACCESS_DENIED'
+                  ? 'Access blocked'
+                  : needsKey(feed.key)
+                    ? 'Key needed'
+                    : feed.key === 'Service / CVE correlation' &&
+                        shodanConfigured &&
+                        scan?.status === 'PREVIEW'
+                      ? 'Not checked'
+                      : !scan && noMatchFor(feed.key)
+                        ? 'No match'
+                        : feedStatus(status)}
               </span>
             </button>
           );
@@ -160,16 +182,25 @@ export function LiveSources({
           />{' '}
           Automatic refresh
         </label>
+        {shodanConfigured && (
+          <small className="exec-credit-note">
+            Shodan searches may use your account’s query credits.
+          </small>
+        )}
       </div>
       {detail && (
         <Modal title={detail.name} close={() => setDetail(undefined)}>
           <div className="exec-source-detail">
             <span className={`exec-feed-status ${record?.status.toLowerCase() ?? ''}`}>
-              {offline && record?.status === 'LIVE'
-                ? 'Saved offline'
-                : !record && noMatchFor(detail.key)
-                  ? 'No match'
-                  : feedStatus(record?.status)}
+              {record?.issue === 'ACCESS_DENIED'
+                ? 'Access blocked'
+                : needsKey(detail.key)
+                  ? 'Key needed'
+                  : offline && record?.status === 'LIVE'
+                    ? 'Saved offline'
+                    : !record && noMatchFor(detail.key)
+                      ? 'No match'
+                      : feedStatus(record?.status)}
             </span>
             <p>{explanation}</p>
             {record && (
@@ -227,6 +258,43 @@ export function LiveSources({
                       </li>
                     ))}
                 </ul>
+              </div>
+            )}
+            {detail.key === 'Service / CVE correlation' && (
+              <div className="exec-source-evidence">
+                <h3>Indexed services</h3>
+                <p>
+                  Only exact hostname matches for systems in this assessment are included. These are
+                  Shodan observations, not a fresh scan of your systems. Unlisted systems have not
+                  been proved safe.
+                </p>
+                {org.assets.some((a) => a.services?.length) ? (
+                  <ul>
+                    {org.assets.flatMap((a) =>
+                      (a.services ?? []).map((service, i) => (
+                        <li key={`${a.id}-${i}`} data-provenance="CITED">
+                          <strong>{a.hostname}</strong>
+                          <br />
+                          {service.ip}:{service.port} · {service.transport}
+                          <br />
+                          {service.product ?? 'Product not identified'} {service.version ?? ''}
+                          <br />
+                          {service.observedAt
+                            ? `Observed ${new Date(service.observedAt).toLocaleString()}`
+                            : 'Observation date not supplied'}
+                          {service.cves.length > 0 && (
+                            <>
+                              <br />
+                              Indexed CVEs: {service.cves.join(', ')}
+                            </>
+                          )}
+                        </li>
+                      )),
+                    )}
+                  </ul>
+                ) : (
+                  <p>No indexed service observations have been saved for this assessment.</p>
+                )}
               </div>
             )}
             <a className="exec-button secondary" href={detail.url} target="_blank" rel="noreferrer">
