@@ -16,7 +16,7 @@
 - The working quantum bridge is a **pairwise surrogate**, exact surrogate search, simulated annealing, and an actual shallow QAOA state-vector circuit. There is no hardware, speedup or advantage claim. Postselection and actual approximation quality are visible.
 - Economic contagion is an additive PREVIEW scenario with explicit coefficients. It is not an ingested MCA/BSE network or validated market contagion forecast.
 - The runtime is a **modular monolith + SQLite**, not multiple deployed services. Typed contracts and persisted outputs preserve separation without operational overhead.
-- Scheduled refresh, change detection, alerts and event injection work while the local process runs. The original demand for descendant-only inference is not described as complete: affected descendants are tracked, but the bounded exact joint and solver are recomputed globally.
+- Scheduled refresh, change detection, alerts and event injection work while the local process runs. The exact engine incrementally recomputes changed conditional distributions and their descendants, preserving the unaffected joint law. Full-state aggregation, Monte Carlo and finite game search are still bounded full-instance operations; no distributed scaling claim is made.
 - Legal references are context. The DPDP statutory ceiling is excluded from ALE. No determination of applicability, commencement or legal compliance is made.
 
 ## Repository boundary
