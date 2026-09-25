@@ -9,7 +9,52 @@ import { applyEdits } from '../server/validation';
 import { infer, affectedNodes } from '../src/core/incremental';
 import { formulate } from '../src/core/quantum';
 import { optimize } from '../src/core/optimizer';
+import { decisionSummary } from '../src/core/decision';
 const org = exampleOrganization();
+test('executive financial figures reconcile with independently evaluated risk and actual selected costs', () => {
+  const scenario = structuredClone(org);
+  scenario.budget = 500000;
+  scenario.horizon = 90;
+  scenario.assumptions.costPerRecord.value = 4200;
+  const output = compute(scenario);
+  const summary = decisionSummary(scenario, output);
+  const before = exact(modelFor(scenario)).ale;
+  const after = exact(modelFor(scenario, output.optimal.mask)).ale;
+  const selectedCost = scenario.controls.reduce(
+    (total, control, i) => total + (output.optimal.mask & (1 << i) ? control.cost.value : 0),
+    0,
+  );
+  assert.ok(Math.abs(summary.before - before) < 1e-6);
+  assert.ok(Math.abs(summary.after - after) < 1e-6);
+  assert.ok(Math.abs(summary.avoided - (before - after)) < 1e-6);
+  assert.ok(Math.abs(summary.reduction - (1 - after / before)) < 1e-10);
+  assert.equal(summary.spend, selectedCost);
+  assert.equal(summary.remaining + summary.spend, scenario.budget);
+  assert.ok(summary.remaining >= 0);
+  assert.ok(
+    Math.abs(output.derivation.reduce((sum, asset) => sum + asset.contribution, 0) - before) < 1e-6,
+  );
+});
+test('executive zero-loss and zero-budget states do not invent savings or produce NaN', () => {
+  const scenario = structuredClone(org);
+  scenario.budget = 0;
+  scenario.assumptions.recordScale.value = 0;
+  const summary = decisionSummary(scenario, compute(scenario));
+  assert.equal(summary.before, 0);
+  assert.equal(summary.after, 0);
+  assert.equal(summary.reduction, 0);
+  assert.equal(summary.spend, 0);
+  assert.equal(summary.avoided, 0);
+  assert.equal(summary.controls.length, 0);
+});
+test('executive brief flags a plan whose annual cost exceeds its modeled benefit', () => {
+  const scenario = structuredClone(org);
+  scenario.assumptions.recordScale.value = 0.001;
+  const summary = decisionSummary(scenario, compute(scenario));
+  assert.ok(summary.controls.length > 0);
+  assert.ok(summary.spend > summary.avoided);
+  assert.equal(summary.annualCostExceedsBenefit, true);
+});
 test('zero game loss produces a constant-zero risk surrogate', () => {
   const noOpportunity = structuredClone(org);
   noOpportunity.assumptions.opportunity.value = 0;

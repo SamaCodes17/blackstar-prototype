@@ -47,19 +47,23 @@ The same API serves Vite during development and the compiled application in prod
 
 ## What works
 
+The customer experience is one executive overview: recommended actions and annual spend, a budget/period comparison, an interactive attack graph, and a live source list. The graph switches between current exposure and the recommended plan. Source rows show actual retrieval status and timestamps, and can refresh manually or periodically. Business inputs are edited in a dialog; the board brief prints without implementation details.
+
+The previous research pages are retained in `src/ui/pages/` for development reference but are not routed or imported by the customer application. There is no Plain/Expert switch, public architecture explorer, quantum tab, or raw evidence export button in the executive flow. Architecture and numerical methods belong in this repository's documentation. Production browser source maps are disabled.
+
 - Authorized domain onboarding with passive certificate discovery; cached fallback and explicit unavailable states.
 - Verified example hostnames from Cert Spotter; separate preview CVE associations and a hypothetical supplier node.
 - Optional Shodan service/version evidence, NVD lookup, live FIRST EPSS and CISA KEV refresh.
 - Exact inference on the bounded acyclic graph; Monte Carlo loss distribution, tail percentile, mean confidence interval and separate parameter sensitivity bands.
 - Finite portfolio enumeration, adaptive attacker paths, defender-favorable ties, severity-first baseline and standalone control ROSI.
 - Real QUBO construction with budget slack, exact surrogate enumeration, seeded simulated annealing and a small complex-amplitude QAOA simulator.
-- Computed preview economic contagion, editable assumptions, sensitivity chart, Plain/Expert lenses, provenance dialogs, guided tour and interactive architecture explorer.
+- Computed preview economic contagion and sensitivity remain available in the numerical engine; executive financial headlines use direct risk only.
 - Scheduled refresh while the local service runs, change history, threshold alerts and preview event injection.
-- Live numerical self-check, board report print view, organization-scoped JSON evidence export and browser snapshot fallback.
+- Numerical self-check and organization-scoped JSON evidence export remain developer API capabilities. The executive UI includes a printable board brief and browser snapshot fallback.
 
 ## Honesty and methodology
 
-Every quantitative display uses one of **CITED**, **ASSUMED**, **COMPUTED**, or **PREVIEW**. A computed result can depend on preview inputs. Source status is not a finding about the assessed organization.
+The data contract retains **CITED**, **ASSUMED**, **COMPUTED**, and **PREVIEW** provenance. The executive UI uses plain-language estimate notices and source statuses instead of repeating technical badges on every figure. Financial totals, reduction, and graph probabilities are calculated; many inputs are assumed or illustrative. Computation does not make them empirically validated forecasts. Source status is not a finding about the assessed organization. The brief explicitly flags annual plans whose cost exceeds modeled loss avoided.
 
 Certificate evidence demonstrates issuance of a certificate containing a name. It does **not** establish an active service, a dependency, a vendor relationship or a vulnerability. In the example, only names are observed; CVE associations and supplier relationships are preview scenarios. The default size and cost-per-record values are assumptions, not claimed institutional facts.
 
@@ -67,7 +71,7 @@ EPSS is a global thirty-day exploitation signal. The model uses `1 - (1 - p30)^(
 
 Full-joint enumeration preserves shared-ancestor dependence. The familiar marginal noisy-OR forward pass can be wrong on DAGs with shared ancestors; it is shown only as a comparison. Exact ALE uses `sum(P(v) × V(v))`. Loss allocations are disjoint equivalent records, not repeated copies of the same dataset. Monte Carlo produces joint loss outcomes; its confidence interval is distinct from the outcome percentile and from the assumption sensitivity band.
 
-The game is an explicitly finite, pure-defense Stackelberg scenario. For each defender portfolio, attacker types choose entry/path/target by expected target utility. Among equal attacker utilities, the lower defender loss is selected. Defender loss includes the successful route and subsequent downstream compromise, weighted by an assumed attack opportunity and normalized type priors. **This game objective is distinct from background Bayesian ALE.** The UI reports both. Enumeration is exact for this finite specified game, not for every possible real attack or mixed-strategy game.
+The game is an explicitly finite, pure-defense Stackelberg scenario. For each defender portfolio, attacker types choose entry/path/target by expected target utility. Among equal attacker utilities, the lower defender loss is selected. Defender loss includes the successful route and subsequent downstream compromise, weighted by an assumed attack opportunity and normalized type priors. **This game objective is distinct from background Bayesian ALE.** The executive UI reports background expected loss before/after the selected plan and explains that the plan prioritizes modeled attacker choices; it does not claim to minimize background ALE or guarantee financial savings. Enumeration is exact for this finite specified game, not for every possible real attack or mixed-strategy game.
 
 The QUBO is a second-order surrogate of the game objective, not an exact reduction of dependent Bayesian cascades. Prices/budgets are integer ₹25,000 units. A slack-bit penalty enforces the budget. QAOA uses an actual shallow state-vector circuit with a deterministic parameter search and feasible modal postselection. Quality is `exact game loss / candidate game loss`; larger is better, with one meaning optimum. There is **no quantum hardware, speedup or advantage claim**.
 

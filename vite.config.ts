@@ -3,5 +3,5 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   server: { watch: { ignored: ['**/data/**', '**/artifacts/**', '**/.git/**'] } },
-  build: { sourcemap: true },
+  build: { sourcemap: false },
 });

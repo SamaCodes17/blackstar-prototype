@@ -18,6 +18,19 @@ The calculation tests run with `npm test`; `npm run check` adds strict TypeScrip
 
 ## Interactive checks performed
 
+### Current executive revision
+
+- All 26 calculation, collector and persistence tests pass. Added financial reconciliation, zero-loss/zero-budget, and annual cost-versus-benefit cases.
+- Browser checks at desktop and narrow mobile widths: one-page layout, no document-level horizontal overflow, and a deliberately scrollable attack map on mobile.
+- Current/With plan changes real stored compromise probabilities; scenario and selected-system controls update the graph details.
+- Zero-budget submission removes funded actions; changing the budget and period recomputes the financial comparison. Restored the sample to its original annual period and budget after checks.
+- Real public-source refresh succeeds; certificate, FIRST, CISA and NVD status rows show actual last-check timestamps, while sample service findings stay illustrative. Outcomes depend on provider availability.
+- Source details show certificate inventory and dated results without solver architecture. Automatic-refresh preference survives a reload.
+- Board brief uses the same values as the dashboard and omits implementation details. The production bundle has no architecture walkthrough or browser source maps.
+- Editing the business impact per record recalculates before/after financial loss; restoring the original input restores the figures. Cost-greater-than-benefit warning was checked on the small example-domain assessment. Browser console has no errors or warnings.
+
+### Earlier research UI checks (historical)
+
 - Desktop and narrow mobile dashboard layout; no document-level horizontal overflow.
 - Displayed numeric-text provenance audit across main views.
 - Live self-check executes all numerical checks and reports their actual results.
