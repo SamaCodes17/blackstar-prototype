@@ -78,7 +78,7 @@ The QUBO is a second-order surrogate of the game objective, not an exact reducti
 - No fingerprint key means no real vulnerability correlation. Preview data never becomes a verified institution finding merely because its global EPSS score refreshes.
 - Graph dependencies, loss allocations, targeting, control effectiveness, prices and attacker priors remain assumptions. MITRE ATT&CK does not supply population-level attacker frequencies.
 - The stored parameter band explores four leading uncertain parameters with uniform draws; it is not a full uncertainty posterior or an empirically validated interval.
-- The scheduler runs only while this process runs. The current exact joint and portfolio solver recompute globally; changed descendants are recorded, not presented as a distributed incremental inference engine.
+- The scheduler runs only while this process runs. The exact engine recomputes changed conditional distributions and their descendants while reusing the unaffected joint law. Joint-state aggregation, Monte Carlo and game search still traverse the bounded full instance. This is not a distributed inference engine.
 - The contagion extension is an additive preview transmission model. No MCA/BSE/NSE corporate network has been ingested and there is no causal stock-price model.
 - Scaling needs authenticated tenancy, a durable job queue, incremental inference, cyclic-graph handling and larger mixed-integer/sampling solvers. See the decision records.
 
