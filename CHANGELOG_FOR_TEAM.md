@@ -36,3 +36,12 @@
 ## Repository boundary
 
 Development is exclusively for **SamaCodes17/blackstar-prototype**, branch **prototype**. The team's repository is not connected. No push before the user's explicit first-push confirmation.
+
+## Focused workspace redesign — 26 September 2026
+
+- Added distinct violet-and-ink styling and five focused pages with hash navigation and browser history.
+- Restored deeper evidence inventory/search/activity, conditional impact, loss distribution, sensitivity, illustrative wider impact, portfolio comparisons and experimental method comparisons.
+- Added Ask BlackStar, a clearly labeled local assessment explainer with grounded financial answers and contextual navigation.
+- Kept business inputs, organization onboarding, source refresh, attack-map interaction and printable board brief connected to the existing runtime. No new dependencies or backend contract changes.
+- Validation: 31 automated tests pass; production build passes. Browser checks cover page navigation, assistant answers, search empty state, graph protection toggle, conditional system selector, investment draft controls and mobile layout.
+- Local preview only. No GitHub push performed; first-push confirmation remains required.

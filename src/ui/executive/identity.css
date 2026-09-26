@@ -1,14 +1,14 @@
-/* Reference-inspired charcoal identity. Layout remains executive-first. */
+/* Shared component palette for the BlackStar violet workspace. */
 .executive-app {
-  --exec-ink: #f1f2e9;
-  --exec-muted: #a0a9ae;
-  --exec-line: #30363b;
-  --accent: #c8f34c;
-  background: #14171b;
+  --exec-ink: #f4f2ff;
+  --exec-muted: #ada9c1;
+  --exec-line: #302c44;
+  --accent: #b6a0ff;
+  background: #0e0d17;
   color-scheme: dark;
 }
 .executive-app .exec-header {
-  background: #101316;
+  background: #11101c;
 }
 .executive-app .exec-brand .logo-window img {
   filter: grayscale(1) contrast(1.3) invert(1);
@@ -27,30 +27,30 @@
 }
 .executive-app .exec-button.primary {
   background: var(--accent);
-  color: #162008;
+  color: #170d35;
   border-color: var(--accent);
 }
 .executive-app .exec-button.primary:hover:not(:disabled) {
-  background: #ddff81;
+  background: #d8caff;
 }
 .executive-app .exec-button.secondary {
-  background: #1b2025;
-  border-color: #3d454b;
+  background: #201c30;
+  border-color: #443b61;
   color: #d6dedc;
 }
 .executive-app .exec-button.secondary:hover:not(:disabled) {
-  background: #2c3438;
+  background: #332b49;
 }
 .executive-app .exec-org-picker select {
   color: #e0e5df;
 }
 .executive-app select option {
-  background: #1b2025;
+  background: #201c30;
   color: #edf1e5;
 }
 .executive-app .exec-org-picker label,
 .executive-app .exec-kicker {
-  color: #bacb95;
+  color: #c1adf6;
   letter-spacing: 0.15em;
 }
 .executive-app .exec-kicker {
@@ -63,8 +63,8 @@
 }
 .executive-app .exec-prototype-pill {
   color: var(--accent);
-  border-color: #657734;
-  background: #222a1a;
+  border-color: #65518b;
+  background: #28203f;
 }
 .executive-app .exec-page-title h1 {
   font-size: clamp(28px, 3vw, 42px);
@@ -74,18 +74,18 @@
   color: #d3dcda;
 }
 .executive-app .exec-confidence-bar {
-  background: #22291c;
+  background: #231d35;
   border: 0;
   border-left: 3px solid var(--accent);
   border-radius: 0;
 }
 .executive-app .exec-confidence-bar p {
-  color: #aebc9c;
+  color: #b9aecf;
   font-size: 12px;
 }
 .executive-app .exec-confidence-bar strong,
 .executive-app .exec-confidence-bar button {
-  color: #d4e8af;
+  color: #dbceff;
 }
 .executive-app .exec-demo-dot {
   background: var(--accent);
@@ -94,15 +94,15 @@
 .executive-app .exec-recommendation {
   border-radius: 4px;
   box-shadow: none;
-  border: 1px solid #333a3e;
-  background: #1a1e23;
+  border: 1px solid #352d48;
+  background: #191624;
 }
 .executive-app .exec-recommendation {
-  background: radial-gradient(ellipse at top right, #35412555, transparent 65%), #1b211b;
-  border-top: 2px solid #b8de47;
+  background: radial-gradient(ellipse at top right, #6f3baa55, transparent 65%), #211733;
+  border-top: 2px solid #a38aff;
 }
 .executive-app .exec-recommendation::after {
-  border-color: #c8f34c22;
+  border-color: #b6a0ff22;
   box-shadow: none;
   border-radius: 0;
   transform: rotate(45deg);
@@ -115,8 +115,8 @@
 }
 .executive-app .exec-outline-pill {
   border-radius: 0;
-  color: #bed58f;
-  border-color: #5f7040;
+  color: #cbb5ff;
+  border-color: #665087;
 }
 .executive-app .exec-investment-amount strong {
   color: var(--accent);
@@ -124,7 +124,7 @@
 .executive-app .exec-investment-amount > span,
 .executive-app .exec-plan-intro,
 .executive-app .exec-action p {
-  color: #a7b1a2;
+  color: #b9adc9;
 }
 .executive-app .exec-plan-intro {
   font-size: 13px;
@@ -137,18 +137,18 @@
 }
 .executive-app .exec-action-check {
   border-radius: 2px;
-  background: #c8f34c15;
+  background: #b6a0ff15;
   color: var(--accent);
 }
 .executive-app .exec-action > strong {
-  color: #d8e6c4;
+  color: #e2d7ff;
 }
 .executive-app .exec-action,
 .executive-app .exec-recommendation-bottom {
-  border-color: #343d31;
+  border-color: #3b2c50;
 }
 .executive-app .exec-recommendation-bottom {
-  color: #a2b08f;
+  color: #b9adc9;
 }
 .executive-app .exec-recommendation-bottom button {
   color: var(--accent);
@@ -158,7 +158,7 @@
 }
 .executive-app .exec-reduction-icon {
   border-radius: 2px;
-  background: #2b3520;
+  background: #35274d;
   color: var(--accent);
 }
 .executive-app .exec-impact-headline strong {
@@ -170,7 +170,7 @@
   font-size: 12px;
 }
 .executive-app .exec-loss-track {
-  background: #30363b;
+  background: #302c44;
   height: 7px;
   border-radius: 0;
 }
@@ -189,13 +189,13 @@
   font-size: 12px;
 }
 .executive-app .exec-avoided strong {
-  color: #d9e6c0;
+  color: #e2d7ff;
 }
 .executive-app .exec-budget-form {
   border-color: #343b3e;
 }
 .executive-app .exec-budget-label label {
-  color: #c4d0cb;
+  color: #d4c8e3;
 }
 .executive-app .exec-budget-form input[type='range'],
 .executive-app .exec-auto-refresh input {
@@ -207,10 +207,10 @@
   color: #9ba8ac;
 }
 .executive-app .exec-budget-bottom select {
-  color: #dce7d2;
+  color: #e5dcf4;
 }
 .executive-app .exec-map-switch {
-  background: #11161a;
+  background: #161222;
   border-radius: 2px;
   border: 1px solid #343e40;
 }
@@ -219,17 +219,17 @@
   border-radius: 0;
 }
 .executive-app .exec-map-switch button[aria-pressed='true'] {
-  background: #303c23;
+  background: #372752;
   color: var(--accent);
   box-shadow: none;
 }
 .executive-app .exec-map-stage {
-  background-color: #11181b;
+  background-color: #12101e;
   background-image: radial-gradient(#42505788 0.7px, transparent 0.7px);
   --path: #f4b36a;
 }
 .executive-app .exec-map-stage.is-defended {
-  --path: #c8f34c;
+  --path: #b6a0ff;
 }
 .executive-app .exec-map-scroll {
   max-height: 430px;
@@ -240,13 +240,13 @@
 }
 .executive-app .exec-map-toolbar select {
   background: #20272b;
-  color: #d4dfce;
+  color: #dfd6ee;
   border-color: #485447;
   border-radius: 2px;
 }
 .executive-app .exec-map-node > rect {
-  fill: #202a24;
-  stroke: #566647;
+  fill: #27203b;
+  stroke: #6a568c;
   rx: 2px;
 }
 .executive-app .exec-map-node.on-route > rect {
@@ -257,17 +257,17 @@
   stroke: var(--accent);
 }
 .executive-app .exec-map-node.protected > rect {
-  fill: #2b361f;
-  stroke: #b9e340;
+  fill: #3d295d;
+  stroke: #c4a8ff;
 }
 .executive-app .exec-map-node:hover > rect {
-  fill: #35412a;
+  fill: #3c2d55;
 }
 .executive-app .is-defended .exec-node-value {
   fill: var(--accent);
 }
 .executive-app .exec-route-caption {
-  background: #0f1316;
+  background: #100d19;
   border-color: #313b37;
 }
 .executive-app .exec-map-detail p,
@@ -279,12 +279,12 @@
   color: #69cfca;
 }
 .executive-app .exec-map-detail strong {
-  color: #dbeac3;
+  color: #e4d9ff;
 }
 .executive-app .exec-count {
   color: var(--accent);
-  background: #262e1d;
-  border-color: #5b6d32;
+  background: #2b2142;
+  border-color: #695389;
   border-radius: 0;
   font-family: Consolas, monospace;
 }
@@ -355,7 +355,7 @@
 }
 .executive-app .exec-next-icon {
   color: var(--accent);
-  background: #303c23;
+  background: #372752;
   border-radius: 2px;
 }
 .executive-app .exec-next-step p:not(.exec-kicker) {

@@ -1,16 +1,26 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { ArrowUpRight, Building2, FileText, Plus, SlidersHorizontal, X } from 'lucide-react';
+import { ArrowUpRight, Building2, Plus, SlidersHorizontal, X } from 'lucide-react';
 import type { State } from '../core/types';
 import { decisionSummary } from '../core/decision';
 import { Modal, fullMoney } from './shared';
 import { Onboarding } from './Onboarding';
-import { DecisionDashboard } from './executive/DecisionDashboard';
+import { Workspace, type View, viewFromHash } from './workspace/Workspace';
+import { Assistant } from './workspace/Assistant';
 import { BusinessInputs } from './executive/BusinessInputs';
 import { DecisionBrief } from './executive/DecisionBrief';
 
 export default function App() {
   const [state, setState] = useState<State>();
-  const [brief, setBrief] = useState(false);
+  const [view, setView] = useState<View>(viewFromHash);
+  const [chat, setChat] = useState<string | null>(null);
+  useEffect(() => {
+    const sync = () => {
+      setView(viewFromHash());
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    };
+    window.addEventListener('hashchange', sync);
+    return () => window.removeEventListener('hashchange', sync);
+  }, []);
   const [onboarding, setOnboarding] = useState(false);
   const [inputs, setInputs] = useState(false);
   const [explain, setExplain] = useState(false);
@@ -83,9 +93,9 @@ export default function App() {
       setBusy(false);
     }
   }
-  const changeView = (showBrief: boolean) => {
-    setBrief(showBrief);
-    window.scrollTo({ top: 0, behavior: 'instant' });
+  const navigate = (next: View) => {
+    window.location.hash = '/' + next;
+    setView(next);
   };
   if (!state)
     return (
@@ -106,29 +116,31 @@ export default function App() {
   return (
     <div className="executive-app">
       <header className="exec-header no-print">
-        <a
-          className="exec-brand"
-          href="#decision"
-          onClick={() => setBrief(false)}
-          aria-label="BlackStar executive overview"
-        >
+        <a className="exec-brand" href="#/overview" aria-label="BlackStar overview">
           <div className="logo-window">
             <img src="/blackstar-logo.jpeg" alt="BlackStar" />
           </div>
         </a>
-        {!brief && (
-          <nav aria-label="On this page">
-            <a href="#decision">Decision overview</a>
-            <a href="#attack-map">Attack graph</a>
-            <a href="#sources">Live sources</a>
-          </nav>
-        )}
+        <nav aria-label="Main navigation">
+          {(
+            [
+              ['overview', 'Overview'],
+              ['evidence', 'Evidence'],
+              ['risk', 'Attack paths'],
+              ['investment', 'Investment'],
+              ['report', 'Board brief'],
+            ] as const
+          ).map(([id, label]) => (
+            <a key={id} href={'#/' + id} aria-current={view === id ? 'page' : undefined}>
+              {label}
+            </a>
+          ))}
+        </nav>
         <button
-          className="exec-button secondary exec-brief-button"
-          onClick={() => changeView(!brief)}
+          className="exec-button secondary"
+          onClick={() => setChat('Help me understand this page')}
         >
-          <FileText size={16} />
-          {brief ? 'Overview' : 'Board brief'}
+          ✦ Ask BlackStar
         </button>
       </header>
       <main className="exec-main">
@@ -188,18 +200,21 @@ export default function App() {
             </button>
           </div>
         )}
-        {brief ? (
-          <DecisionBrief state={state} back={() => changeView(false)} />
+        {view === 'report' ? (
+          <DecisionBrief state={state} back={() => navigate('overview')} />
         ) : (
-          <DecisionDashboard
+          <Workspace
             key={org.id}
+            view={view}
             state={state}
             busy={busy}
             offline={offline}
+            navigate={navigate}
             update={(body) => action('/api/update', body)}
             refresh={() => action('/api/scan')}
-            explain={() => setExplain(true)}
             inputs={() => setInputs(true)}
+            ask={setChat}
+            explain={() => setExplain(true)}
           />
         )}
         <footer className="exec-footer no-print">
@@ -209,6 +224,16 @@ export default function App() {
           <span>Executive risk decisions</span>
         </footer>
       </main>
+      {chat !== null && (
+        <Assistant
+          key={org.id}
+          state={state}
+          view={view}
+          question={chat}
+          close={() => setChat(null)}
+          navigate={navigate}
+        />
+      )}
       {inputs && (
         <BusinessInputs
           org={org}
@@ -223,7 +248,7 @@ export default function App() {
           accept={(data) => {
             accept(data);
             setOnboarding(false);
-            changeView(false);
+            navigate('overview');
           }}
         />
       )}

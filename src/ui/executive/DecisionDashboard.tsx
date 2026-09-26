@@ -11,8 +11,6 @@ import {
 import type { State } from '../../core/types';
 import { decisionSummary } from '../../core/decision';
 import { fullMoney, money, percent } from '../shared';
-import { AttackMap } from './AttackMap';
-import { LiveSources } from './LiveSources';
 
 export const controlCopy: Record<string, { name: string; benefit: string }> = {
   patch: {
@@ -45,7 +43,6 @@ export function DecisionDashboard({
   busy,
   offline,
   update,
-  refresh,
   explain,
   inputs,
 }: {
@@ -53,7 +50,6 @@ export function DecisionDashboard({
   busy: boolean;
   offline: boolean;
   update: (body: unknown) => Promise<boolean>;
-  refresh: () => Promise<boolean>;
   explain: () => void;
   inputs: () => void;
 }) {
@@ -73,8 +69,8 @@ export function DecisionDashboard({
     <>
       <section className="exec-page-title" id="decision">
         <div>
-          <p className="exec-kicker">YOUR EXECUTIVE BRIEF</p>
-          <h1>A clear next step for your security.</h1>
+          <p className="exec-kicker">INVESTMENT PLAN</p>
+          <h1>Make your budget count.</h1>
           <p>See the financial exposure, choose a budget, and know what to fund.</p>
         </div>
         <div className="exec-assessment-date" data-provenance="COMPUTED">
@@ -279,17 +275,6 @@ export function DecisionDashboard({
           </form>
         </div>
       </section>
-      <div className="exec-evidence-grid">
-        <AttackMap key={org.id} org={org} output={output} />
-        <LiveSources
-          org={org}
-          busy={busy}
-          offline={offline}
-          refresh={refresh}
-          update={update}
-          shodanConfigured={state.integrations?.shodanConfigured}
-        />
-      </div>
       <section className="exec-next-step">
         <div className="exec-next-icon">
           <ShieldCheck size={26} />

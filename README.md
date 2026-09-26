@@ -93,3 +93,7 @@ The QUBO is a second-order surrogate of the game objective, not an exact reducti
 Collectors only request fixed allowlisted public index hosts over HTTPS, reject redirects, limit response sizes and use timeouts. Domains are validated and encoded as index query parameters; no target probing occurs. Mutations require same-origin JSON requests, the server validates the Host header, and API keys stay on the server. The optional Shodan key is used only for its service-index request and never persisted or returned.
 
 The sole configured Git remote must remain `https://github.com/SamaCodes17/blackstar-prototype.git`. Development stays on `prototype`. There is no automatic push or deployment workflow. Verify the authenticated account and exact remote, review the commits, and obtain the user's confirmation **before the first push**. Never force-push or push directly to `main` without explicit authorization. See `docs/GITHUB_HANDOFF.md`.
+
+## Current interface
+
+The executive workspace has separate Overview, Evidence, Attack paths, Investment and Board brief pages. Deeper analyses are expandable within the relevant page. Ask BlackStar is a local topic-based explainer grounded in the current assessment, not an external AI integration. See [the workspace decision](docs/adr/005-focused-workspace.md).
