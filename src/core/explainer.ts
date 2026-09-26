@@ -20,7 +20,7 @@ export function explainAssessment(question: string, state: State, page: string):
         'Start with estimated loss, then review the recommended investment. Evidence explains what was observed; Attack paths explores what could happen; Board brief prepares a printable summary.',
       evidence:
         'Source cards show the latest recorded result, not a guarantee of continuous coverage. Open a source for dates and evidence, search the systems table, or expand discovered names and assessment activity.',
-      risk: 'Select a graph node to inspect its business impact. Switch between current exposure and recommended protections. Below the graph, choose a starting system for a hypothetical compromise and explore the range of loss outcomes.',
+      risk: 'Select a graph node to inspect its business impact. Switch between current exposure and recommended protections. Click any node to force a starting breach and see every downstream branch. Replay spread to step through the connections, or explore the explicitly illustrative network.',
       investment:
         'Choose an annual budget and planning period, then select Update plan. Compare the recommendation against current exposure and a severity-first plan. Expand the protection options to see alternatives.',
       report:
@@ -35,10 +35,10 @@ export function explainAssessment(question: string, state: State, page: string):
     const scan = org.scans.find((s) => s.collector === 'Service / CVE correlation');
     return answer(
       !state.integrations?.shodanConfigured
-        ? 'A Shodan key is not configured on the local service. Without it, BlackStar cannot retrieve Shodan service evidence.'
+        ? 'An authenticated Shodan key is not configured. The public InternetDB fallback does not require a key and can return weekly IP-level snapshots; check the source card for its actual result.'
         : scan?.issue === 'ACCESS_DENIED'
           ? 'A Shodan key is configured, but the latest search was blocked by the account’s access permissions. No successful search is implied by having a key. See the Shodan source card for the recorded status.'
-          : `A Shodan key is configured. Latest recorded service search: ${scan?.status ?? 'not checked'}. Configuration alone does not establish that live observations were retrieved. Open its source card to inspect the result.`,
+          : `A Shodan key is configured. Latest recorded service lookup: ${scan?.status ?? 'not checked'}. Configuration alone does not establish that live observations were retrieved. The collector can fall back from filtered search to public DNS plus IP-host lookups, then the public InternetDB snapshot when host access is restricted. Open its source card to inspect which method succeeded.`,
       'evidence',
     );
   }
@@ -57,7 +57,7 @@ export function explainAssessment(question: string, state: State, page: string):
     );
   if (/conditional|blast|compromis|what if/.test(q))
     return answer(
-      'The what-if panel forces your selected starting system to be compromised, switches off other initial entry events, then estimates spread through the mapped connections. It is a hypothetical impact estimate, not the probability of a real incident. Changing this selector does not change saved evidence.',
+      'The attack graph forces your selected starting system to be compromised, switches off other initial entry events, then estimates spread through the mapped connections. It is a hypothetical impact estimate, not the probability of a real incident. Clicking a node or exploring sandbox connections does not change saved evidence.',
       'risk',
     );
   if (/plan|budget|recommend|invest|cost|protect|optim/.test(q))

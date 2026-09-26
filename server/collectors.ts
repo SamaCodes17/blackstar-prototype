@@ -1,3 +1,4 @@
+import { lookupResolvedHosts } from './shodan';
 import { domainToASCII } from 'node:url';
 import { isIP } from 'node:net';
 import { cache, cached } from './store';
@@ -11,6 +12,8 @@ const allowedHosts = new Set([
   'www.cisa.gov',
   'services.nvd.nist.gov',
   'api.shodan.io',
+  'dns.google',
+  'internetdb.shodan.io',
 ]);
 const nextRequest = new Map<string, number>();
 const queues = new Map<string, Promise<void>>();
@@ -165,14 +168,35 @@ export async function scan(
       old?.at ?? input.scans.find((s) => s.collector === 'Certificate transparency')?.dataAt,
     );
   }
-  if (process.env.SHODAN_API_KEY?.trim()) {
+  {
     try {
-      const data = await adapters.read(
-        `https://api.shodan.io/shodan/host/search?key=${encodeURIComponent(process.env.SHODAN_API_KEY)}&query=${encodeURIComponent('hostname:' + org.domain)}`,
-      );
+      let data: { matches: any[]; message?: string };
+      try {
+        if (!process.env.SHODAN_API_KEY?.trim()) throw new Error('Use public IP index');
+        data = await adapters.read(
+          `https://api.shodan.io/shodan/host/search?key=${encodeURIComponent(process.env.SHODAN_API_KEY)}&query=${encodeURIComponent('hostname:' + org.domain)}`,
+        );
+      } catch (cause) {
+        if (
+          !(cause instanceof Error) ||
+          !['Public index responded 403', 'Use public IP index'].includes(cause.message)
+        )
+          throw cause;
+        data = await lookupResolvedHosts(org, process.env.SHODAN_API_KEY!, adapters.read);
+      }
       if (!Array.isArray(data.matches)) throw new Error('Invalid service-index response');
       let matches = 0;
-      for (const asset of org.assets) asset.services = [];
+      for (const asset of org.assets) {
+        if (
+          !data.message ||
+          data.matches.some(
+            (service) =>
+              service?._resolvedHostname === asset.hostname ||
+              service?.hostnames?.includes(asset.hostname),
+          )
+        )
+          asset.services = [];
+      }
       for (const service of data.matches ?? []) {
         if (
           !service ||
@@ -189,7 +213,11 @@ export async function scan(
               .filter((name: unknown): name is string => typeof name === 'string')
               .map((name: string) => name.toLowerCase().replace(/\.$/, ''))
           : [];
-        const assets = org.assets.filter((a) => hostnames.includes(a.hostname.toLowerCase()));
+        const assets = org.assets.filter(
+          (a) =>
+            hostnames.includes(a.hostname.toLowerCase()) ||
+            service._resolvedHostname === a.hostname,
+        );
         const cves = (
           Array.isArray(service.vulns) ? service.vulns : Object.keys(service.vulns ?? {})
         ).filter(
@@ -205,9 +233,19 @@ export async function scan(
             asset.services!.length < 20
           ) {
             asset.services!.push({
+              association: hostnames.includes(asset.hostname.toLowerCase())
+                ? 'indexed-hostname'
+                : 'dns-ip',
               ip: service.ip_str,
               port: service.port,
-              transport: service.transport === 'udp' ? 'udp' : 'tcp',
+              transport:
+                service._provider === 'internetdb'
+                  ? 'unknown'
+                  : service.transport === 'udp'
+                    ? 'udp'
+                    : 'tcp',
+              provider: service._provider === 'internetdb' ? 'internetdb' : 'shodan',
+              ipCves: service._ipCves,
               product: typeof service.product === 'string' ? service.product : undefined,
               version: typeof service.version === 'string' ? service.version : undefined,
               observedAt:
@@ -224,6 +262,7 @@ export async function scan(
           const cve = cves[0];
           if (
             cve &&
+            hostnames.includes(asset.hostname.toLowerCase()) &&
             typeof service.product === 'string' &&
             service.product &&
             typeof service.version === 'string' &&
@@ -245,8 +284,9 @@ export async function scan(
         'Service / CVE correlation',
         'LIVE',
         matches,
-        'Shodan indexed services matched to modeled hostnames. Version-backed CVE associations are third-party observations, not independently verified on target. One search page; not an exhaustive inventory.',
-        checkedAt,
+        data.message ??
+          'Shodan indexed services matched to modeled hostnames. Version-backed CVE associations are third-party observations, not independently verified on target. One search page; not an exhaustive inventory.',
+        undefined,
       );
     } catch (cause) {
       const httpCode =
@@ -274,13 +314,7 @@ export async function scan(
         issue,
       );
     }
-  } else
-    status(
-      'Service / CVE correlation',
-      'PREVIEW',
-      org.assets.filter((a) => a.findingTag === 'PREVIEW').length,
-      'Optional Shodan key absent. Example associations remain PREVIEW; no CVEs inferred from hostnames.',
-    );
+  }
   const cves = [...new Set(org.assets.flatMap((a) => (a.cve ? [a.cve] : [])))];
   if (cves.length) {
     await Promise.all([

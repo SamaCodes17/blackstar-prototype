@@ -45,3 +45,12 @@ Development is exclusively for **SamaCodes17/blackstar-prototype**, branch **pro
 - Kept business inputs, organization onboarding, source refresh, attack-map interaction and printable board brief connected to the existing runtime. No new dependencies or backend contract changes.
 - Validation: 31 automated tests pass; production build passes. Browser checks cover page navigation, assistant answers, search empty state, graph protection toggle, conditional system selector, investment draft controls and mobile layout.
 - Local preview only. No GitHub push performed; first-push confirmation remains required.
+
+## Branching attack simulation and Shodan capability fallback — 26 September 2026
+
+- Replaced single-route inspection with node-triggered conditional propagation across every reachable branch, directional transmission labels, replay, and an impact table. Current/with-plan compares containment after the selected node is already breached.
+- Scenario selection recomputes the actor's preferred entry and target. Shared routes are explicitly explained. A labeled illustrative branching network gives distinct example entry points; a local connection sandbox supports add/remove with cycle validation. Neither modifies saved financial decisions or evidence.
+- Added public DNS resolution, authenticated Shodan IP lookups and InternetDB fallback after denied search/host access. No direct target probing. Deduplicated IP requests, excluded private/reserved addresses and limited lookup scope.
+- InternetDB records retain provider identity, unknown transport/observation time, and IP-level CVE candidates separately. A DNS-to-IP match never alone promotes a hostname CVE association.
+- Live verification retrieved 11 observations across five hostnames/seven IPs: one authenticated IP response and six InternetDB responses. Authenticated filtered search remained access-restricted. API keys were not printed or committed.
+- Validation: 37 automated tests, production build, browser node/scenario/replay and real source-refresh checks.

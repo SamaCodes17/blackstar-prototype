@@ -65,20 +65,19 @@ export function LiveSources({
   const [refreshing, setRefreshing] = useState(false);
   const live = offline
     ? 0
-    : feeds.filter(
-        (feed) =>
-          !(feed.key === 'Service / CVE correlation' && shodanConfigured === false) &&
-          org.scans.some((s) => s.collector === feed.key && s.status === 'LIVE'),
-      ).length;
+    : feeds.filter((feed) => org.scans.some((s) => s.collector === feed.key && s.status === 'LIVE'))
+        .length;
   const record = org.scans.find((s) => s.collector === detail?.key);
   const needsKey = (key: string) =>
-    key === 'Service / CVE correlation' && shodanConfigured === false;
+    key === 'Service / CVE correlation' &&
+    shodanConfigured === false &&
+    !org.scans.some((s) => s.collector === key && s.status === 'LIVE');
   const noMatches = org.scans.some((s) => s.collector === 'Vulnerability intelligence');
   const noMatchFor = (key: string) =>
     noMatches && ['FIRST EPSS', 'CISA KEV', 'NVD / CVE'].includes(key);
   const explanation =
     detail && needsKey(detail.key)
-      ? 'Shodan is not connected. The organization administrator needs to configure the server-side API key. No live Shodan findings are claimed; any stored example associations remain illustrative.'
+      ? 'Authenticated Shodan is not configured. Refresh sources to try the public InternetDB IP snapshot; full search and banners need appropriate account access.'
       : detail?.key === 'Service / CVE correlation' && record?.issue
         ? record.message
         : !record
@@ -123,7 +122,11 @@ export function LiveSources({
               </span>
               <span className="exec-feed-copy">
                 <strong>{feed.name}</strong>
-                <small>{feed.detail}</small>
+                <small>
+                  {feed.key === 'Service / CVE correlation' && scan?.message.includes('InternetDB')
+                    ? 'IP observations · includes weekly InternetDB snapshots'
+                    : feed.detail}
+                </small>
                 {scan && (
                   <time dateTime={scan.checkedAt} data-provenance="CITED">
                     {scan.status === 'PREVIEW' ? 'Status' : 'Checked'}{' '}
@@ -140,7 +143,7 @@ export function LiveSources({
                 {scan?.issue === 'ACCESS_DENIED'
                   ? 'Access blocked'
                   : needsKey(feed.key)
-                    ? 'Key needed'
+                    ? 'Public lookup available'
                     : feed.key === 'Service / CVE correlation' &&
                         shodanConfigured &&
                         scan?.status === 'PREVIEW'
@@ -184,7 +187,8 @@ export function LiveSources({
         </label>
         {shodanConfigured && (
           <small className="exec-credit-note">
-            Shodan searches may use your account’s query credits.
+            Authenticated searches may use query credits. InternetDB is a separate public weekly
+            snapshot.
           </small>
         )}
       </div>
@@ -195,7 +199,7 @@ export function LiveSources({
               {record?.issue === 'ACCESS_DENIED'
                 ? 'Access blocked'
                 : needsKey(detail.key)
-                  ? 'Key needed'
+                  ? 'Public lookup available'
                   : offline && record?.status === 'LIVE'
                     ? 'Saved offline'
                     : !record && noMatchFor(detail.key)
@@ -203,13 +207,14 @@ export function LiveSources({
                       : feedStatus(record?.status)}
             </span>
             <p>{explanation}</p>
+            {detail.key === 'Service / CVE correlation' && record && <p>{record.message}</p>}
             {record && (
               <dl data-provenance="CITED">
                 <div>
                   <dt>Last checked</dt>
                   <dd>{new Date(record.checkedAt).toLocaleString()}</dd>
                 </div>
-                {record.dataAt && (
+                {record.dataAt && detail.key !== 'Service / CVE correlation' && (
                   <div>
                     <dt>Source data dated</dt>
                     <dd>{new Date(record.dataAt).toLocaleString()}</dd>
@@ -264,9 +269,9 @@ export function LiveSources({
               <div className="exec-source-evidence">
                 <h3>Indexed services</h3>
                 <p>
-                  Only exact hostname matches for systems in this assessment are included. These are
-                  Shodan observations, not a fresh scan of your systems. Unlisted systems have not
-                  been proved safe.
+                  Exact hostname matches and explicitly labeled DNS-to-IP associations are included.
+                  These are Shodan observations, not a fresh scan of your systems. Unlisted systems
+                  have not been proved safe.
                 </p>
                 {org.assets.some((a) => a.services?.length) ? (
                   <ul>
@@ -275,7 +280,26 @@ export function LiveSources({
                         <li key={`${a.id}-${i}`} data-provenance="CITED">
                           <strong>{a.hostname}</strong>
                           <br />
-                          {service.ip}:{service.port} · {service.transport}
+                          {service.ip}:{service.port} ·{' '}
+                          {service.transport === 'unknown'
+                            ? 'Transport not supplied'
+                            : service.transport}
+                          <br />
+                          {service.provider === 'internetdb'
+                            ? 'Shodan InternetDB · weekly IP snapshot; no service banners'
+                            : 'Shodan authenticated host index'}
+                          <br />
+                          {service.association === 'dns-ip'
+                            ? 'DNS-to-IP association; shared-host services may belong to another tenant.'
+                            : 'Exact indexed hostname match.'}
+                          <br />
+                          Retrieved {new Date(service.retrievedAt).toLocaleString()}
+                          {service.ipCves?.length ? (
+                            <p>
+                              IP-level candidate CVEs (not confirmed for this hostname or port):{' '}
+                              {service.ipCves.join(', ')}
+                            </p>
+                          ) : null}
                           <br />
                           {service.product ?? 'Product not identified'} {service.version ?? ''}
                           <br />

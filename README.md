@@ -97,3 +97,9 @@ The sole configured Git remote must remain `https://github.com/SamaCodes17/black
 ## Current interface
 
 The executive workspace has separate Overview, Evidence, Attack paths, Investment and Board brief pages. Deeper analyses are expandable within the relevant page. Ask BlackStar is a local topic-based explainer grounded in the current assessment, not an external AI integration. See [the workspace decision](docs/adr/005-focused-workspace.md).
+
+## Attack propagation and free-access Shodan path
+
+On Attack paths, selecting a node forces its compromise and calculates all downstream effects using the existing exact model. Replay is a visual sequence of graph hops, not a calibrated timeline. The model currently supports directed acyclic graphs. Incoming protection cannot prevent a starting breach that is already assumed; edge protections can reduce subsequent spread. Missing relationships are not inferred from hostnames. The illustrative network and connection sandbox are explicitly hypothetical and do not modify saved assessments.
+
+The collector now tries filtered Shodan search, then bounded public-DNS-to-IP lookups when access is denied. Restricted host lookups fall back to [Shodan InternetDB](https://internetdb.shodan.io/), which returns fewer details and is refreshed weekly. InternetDB needs no API key and is free for non-commercial use; commercial use requires Shodan's applicable license. Individual services retain their provider, retrieval time, match basis and supplied observation time. DNS associations can point to shared infrastructure, so IP-level CVEs are not treated as confirmed hostname vulnerabilities. [Shodan host API](https://developer.shodan.io/api) and [Google DNS API](https://developers.google.com/speed/public-dns/docs/doh/json) document the underlying endpoints.

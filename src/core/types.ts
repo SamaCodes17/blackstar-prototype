@@ -30,9 +30,12 @@ export interface Asset {
   findingTag?: Tag;
   product?: string;
   services?: {
+    association?: 'indexed-hostname' | 'dns-ip';
     ip: string;
     port: number;
     transport: string;
+    provider?: 'shodan' | 'internetdb';
+    ipCves?: string[];
     product?: string;
     version?: string;
     observedAt?: string;
