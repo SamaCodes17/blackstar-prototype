@@ -803,3 +803,287 @@ button.ws-stat:hover {
     transition: none !important;
   }
 }
+.cascade-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 18px;
+  padding: 18px 24px;
+  border-bottom: 1px solid #352d48;
+}
+.cascade-controls label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: #b8a6cc;
+  font-size: 11px;
+}
+.cascade-controls select,
+.cascade-controls input {
+  max-width: 280px;
+  background: #21172f;
+  color: #efddff;
+  border: 1px solid #58406f;
+  padding: 10px 12px;
+  border-radius: 7px;
+  font-size: 12px;
+}
+.cascade-controls input {
+  width: 100px;
+}
+.cascade-scenario {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 18px 24px;
+  background: #241a33;
+}
+.cascade-scenario strong {
+  color: #dfc6fa;
+  font-size: 14px;
+}
+.cascade-scenario span,
+.cascade-scenario small {
+  color: #b9a7cb;
+  font-size: 12px;
+  line-height: 1.7;
+}
+.cascade-notice {
+  margin: 18px 24px;
+  padding: 14px 18px;
+  background: #38291e;
+  border: 1px solid #76552f;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.cascade-notice strong {
+  color: #f2c88f;
+  font-size: 13px;
+}
+.cascade-notice span {
+  color: #d1b997;
+  font-size: 12px;
+  line-height: 1.7;
+}
+.cascade-canvas {
+  overflow: auto;
+  background:
+    radial-gradient(#75629233 0.8px, transparent 0.8px) 0 0/22px 22px,
+    #110e1a;
+}
+.cascade-canvas svg {
+  width: 100%;
+  display: block;
+  max-height: 650px;
+}
+.cascade-edge {
+  fill: none;
+  stroke: #554566;
+  stroke-width: 2;
+  opacity: 0.55;
+}
+.cascade-edge.affected {
+  stroke: #e0a46b;
+  stroke-width: 2.5;
+  stroke-dasharray: 9 5;
+  opacity: 1;
+  animation: cascade-flow 1.5s linear infinite;
+}
+.cascade-edge.affected.defended {
+  stroke: #70d5b7;
+}
+.cascade-edge-label {
+  font-size: 10px;
+  fill: #b4a1c9;
+  paint-order: stroke;
+  stroke: #110e1a;
+  stroke-width: 5px;
+  stroke-linejoin: round;
+  text-anchor: middle;
+}
+.cascade-node {
+  cursor: pointer;
+  outline: none;
+}
+.cascade-node circle {
+  fill: #282039;
+  stroke: #765896;
+  stroke-width: 2;
+}
+.cascade-node svg {
+  color: #b3a0cf;
+}
+.cascade-node.source circle {
+  fill: #6d302b;
+  stroke: #ff9977;
+  stroke-width: 3;
+  filter: drop-shadow(0 0 10px #fa725044);
+}
+.cascade-node.source svg {
+  color: #ffc8ad;
+}
+.cascade-node.reached circle {
+  fill: #493225;
+  stroke: #dfad6d;
+}
+.cascade-node.reached svg {
+  color: #f3c886;
+}
+.cascade-node.reached.defended circle {
+  fill: #193e39;
+  stroke: #70d5b7;
+}
+.cascade-node.reached.defended svg {
+  color: #8de9d0;
+}
+.cascade-node:hover circle,
+.cascade-node:focus-visible circle {
+  stroke: #fff;
+  stroke-width: 3;
+}
+.cascade-node-name {
+  font-size: 12px;
+  font-weight: 600;
+  fill: #eee2fc;
+  paint-order: stroke;
+  stroke: #110e1a;
+  stroke-width: 4px;
+}
+.cascade-node-prob {
+  font-size: 10px;
+  fill: #b9a3d0;
+}
+.cascade-node.source .cascade-node-prob {
+  fill: #ffad90;
+}
+.cascade-node.reached .cascade-node-prob {
+  fill: #e8bf86;
+}
+.cascade-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 16px 24px;
+  font-size: 10px;
+  color: #b4a2c5;
+  border-block: 1px solid #352a43;
+}
+.cascade-legend span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.cascade-legend i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+.cascade-legend .red {
+  background: #ff9977;
+}
+.cascade-legend .amber {
+  background: #dfad6d;
+}
+.cascade-legend .purple {
+  background: #765896;
+}
+.cascade-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  padding: 24px;
+}
+.cascade-summary > div {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.cascade-summary small {
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: #ab93c1;
+}
+.cascade-summary strong {
+  font-size: 25px;
+  color: #e9d5fc;
+  letter-spacing: -0.03em;
+}
+.cascade-summary span {
+  font-size: 11px;
+  color: #b4a3c4;
+  overflow-wrap: anywhere;
+}
+.cascade-details {
+  padding: 20px 24px;
+  border-top: 1px solid #352a43;
+}
+.cascade-details summary {
+  cursor: pointer;
+  font-size: 13px;
+  color: #d5b6ed;
+}
+.cascade-details p {
+  font-size: 12px;
+  line-height: 1.7;
+  color: #b7a1c9;
+}
+.cascade-details .cascade-controls {
+  padding: 18px 0;
+}
+.cascade-details .ws-table {
+  margin-top: 20px;
+}
+.cascade-connection-list > div {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  font-size: 12px;
+  color: #bfa8d2;
+}
+.cascade-connection-list button {
+  background: transparent;
+  border: 0;
+  color: #dba9bd;
+  cursor: pointer;
+}
+@keyframes cascade-flow {
+  to {
+    stroke-dashoffset: -28;
+  }
+}
+@media (max-width: 700px) {
+  .cascade-summary {
+    grid-template-columns: 1fr;
+  }
+  .cascade-controls {
+    gap: 14px;
+  }
+  .cascade-controls label {
+    width: 100%;
+  }
+  .cascade-controls select {
+    max-width: 100%;
+  }
+  .cascade-canvas svg {
+    min-width: 900px;
+  }
+  .cascade-summary strong {
+    font-size: 23px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cascade-edge.affected {
+    animation: none;
+  }
+}
+.cascade-replay-state {
+  padding: 12px 24px;
+  color: #b6a2cc;
+  font-size: 11px;
+  background: #191323;
+}
+.cascade-legend .green {
+  background: #70d5b7;
+}

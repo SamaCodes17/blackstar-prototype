@@ -1,13 +1,10 @@
 import type { WorkspaceProps } from './types';
 import { money } from '../shared';
-import { useState } from 'react';
 import { AttackMap } from '../executive/AttackMap';
 import { Distribution } from '../visuals';
 import { pageHelpers } from './pageHelpers';
 export function RiskExplorer(p: WorkspaceProps) {
   const { org, output } = p.state;
-  const [entry, setEntry] = useState(org.assets[0]?.id ?? '');
-  const conditional = output.blast.find((b) => b.entry === entry);
   const { heading, help } = pageHelpers(p);
   return (
     <>
@@ -20,25 +17,22 @@ export function RiskExplorer(p: WorkspaceProps) {
       <div className="ws-overview-grid">
         <section className="ws-card">
           <div className="ws-section-top">
-            <h2>What if a system is compromised?</h2>
+            <h2>From a breach to business impact</h2>
             {help('What does conditional impact mean?')}
           </div>
           <p>
-            Force one entry to be compromised and turn off other initial entries. Connections
-            determine the modeled spread.
+            Select a node directly in the graph to make it the starting breach. Every reachable
+            branch updates, including shared downstream systems.
           </p>
-          <label className="ws-field">
-            Starting system
-            <select value={entry} onChange={(e) => setEntry(e.target.value)}>
-              {org.assets.map((a) => (
-                <option value={a.id} key={a.id}>
-                  {a.label} · {a.hostname}
-                </option>
-              ))}
-            </select>
-          </label>
-          <strong className="ws-large-number">{money(conditional?.loss ?? 0)}</strong>
-          <p>Conditional expected loss · hypothetical scenario</p>
+          <p>
+            Compare Current and With plan to see whether the selected protections limit spread.
+            Entry prevention cannot undo a breach that this scenario has already assumed.
+          </p>
+          <p>
+            Scenario choices select the attacker's preferred starting point. If multiple actors
+            choose the same route under your inputs, the graph explains that instead of inventing a
+            difference.
+          </p>
         </section>
         <section className="ws-card">
           <div className="ws-section-top">
