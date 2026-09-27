@@ -1,0 +1,1163 @@
+{
+  "archiveSha256": "99b1e964347de4183742b517e8a2e02cc3a2b9bd28f4a4f135ca7cf8969d8e81",
+  "exclusions": {
+    "missingOrDuplicateId": 44,
+    "noExternalActor": 3417,
+    "notConfirmed": 63,
+    "preferentialSampling": 1900
+  },
+  "groups": {
+    "00": {
+      "actions": {
+        "error": 2,
+        "hacking": 94,
+        "malware": 16,
+        "misuse": 4,
+        "physical": 27,
+        "social": 15,
+        "unknown": 3
+      },
+      "assets": {
+        "M - Disk drive": 1,
+        "M - Payment card": 1,
+        "M - Smart card": 1,
+        "M - Unknown": 1,
+        "N - Router or switch": 9,
+        "N - SAN": 1,
+        "N - Unknown": 1,
+        "P - Cashier": 1,
+        "P - Customer": 2,
+        "P - End-user or employee": 1,
+        "P - Finance": 1,
+        "P - Former employee": 1,
+        "P - Other": 1,
+        "P - Unknown": 10,
+        "S - Authentication": 1,
+        "S - DNS": 2,
+        "S - Database": 12,
+        "S - ICS": 2,
+        "S - Mail": 4,
+        "S - POS controller": 1,
+        "S - Payment switch": 1,
+        "S - Unknown": 10,
+        "S - Web application": 67,
+        "T - ATM": 12,
+        "T - PED pad": 1,
+        "U - Desktop": 16,
+        "U - Desktop or laptop": 22,
+        "U - Laptop": 7,
+        "U - Mobile phone": 8,
+        "U - POS terminal": 1,
+        "U - Telephone": 1,
+        "Unknown": 17
+      },
+      "categories": {
+        "credentials": 15,
+        "other": 119,
+        "ransomware": 0
+      },
+      "records": 134
+    },
+    "11": {
+      "actions": {
+        "hacking": 2,
+        "physical": 1,
+        "social": 1
+      },
+      "assets": {
+        "P - Human resources": 1,
+        "S - Database": 1,
+        "S - Web application": 2,
+        "U - Desktop or laptop": 1,
+        "U - Laptop": 1
+      },
+      "categories": {
+        "credentials": 1,
+        "other": 3,
+        "ransomware": 0
+      },
+      "records": 4
+    },
+    "21": {
+      "actions": {
+        "error": 1,
+        "hacking": 7,
+        "malware": 9,
+        "physical": 5,
+        "social": 6
+      },
+      "assets": {
+        "N - Private WAN": 1,
+        "N - Router or switch": 3,
+        "P - End-user or employee": 1,
+        "P - Finance": 1,
+        "P - Unknown": 4,
+        "S - File": 1,
+        "S - Unknown": 5,
+        "S - Web application": 1,
+        "T - Gas terminal": 3,
+        "U - Desktop": 7,
+        "U - Desktop or laptop": 10,
+        "U - Laptop": 3,
+        "U - Mobile phone": 3,
+        "Unknown": 1
+      },
+      "categories": {
+        "credentials": 4,
+        "other": 12,
+        "ransomware": 3
+      },
+      "records": 19
+    },
+    "22": {
+      "actions": {
+        "hacking": 24,
+        "malware": 14,
+        "misuse": 1,
+        "physical": 1,
+        "social": 10
+      },
+      "assets": {
+        "M - Documents": 1,
+        "N - Firewall": 1,
+        "N - Router or switch": 6,
+        "P - Finance": 1,
+        "P - Other": 1,
+        "P - Unknown": 9,
+        "S - Database": 2,
+        "S - File": 3,
+        "S - ICS": 1,
+        "S - Unknown": 8,
+        "S - Web application": 11,
+        "U - Desktop": 8,
+        "U - Desktop or laptop": 10,
+        "U - Laptop": 2,
+        "U - Mobile phone": 6,
+        "Unknown": 3
+      },
+      "categories": {
+        "credentials": 12,
+        "other": 13,
+        "ransomware": 6
+      },
+      "records": 31
+    },
+    "23": {
+      "actions": {
+        "error": 1,
+        "hacking": 6,
+        "malware": 2,
+        "misuse": 2,
+        "physical": 5,
+        "social": 5
+      },
+      "assets": {
+        "M - Documents": 2,
+        "P - End-user or employee": 1,
+        "P - Executive": 1,
+        "P - Finance": 2,
+        "P - Human resources": 1,
+        "P - Unknown": 2,
+        "S - Backup": 1,
+        "S - Database": 2,
+        "S - ICS": 1,
+        "S - Mail": 2,
+        "S - Web application": 2,
+        "U - Desktop": 1,
+        "U - Desktop or laptop": 6,
+        "U - Laptop": 5,
+        "U - Tablet": 1,
+        "Unknown": 2
+      },
+      "categories": {
+        "credentials": 5,
+        "other": 10,
+        "ransomware": 2
+      },
+      "records": 17
+    },
+    "31": {
+      "actions": {
+        "hacking": 12,
+        "malware": 9,
+        "misuse": 1,
+        "physical": 3,
+        "social": 2,
+        "unknown": 2
+      },
+      "assets": {
+        "P - Developer": 1,
+        "P - Unknown": 1,
+        "S - Database": 1,
+        "S - Other": 1,
+        "S - Unknown": 2,
+        "S - Web application": 11,
+        "T - PED pad": 1,
+        "U - Desktop": 1,
+        "U - Desktop or laptop": 3,
+        "U - Laptop": 3,
+        "U - Mobile phone": 1,
+        "Unknown": 1
+      },
+      "categories": {
+        "credentials": 3,
+        "other": 13,
+        "ransomware": 4
+      },
+      "records": 20
+    },
+    "32": {
+      "actions": {
+        "hacking": 16,
+        "malware": 12,
+        "misuse": 1,
+        "physical": 5,
+        "social": 8
+      },
+      "assets": {
+        "E - Telemetry": 1,
+        "M - Flash drive": 1,
+        "N - Camera": 1,
+        "N - PLC": 1,
+        "P - End-user or employee": 4,
+        "P - Executive": 2,
+        "P - Former employee": 1,
+        "P - System admin": 3,
+        "P - Unknown": 3,
+        "S - Database": 5,
+        "S - File": 3,
+        "S - Unknown": 1,
+        "S - Web application": 12,
+        "U - Desktop": 3,
+        "U - Desktop or laptop": 7,
+        "U - Laptop": 4,
+        "Unknown": 5
+      },
+      "categories": {
+        "credentials": 2,
+        "other": 21,
+        "ransomware": 8
+      },
+      "records": 31
+    },
+    "33": {
+      "actions": {
+        "error": 1,
+        "hacking": 52,
+        "malware": 18,
+        "misuse": 7,
+        "physical": 12,
+        "social": 19,
+        "unknown": 1
+      },
+      "assets": {
+        "M - Documents": 1,
+        "N - Router or switch": 1,
+        "Other": 1,
+        "P - End-user": 1,
+        "P - End-user or employee": 1,
+        "P - Executive": 4,
+        "P - Finance": 6,
+        "P - Other": 2,
+        "P - System admin": 3,
+        "P - Unknown": 7,
+        "S - Code repository": 2,
+        "S - Database": 9,
+        "S - File": 5,
+        "S - Mail": 2,
+        "S - Unknown": 10,
+        "S - Web application": 32,
+        "T - ATM": 1,
+        "T - Gas terminal": 1,
+        "U - Desktop": 7,
+        "U - Desktop or laptop": 18,
+        "U - Laptop": 10,
+        "U - Mobile phone": 1,
+        "U - POS terminal": 1,
+        "U - Unknown": 2,
+        "Unknown": 4
+      },
+      "categories": {
+        "credentials": 13,
+        "other": 64,
+        "ransomware": 7
+      },
+      "records": 84
+    },
+    "42": {
+      "actions": {
+        "hacking": 36,
+        "malware": 14,
+        "misuse": 2,
+        "physical": 11,
+        "social": 1
+      },
+      "assets": {
+        "M - Documents": 1,
+        "M - Payment card": 1,
+        "N - Telephone": 1,
+        "P - Unknown": 1,
+        "S - Authentication": 2,
+        "S - Database": 4,
+        "S - File": 3,
+        "S - Mail": 2,
+        "S - Unknown": 3,
+        "S - Web application": 28,
+        "T - Gas terminal": 3,
+        "U - Desktop": 1,
+        "U - Desktop or laptop": 6,
+        "U - Laptop": 5,
+        "U - POS terminal": 1,
+        "U - Unknown": 1,
+        "Unknown": 3
+      },
+      "categories": {
+        "credentials": 2,
+        "other": 42,
+        "ransomware": 7
+      },
+      "records": 51
+    },
+    "43": {
+      "actions": {
+        "malware": 1
+      },
+      "assets": {
+        "Unknown": 1
+      },
+      "categories": {
+        "credentials": 0,
+        "other": 0,
+        "ransomware": 1
+      },
+      "records": 1
+    },
+    "44": {
+      "actions": {
+        "error": 4,
+        "hacking": 66,
+        "malware": 27,
+        "misuse": 1,
+        "physical": 162,
+        "social": 6,
+        "unknown": 5
+      },
+      "assets": {
+        "M - Disk drive": 1,
+        "M - Documents": 8,
+        "M - Payment card": 3,
+        "M - Tapes": 1,
+        "N - WLAN": 1,
+        "P - Cashier": 2,
+        "P - Customer": 1,
+        "P - Executive": 1,
+        "P - Finance": 1,
+        "P - Unknown": 1,
+        "S - Database": 9,
+        "S - Directory": 1,
+        "S - File": 4,
+        "S - Mail": 2,
+        "S - POS controller": 8,
+        "S - Payment switch": 1,
+        "S - Unknown": 6,
+        "S - Web application": 43,
+        "T - ATM": 40,
+        "T - Gas terminal": 94,
+        "T - Kiosk": 2,
+        "T - PED pad": 3,
+        "U - Desktop": 4,
+        "U - Desktop or laptop": 10,
+        "U - Laptop": 6,
+        "U - POS terminal": 15,
+        "U - Unknown": 1,
+        "Unknown": 14
+      },
+      "categories": {
+        "credentials": 15,
+        "other": 230,
+        "ransomware": 3
+      },
+      "records": 248
+    },
+    "45": {
+      "actions": {
+        "error": 2,
+        "hacking": 52,
+        "malware": 16,
+        "misuse": 1,
+        "physical": 10,
+        "social": 2,
+        "unknown": 1
+      },
+      "assets": {
+        "M - Disk drive": 2,
+        "N - Firewall": 1,
+        "P - End-user or employee": 1,
+        "P - Other": 1,
+        "P - Unknown": 1,
+        "S - Code repository": 1,
+        "S - DNS": 1,
+        "S - Database": 6,
+        "S - Directory": 1,
+        "S - File": 2,
+        "S - Mail": 1,
+        "S - POS controller": 3,
+        "S - Unknown": 3,
+        "S - Web application": 52,
+        "T - ATM": 2,
+        "T - Kiosk": 1,
+        "T - PED pad": 2,
+        "U - Desktop or laptop": 1,
+        "U - Laptop": 1,
+        "U - POS terminal": 3,
+        "Unknown": 1
+      },
+      "categories": {
+        "credentials": 5,
+        "other": 66,
+        "ransomware": 2
+      },
+      "records": 73
+    },
+    "48": {
+      "actions": {
+        "error": 7,
+        "hacking": 26,
+        "malware": 16,
+        "misuse": 2,
+        "physical": 8,
+        "social": 6,
+        "unknown": 3
+      },
+      "assets": {
+        "M - Disk drive": 1,
+        "M - Documents": 1,
+        "M - Payment card": 1,
+        "N - Unknown": 1,
+        "P - Human resources": 1,
+        "P - Unknown": 5,
+        "S - Database": 6,
+        "S - File": 3,
+        "S - Mail": 4,
+        "S - Other": 2,
+        "S - Unknown": 5,
+        "S - Web application": 20,
+        "T - Kiosk": 5,
+        "T - Unknown": 1,
+        "U - Desktop": 4,
+        "U - Desktop or laptop": 4,
+        "Unknown": 4
+      },
+      "categories": {
+        "credentials": 5,
+        "other": 35,
+        "ransomware": 9
+      },
+      "records": 49
+    },
+    "49": {
+      "actions": {
+        "hacking": 6,
+        "malware": 1,
+        "physical": 2
+      },
+      "assets": {
+        "M - Documents": 1,
+        "M - Unknown": 1,
+        "P - Unknown": 1,
+        "S - Database": 1,
+        "S - File": 1,
+        "S - Web application": 6,
+        "T - Kiosk": 1
+      },
+      "categories": {
+        "credentials": 3,
+        "other": 5,
+        "ransomware": 1
+      },
+      "records": 9
+    },
+    "51": {
+      "actions": {
+        "environmental": 3,
+        "error": 15,
+        "hacking": 397,
+        "malware": 59,
+        "misuse": 17,
+        "physical": 12,
+        "social": 39,
+        "unknown": 13
+      },
+      "assets": {
+        "M - Disk drive": 1,
+        "M - Disk media": 1,
+        "M - Documents": 2,
+        "M - Flash drive": 1,
+        "M - Payment card": 1,
+        "M - Tapes": 1,
+        "M - Unknown": 1,
+        "N - Broadband": 1,
+        "N - Firewall": 1,
+        "N - IDS": 1,
+        "N - LAN": 1,
+        "N - PBX": 1,
+        "N - Public WAN": 3,
+        "N - Router or switch": 9,
+        "N - Unknown": 2,
+        "N - WLAN": 1,
+        "P - Customer": 3,
+        "P - End-user or employee": 5,
+        "P - Executive": 7,
+        "P - Finance": 1,
+        "P - Helpdesk": 2,
+        "P - Human resources": 3,
+        "P - Manager": 1,
+        "P - System admin": 12,
+        "P - Unknown": 11,
+        "S - Authentication": 4,
+        "S - Backup": 2,
+        "S - Code repository": 3,
+        "S - DNS": 15,
+        "S - Database": 82,
+        "S - File": 10,
+        "S - Mail": 13,
+        "S - Other": 3,
+        "S - POS controller": 3,
+        "S - Proxy": 1,
+        "S - Remote access": 2,
+        "S - Unknown": 38,
+        "S - VM host": 1,
+        "S - Web application": 297,
+        "T - ATM": 2,
+        "U - Desktop": 21,
+        "U - Desktop or laptop": 27,
+        "U - Laptop": 7,
+        "U - Mobile phone": 1,
+        "U - Unknown": 1,
+        "Unknown": 39
+      },
+      "categories": {
+        "credentials": 63,
+        "other": 388,
+        "ransomware": 22
+      },
+      "records": 473
+    },
+    "52": {
+      "actions": {
+        "error": 1,
+        "hacking": 223,
+        "malware": 109,
+        "misuse": 17,
+        "physical": 219,
+        "social": 33,
+        "unknown": 8
+      },
+      "assets": {
+        "M - Disk drive": 3,
+        "M - Disk media": 3,
+        "M - Documents": 10,
+        "M - Flash drive": 6,
+        "M - Payment card": 5,
+        "M - Tapes": 3,
+        "N - Access reader": 1,
+        "N - Other": 1,
+        "N - Router or switch": 1,
+        "N - Unknown": 1,
+        "Other": 1,
+        "P - Call center": 2,
+        "P - Cashier": 7,
+        "P - Customer": 3,
+        "P - End-user or employee": 7,
+        "P - Executive": 2,
+        "P - Finance": 3,
+        "P - Maintenance": 1,
+        "P - Other": 1,
+        "P - Partner": 1,
+        "P - System admin": 2,
+        "P - Unknown": 10,
+        "S - DNS": 1,
+        "S - Database": 47,
+        "S - Directory": 1,
+        "S - File": 85,
+        "S - Log": 1,
+        "S - Mail": 5,
+        "S - Mainframe": 1,
+        "S - Other": 1,
+        "S - POS controller": 3,
+        "S - Payment switch": 1,
+        "S - Remote access": 1,
+        "S - Unknown": 20,
+        "S - Web application": 166,
+        "T - ATM": 157,
+        "T - Unknown": 1,
+        "U - Desktop": 19,
+        "U - Desktop or laptop": 47,
+        "U - Laptop": 29,
+        "U - Unknown": 2,
+        "Unknown": 27
+      },
+      "categories": {
+        "credentials": 31,
+        "other": 355,
+        "ransomware": 89
+      },
+      "records": 475
+    },
+    "53": {
+      "actions": {
+        "error": 2,
+        "hacking": 9,
+        "malware": 6,
+        "misuse": 2,
+        "physical": 6,
+        "social": 2,
+        "unknown": 2
+      },
+      "assets": {
+        "M - Documents": 3,
+        "M - Flash drive": 1,
+        "P - Customer": 1,
+        "P - Executive": 1,
+        "P - Other": 1,
+        "P - Unknown": 1,
+        "S - Database": 3,
+        "S - Unknown": 3,
+        "S - Web application": 5,
+        "U - Desktop": 3,
+        "U - Desktop or laptop": 4,
+        "U - Laptop": 1,
+        "U - Mobile phone": 1,
+        "U - POS terminal": 1,
+        "U - Tablet": 1,
+        "U - Unknown": 2,
+        "Unknown": 4
+      },
+      "categories": {
+        "credentials": 3,
+        "other": 20,
+        "ransomware": 1
+      },
+      "records": 24
+    },
+    "54": {
+      "actions": {
+        "error": 4,
+        "hacking": 163,
+        "malware": 67,
+        "misuse": 8,
+        "physical": 28,
+        "social": 24,
+        "unknown": 7
+      },
+      "assets": {
+        "M - Disk drive": 2,
+        "M - Disk media": 1,
+        "M - Documents": 9,
+        "M - Unknown": 4,
+        "N - Router or switch": 4,
+        "P - Call center": 1,
+        "P - Customer": 1,
+        "P - End-user or employee": 4,
+        "P - Finance": 5,
+        "P - Human resources": 1,
+        "P - Other": 1,
+        "P - Unknown": 14,
+        "S - Authentication": 1,
+        "S - Code repository": 3,
+        "S - DNS": 2,
+        "S - Database": 37,
+        "S - Directory": 1,
+        "S - File": 15,
+        "S - Log": 1,
+        "S - Mail": 7,
+        "S - Mainframe": 2,
+        "S - Unknown": 29,
+        "S - Web application": 99,
+        "U - Desktop": 22,
+        "U - Desktop or laptop": 40,
+        "U - Laptop": 18,
+        "U - Mobile phone": 4,
+        "U - Unknown": 2,
+        "Unknown": 21
+      },
+      "categories": {
+        "credentials": 38,
+        "other": 168,
+        "ransomware": 33
+      },
+      "records": 239
+    },
+    "55": {
+      "actions": {
+        "hacking": 5,
+        "physical": 4,
+        "social": 1
+      },
+      "assets": {
+        "M - Tapes": 1,
+        "P - End-user or employee": 1,
+        "S - Database": 1,
+        "S - Web application": 5,
+        "T - ATM": 2
+      },
+      "categories": {
+        "credentials": 1,
+        "other": 8,
+        "ransomware": 0
+      },
+      "records": 9
+    },
+    "56": {
+      "actions": {
+        "error": 4,
+        "hacking": 51,
+        "malware": 13,
+        "misuse": 5,
+        "physical": 17,
+        "social": 10,
+        "unknown": 5
+      },
+      "assets": {
+        "M - Disk drive": 1,
+        "M - Documents": 3,
+        "N - PBX": 1,
+        "P - Call center": 1,
+        "P - End-user or employee": 2,
+        "P - Other": 1,
+        "P - Unknown": 7,
+        "S - Database": 19,
+        "S - File": 1,
+        "S - Mail": 2,
+        "S - POS controller": 2,
+        "S - Unknown": 5,
+        "S - Web application": 39,
+        "U - Desktop": 11,
+        "U - Desktop or laptop": 19,
+        "U - Laptop": 9,
+        "U - POS terminal": 1,
+        "Unknown": 7
+      },
+      "categories": {
+        "credentials": 8,
+        "other": 76,
+        "ransomware": 3
+      },
+      "records": 87
+    },
+    "61": {
+      "actions": {
+        "error": 9,
+        "hacking": 776,
+        "malware": 670,
+        "misuse": 7,
+        "physical": 60,
+        "social": 37,
+        "unknown": 11
+      },
+      "assets": {
+        "M - Disk drive": 1,
+        "M - Documents": 10,
+        "M - Flash drive": 8,
+        "M - Payment card": 1,
+        "M - Smart card": 1,
+        "M - Tapes": 1,
+        "M - Unknown": 2,
+        "N - Broadband": 1,
+        "N - Camera": 1,
+        "P - Customer": 1,
+        "P - End-user": 1,
+        "P - End-user or employee": 15,
+        "P - Executive": 1,
+        "P - Finance": 6,
+        "P - Human resources": 4,
+        "P - Other": 1,
+        "P - Unknown": 11,
+        "S - Authentication": 1,
+        "S - DHCP": 1,
+        "S - DNS": 1,
+        "S - Database": 44,
+        "S - File": 619,
+        "S - Mail": 22,
+        "S - Other": 2,
+        "S - Unknown": 35,
+        "S - Web application": 692,
+        "U - Desktop": 28,
+        "U - Desktop or laptop": 65,
+        "U - Laptop": 35,
+        "U - Other": 1,
+        "U - Tablet": 1,
+        "U - Telephone": 1,
+        "U - Unknown": 1,
+        "Unknown": 28
+      },
+      "categories": {
+        "credentials": 37,
+        "other": 211,
+        "ransomware": 649
+      },
+      "records": 897
+    },
+    "62": {
+      "actions": {
+        "environmental": 2,
+        "error": 17,
+        "hacking": 115,
+        "malware": 47,
+        "misuse": 25,
+        "physical": 516,
+        "social": 49,
+        "unknown": 7
+      },
+      "assets": {
+        "M - Disk drive": 14,
+        "M - Disk media": 1,
+        "M - Documents": 90,
+        "M - Flash drive": 30,
+        "M - Tapes": 7,
+        "M - Unknown": 6,
+        "N - LAN": 1,
+        "P - Customer": 4,
+        "P - End-user or employee": 17,
+        "P - Finance": 2,
+        "P - Human resources": 1,
+        "P - Other": 1,
+        "P - Partner": 2,
+        "P - System admin": 1,
+        "P - Unknown": 28,
+        "S - Authentication": 1,
+        "S - Backup": 1,
+        "S - Database": 51,
+        "S - File": 11,
+        "S - Mail": 26,
+        "S - Unknown": 59,
+        "S - Web application": 36,
+        "T - ATM": 2,
+        "U - Desktop": 121,
+        "U - Desktop or laptop": 378,
+        "U - Laptop": 264,
+        "U - Media": 3,
+        "U - Mobile phone": 2,
+        "U - POS terminal": 1,
+        "U - Tablet": 1,
+        "U - Unknown": 11,
+        "Unknown": 32
+      },
+      "categories": {
+        "credentials": 24,
+        "other": 664,
+        "ransomware": 18
+      },
+      "records": 706
+    },
+    "71": {
+      "actions": {
+        "error": 3,
+        "hacking": 24,
+        "malware": 10,
+        "misuse": 2,
+        "physical": 8,
+        "social": 1
+      },
+      "assets": {
+        "E - Other": 1,
+        "M - Documents": 4,
+        "M - Payment card": 2,
+        "N - WLAN": 1,
+        "P - Unknown": 1,
+        "S - Database": 8,
+        "S - File": 1,
+        "S - Mail": 2,
+        "S - POS controller": 1,
+        "S - Unknown": 2,
+        "S - Web application": 12,
+        "T - ATM": 1,
+        "U - Desktop": 2,
+        "U - Desktop or laptop": 5,
+        "U - Laptop": 4,
+        "U - POS terminal": 1,
+        "Unknown": 6
+      },
+      "categories": {
+        "credentials": 3,
+        "other": 34,
+        "ransomware": 4
+      },
+      "records": 41
+    },
+    "72": {
+      "actions": {
+        "error": 1,
+        "hacking": 49,
+        "malware": 41,
+        "misuse": 4,
+        "physical": 11,
+        "social": 5,
+        "unknown": 1
+      },
+      "assets": {
+        "M - Disk drive": 1,
+        "M - Disk media": 1,
+        "M - Documents": 1,
+        "M - Payment card": 3,
+        "P - Cashier": 3,
+        "P - Former employee": 1,
+        "P - Manager": 1,
+        "P - System admin": 1,
+        "S - Database": 9,
+        "S - File": 2,
+        "S - Mail": 1,
+        "S - POS controller": 10,
+        "S - Payment switch": 1,
+        "S - Unknown": 3,
+        "S - Web application": 15,
+        "T - ATM": 3,
+        "T - PED pad": 2,
+        "U - Desktop": 4,
+        "U - Desktop or laptop": 8,
+        "U - Laptop": 4,
+        "U - POS terminal": 23,
+        "Unknown": 7
+      },
+      "categories": {
+        "credentials": 6,
+        "other": 72,
+        "ransomware": 5
+      },
+      "records": 83
+    },
+    "81": {
+      "actions": {
+        "error": 4,
+        "hacking": 94,
+        "malware": 15,
+        "misuse": 6,
+        "physical": 26,
+        "social": 9,
+        "unknown": 5
+      },
+      "assets": {
+        "M - Disk drive": 1,
+        "M - Disk media": 1,
+        "M - Documents": 7,
+        "M - Flash drive": 3,
+        "P - Customer": 1,
+        "P - End-user or employee": 2,
+        "P - Executive": 1,
+        "P - Finance": 2,
+        "P - Human resources": 1,
+        "P - Partner": 1,
+        "P - System admin": 1,
+        "P - Unknown": 3,
+        "S - DNS": 1,
+        "S - Database": 17,
+        "S - File": 2,
+        "S - Mail": 4,
+        "S - POS controller": 1,
+        "S - Unknown": 5,
+        "S - Web application": 69,
+        "T - Kiosk": 1,
+        "U - Desktop": 7,
+        "U - Desktop or laptop": 15,
+        "U - Laptop": 9,
+        "U - Mobile phone": 1,
+        "U - POS terminal": 1,
+        "U - Tablet": 1,
+        "U - Unknown": 1,
+        "Unknown": 21
+      },
+      "categories": {
+        "credentials": 4,
+        "other": 129,
+        "ransomware": 7
+      },
+      "records": 140
+    },
+    "92": {
+      "actions": {
+        "environmental": 2,
+        "error": 15,
+        "hacking": 453,
+        "malware": 207,
+        "misuse": 20,
+        "physical": 130,
+        "social": 181,
+        "unknown": 12
+      },
+      "assets": {
+        "M - Disk drive": 7,
+        "M - Disk media": 4,
+        "M - Documents": 56,
+        "M - Flash drive": 10,
+        "M - Smart card": 1,
+        "M - Tapes": 1,
+        "M - Unknown": 2,
+        "N - Other": 1,
+        "N - PBX": 2,
+        "N - Private WAN": 1,
+        "N - Router or switch": 67,
+        "N - Telephone": 1,
+        "N - Unknown": 2,
+        "N - WLAN": 1,
+        "P - Call center": 1,
+        "P - Customer": 2,
+        "P - End-user or employee": 18,
+        "P - Executive": 4,
+        "P - Finance": 8,
+        "P - Helpdesk": 1,
+        "P - Maintenance": 2,
+        "P - Manager": 1,
+        "P - Other": 3,
+        "P - Unknown": 152,
+        "S - Authentication": 3,
+        "S - Backup": 1,
+        "S - Database": 59,
+        "S - File": 19,
+        "S - Mail": 20,
+        "S - Mainframe": 1,
+        "S - Remote access": 4,
+        "S - Unknown": 171,
+        "S - Web application": 232,
+        "T - ATM": 1,
+        "T - Kiosk": 1,
+        "T - Unknown": 2,
+        "U - Desktop": 160,
+        "U - Desktop or laptop": 213,
+        "U - Laptop": 48,
+        "U - Mobile phone": 67,
+        "U - Tablet": 1,
+        "U - Unknown": 1,
+        "Unknown": 41
+      },
+      "categories": {
+        "credentials": 157,
+        "other": 475,
+        "ransomware": 44
+      },
+      "records": 676
+    },
+    "99": {
+      "actions": {
+        "malware": 2
+      },
+      "assets": {
+        "S - Database": 1,
+        "S - Mail": 1
+      },
+      "categories": {
+        "credentials": 0,
+        "other": 0,
+        "ransomware": 2
+      },
+      "records": 2
+    },
+    "all": {
+      "actions": {
+        "environmental": 7,
+        "error": 93,
+        "hacking": 2758,
+        "malware": 1401,
+        "misuse": 135,
+        "physical": 1289,
+        "social": 472,
+        "unknown": 86
+      },
+      "assets": {
+        "E - Other": 1,
+        "E - Telemetry": 1,
+        "M - Disk drive": 36,
+        "M - Disk media": 12,
+        "M - Documents": 210,
+        "M - Flash drive": 60,
+        "M - Payment card": 18,
+        "M - Smart card": 3,
+        "M - Tapes": 15,
+        "M - Unknown": 17,
+        "N - Access reader": 1,
+        "N - Broadband": 2,
+        "N - Camera": 2,
+        "N - Firewall": 3,
+        "N - IDS": 1,
+        "N - LAN": 2,
+        "N - Other": 2,
+        "N - PBX": 4,
+        "N - PLC": 1,
+        "N - Private WAN": 2,
+        "N - Public WAN": 3,
+        "N - Router or switch": 100,
+        "N - SAN": 1,
+        "N - Telephone": 2,
+        "N - Unknown": 7,
+        "N - WLAN": 4,
+        "Other": 2,
+        "P - Call center": 5,
+        "P - Cashier": 13,
+        "P - Customer": 19,
+        "P - Developer": 1,
+        "P - End-user": 2,
+        "P - End-user or employee": 80,
+        "P - Executive": 24,
+        "P - Finance": 39,
+        "P - Former employee": 3,
+        "P - Helpdesk": 3,
+        "P - Human resources": 13,
+        "P - Maintenance": 3,
+        "P - Manager": 3,
+        "P - Other": 14,
+        "P - Partner": 4,
+        "P - System admin": 23,
+        "P - Unknown": 283,
+        "S - Authentication": 13,
+        "S - Backup": 5,
+        "S - Code repository": 9,
+        "S - DHCP": 1,
+        "S - DNS": 23,
+        "S - Database": 436,
+        "S - Directory": 4,
+        "S - File": 790,
+        "S - ICS": 4,
+        "S - Log": 2,
+        "S - Mail": 120,
+        "S - Mainframe": 4,
+        "S - Other": 9,
+        "S - POS controller": 32,
+        "S - Payment switch": 4,
+        "S - Proxy": 1,
+        "S - Remote access": 7,
+        "S - Unknown": 423,
+        "S - VM host": 1,
+        "S - Web application": 1954,
+        "T - ATM": 223,
+        "T - Gas terminal": 101,
+        "T - Kiosk": 11,
+        "T - PED pad": 9,
+        "T - Unknown": 4,
+        "U - Desktop": 450,
+        "U - Desktop or laptop": 919,
+        "U - Laptop": 475,
+        "U - Media": 3,
+        "U - Mobile phone": 95,
+        "U - Other": 1,
+        "U - POS terminal": 49,
+        "U - Tablet": 6,
+        "U - Telephone": 2,
+        "U - Unknown": 25,
+        "Unknown": 289
+      },
+      "categories": {
+        "credentials": 460,
+        "other": 3233,
+        "ransomware": 930
+      },
+      "records": 4623
+    }
+  },
+  "license": "CC-BY-SA-4.0",
+  "limitation": "Publicly reported incidents have reporting and selection bias. These frequencies are not population breach rates, causal effects or calibrated forecasts. Removing known preferential selections does not remove all bias.",
+  "method": "Validated records only; deduplicate incident_id; exclude phidbr/priority selection, unconfirmed incidents and records without external actors. Disjoint categories: ransomware first, then phishing/stolen credentials, then other external incidents. Actions and assets can overlap.",
+  "retrievedAt": "2026-09-27",
+  "revision": "230cf22b56a481dd1a994b21e4d94c59e2bccea9",
+  "source": "VERIS Community Database, Verizon RISK Team and contributors",
+  "url": "https://github.com/vz-risk/VCDB/tree/230cf22b56a481dd1a994b21e4d94c59e2bccea9",
+  "validatedRecords": 10047
+}
