@@ -1,0 +1,19 @@
+# Public judge demo; no database or paid resource is created by this blueprint.
+services:
+  - type: web
+    name: blackstar-demo
+    runtime: docker
+    repo: https://github.com/SamaCodes17/blackstar-prototype
+    branch: prototype
+    plan: free
+    healthCheckPath: /api/health
+    autoDeployTrigger: off
+    envVars:
+      - key: HOST
+        value: 0.0.0.0
+      - key: PUBLIC_ORIGIN
+        sync: false
+      - key: ENABLE_LIVE_COLLECTION
+        value: 'false'
+      - key: SESSION_SECRET
+        generateValue: true

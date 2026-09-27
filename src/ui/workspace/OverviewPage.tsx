@@ -44,7 +44,7 @@ export function OverviewPage(p: WorkspaceProps) {
             </button>
           </div>
           <span className="ws-hero-note">
-            {org.example ? 'Example assessment' : 'Planning assessment'} · Updated{' '}
+            {org.example ? 'Fictional assessment' : 'Planning assessment'} · Updated{' '}
             {new Date(output.at).toLocaleString('en-IN', {
               day: 'numeric',
               month: 'short',
@@ -84,8 +84,12 @@ export function OverviewPage(p: WorkspaceProps) {
             <em> modeled systems</em>
           </strong>
           <small>
-            {p.offline ? 'Saved source results' : sourceCount + ' live source results'} · View
-            provenance <ArrowRight size={14} />
+            {p.state.access?.demo
+              ? 'Fictional inventory + VCDB history'
+              : p.offline
+                ? 'Saved source results'
+                : sourceCount + ' live source results'}{' '}
+            · View provenance <ArrowRight size={14} />
           </small>
         </button>
       </div>

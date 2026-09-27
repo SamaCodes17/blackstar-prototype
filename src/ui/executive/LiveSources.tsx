@@ -51,7 +51,7 @@ export function LiveSources({
   busy,
   offline,
   refresh,
-  update,
+  collectionEnabled = true,
   shodanConfigured,
 }: {
   org: Organization;
@@ -60,6 +60,7 @@ export function LiveSources({
   refresh: () => Promise<boolean>;
   update: (body: unknown) => Promise<boolean>;
   shodanConfigured?: boolean;
+  collectionEnabled?: boolean;
 }) {
   const [detail, setDetail] = useState<(typeof feeds)[number]>();
   const [refreshing, setRefreshing] = useState(false);
@@ -163,7 +164,7 @@ export function LiveSources({
         </p>
         <button
           className="exec-button secondary"
-          disabled={busy || offline}
+          disabled={busy || offline || !collectionEnabled}
           onClick={async () => {
             setRefreshing(true);
             try {
@@ -176,15 +177,11 @@ export function LiveSources({
           <RefreshCw size={15} className={refreshing ? 'spin' : ''} />
           {refreshing ? 'Checking public sources…' : 'Refresh sources'}
         </button>
-        <label className="exec-auto-refresh">
-          <input
-            type="checkbox"
-            checked={org.continuous}
-            disabled={busy || offline}
-            onChange={(event) => void update({ continuous: event.target.checked })}
-          />{' '}
-          Automatic refresh
-        </label>
+        <small>
+          {collectionEnabled
+            ? 'Manual admin refresh only.'
+            : 'Live collection is disabled for this deployment.'}
+        </small>
         {shodanConfigured && (
           <small className="exec-credit-note">
             Authenticated searches may use query credits. InternetDB is a separate public weekly

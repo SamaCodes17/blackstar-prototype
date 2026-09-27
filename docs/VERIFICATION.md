@@ -66,3 +66,14 @@ for (const element of document.querySelectorAll('body *')) {
 }
 console.table(missing.filter(Boolean));
 ```
+
+
+## 27 September 2026 — Public demo and admin boundary
+
+- `npm run check`: 42 tests passed, TypeScript and production Vite build passed.
+- New checks cover reserved fictional domains/IPs, collector refusal with zero outbound calls, stateless scenario isolation, historical count reconciliation, scrypt passwords, signed-cookie tampering/expiry, HTTP public/private reads, viewer creation/scan denial, origin checks, admin login/logout and fail-closed missing private storage.
+- VCDB importer independently checked for category precedence, deduplication, preferential-source exclusion, victim identifier omission and downloaded archive SHA-256 match.
+- Browser: public overview and three-company selector loaded without login; no Add organization control; Evidence displayed 4,623 selected incidents with provenance; zero-budget/90-day update produced zero funded actions and equal before/after loss; reset restored the baseline; switching ransomware to credential scenario changed the starting system and branching probabilities; pricing selected MSME in the enquiry form; unconfigured admin sign-in honestly displayed unavailable.
+- Build includes no local database dependency. Existing SQLite is not imported. Runtime requires no historical-source network access in public mode.
+- Not yet verified: actual managed PostgreSQL connection/schema persistence and TLS, Docker image startup (Docker unavailable), cloud deployment, backup/restore, production load or independent penetration testing. The test storage adapter is in-memory; it does not substitute for a PostgreSQL integration test.
+- Email form prepares a `mailto` enquiry for review; no real email was sent during testing.

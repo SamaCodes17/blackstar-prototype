@@ -40,8 +40,8 @@ export function Onboarding({
   return (
     <Modal title="Add your organization" close={close}>
       <p className="muted">
-        Start with your public footprint. Public indexes discover certificate names; uncertain
-        dependencies and loss inputs remain editable.
+        Private admin workspace. The exact domain must be preapproved in server configuration after
+        permission has been verified. Creating an assessment does not start a scan.
       </p>
       <form className="onboarding-form" onSubmit={(e) => void submit(e)}>
         <label>
@@ -78,8 +78,8 @@ export function Onboarding({
           <input name="authorized" type="checkbox" required />I am authorized to assess this domain.
         </label>
         <Note>
-          Only third-party public indexes are queried. No packets are sent to the target
-          infrastructure. This local prototype stores no login credentials.
+          A checkbox does not establish permission. Live collection requires a signed-in
+          administrator, a configured allowlist and the live-collection setting.
         </Note>
         {error && (
           <p className="form-error" role="alert">
@@ -87,7 +87,7 @@ export function Onboarding({
           </p>
         )}
         <button className="primary-button" disabled={busy} type="submit">
-          {busy ? 'Reading public indexes…' : 'Create assessment'}
+          {busy ? 'Creating private assessment…' : 'Create assessment'}
           <ArrowRight size={15} />
         </button>
       </form>

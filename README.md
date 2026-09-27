@@ -1,17 +1,17 @@
 # BLACKSTAR
 
-A working local prototype for passive cyber-risk quantification and security investment planning. Built for the personal development repository **SamaCodes17/blackstar-prototype**, on branch **prototype**.
+A public-demo-ready prototype for cyber-risk quantification and security investment planning, with a private admin boundary for approved live assessments. Built for the personal development repository **SamaCodes17/blackstar-prototype**, on branch **prototype**.
 
 ## Run
 
-Use **Node.js 22.13+ (24 LTS recommended)**. Node 20 cannot run the built-in SQLite module.
+Use **Node.js 22.13+ (24 LTS recommended)**. The deployed runtime does not use SQLite or require a local database.
 
 ```sh
 npm ci
 npm run dev
 ```
 
-Open http://127.0.0.1:4173. The example is available immediately without keys or internet. On this Windows workstation, `./scripts/start-local.ps1` can use the already-installed compatible bundled Node runtime. It does not install or change system software.
+Open http://127.0.0.1:4173. Three fictional organizations are available immediately without keys, login, a database or outbound collection. On this Windows workstation, `./scripts/start-local.ps1` can use the already-installed compatible bundled Node runtime. It does not install or change system software.
 
 ```sh
 npm run check      # numerical/security tests, TypeScript check, production build
@@ -19,55 +19,47 @@ npm run build
 npm start          # serve built assets using the same local API
 ```
 
-Optional settings are documented in `.env.example`. Copy it to `.env` for optional third-party keys. `.env`, SQLite databases, logs and browser test artifacts are excluded from Git.
+Optional deployment settings are in `.env.example`. The public demo needs none. Private organizations require `DATABASE_URL` (managed PostgreSQL), `ADMIN_PASSWORD_HASH` and `SESSION_SECRET`. Real collection additionally requires an exact `ADMIN_APPROVED_DOMAINS` allowlist and `ENABLE_LIVE_COLLECTION=true`. A viewer checkbox never grants access. API keys remain server-side. Existing SQLite files are preserved but no longer loaded.
 
-For Shodan, set `SHODAN_API_KEY` in the local `.env` and restart the service. Never paste the key into the UI or commit it. A valid key is not sufficient unless the account permits filtered search; these requests may consume query credits. The source panel distinguishes missing configuration, denied access, and successful retrieval. See [Shodan's API requirements](https://developer.shodan.io/api) and [the three-layer implementation status](docs/IMPLEMENTATION_STATUS.md).
+Start with [deployment setup](docs/DEPLOYMENT.md), [architecture rationale](docs/adr/006-public-demo-and-cloud-storage.md), [dataset provenance](fixtures/README.md) and [implementation status](docs/IMPLEMENTATION_STATUS.md).
 
 ## Architecture
 
 ```text
-Public third-party indexes ─► evidence collectors ─► organization-scoped SQLite snapshots
-                                                      │
-                         Layer 2: exact Bayesian inference + joint Monte Carlo
-                                                      │
-                         Layer 3: finite Stackelberg portfolio enumeration
-                                  ├─ pairwise QUBO surrogate
-                                  ├─ simulated annealing
-                                  └─ QAOA state-vector circuit simulation
-                                                      │
-                          persisted Output contract ─► React reporting / export
+Fictional organizations + pinned VCDB aggregates → isolated viewer what-if calculations
+                                                        │
+Admin session + preapproved domain → passive collectors → managed PostgreSQL
+                                                        │
+                      Shared TypeScript risk / propagation / optimization engine
+                                                        │
+                      React executive pages + graph + guide + board brief + pricing
 ```
 
-- `src/core/`: pure numerical model, solver, sources and shared contracts.
-- `server/`: one local HTTP entry point, input validation, passive collectors, SQLite persistence and scheduler.
-- `src/ui/`: React views and custom SVG graphs. No charting framework or microservices required.
-- `fixtures/ct-srmist.json`: public CT snapshot with original source and retrieval timestamp.
-- `tests/`: repeatable model and safety checks.
-- `docs/adr/`: architecture decisions and their tradeoffs.
+- `src/core/`: pure numerical model, solver, historical weighting and contracts.
+- `server/`: same-origin HTTP API, admin sessions, public demo policy, collectors and PostgreSQL adapter.
+- `src/ui/`: React views and SVG graphs; no additional router or chart framework.
+- `fixtures/vcdb-aggregate.json`: attributed historical aggregate without victim identifiers.
+- `scripts/import_vcdb.py`: optional offline dataset preparation; Python is not a runtime dependency.
+- `tests/`: numerical, collector, storage-contract, session and HTTP authorization checks.
+- `docs/adr/`: architecture decisions and limitations.
 
-The same API serves Vite during development and the compiled application in production mode. SQLite transactions persist the organization, computed output and history together. There is no frontend secret or credential store.
+Public changes are stateless, validated numeric scenarios. They never overwrite shared fixtures or saved admin data. Private state is returned only to authenticated admins. PostgreSQL stores the organization, output and bounded event history in one atomic statement. There is no browser snapshot fallback to old real-company data. Docker packages all runtime files, and the app writes no local data files.
 
 ## What works
 
-The customer experience is one executive overview: recommended actions and annual spend, a budget/period comparison, an interactive attack graph, and a live source list. The graph switches between current exposure and the recommended plan. Source rows show actual retrieval status and timestamps, and can refresh manually or periodically. Business inputs are edited in a dialog; the board brief prints without implementation details.
+The experience has six focused pages: Overview, Evidence, Attack paths, Investment, Board brief and Pricing. Visitors can explore three fictional businesses, change numerical assumptions and budgets, select a starting breach, inspect branching effects, compare protections, ask the bounded local guide and print a board summary. Pricing presents proposed pilot plans and opens an email enquiry for review; it does not sell a subscription.
 
-The previous research pages are retained in `src/ui/pages/` for development reference but are not routed or imported by the customer application. There is no Plain/Expert switch, public architecture explorer, quantum tab, or raw evidence export button in the executive flow. Architecture and numerical methods belong in this repository's documentation. Production browser source maps are disabled.
+Evidence distinguishes generated company data from 4,623 qualifying VCDB incident records. A documented, smoothed historical category mixture contributes 25% of demo attacker weights; the rest is assumed. This is not a trained predictive model.
 
-- Authorized domain onboarding with passive certificate discovery; cached fallback and explicit unavailable states.
-- Verified example hostnames from Cert Spotter; separate preview CVE associations and a hypothetical supplier node.
-- Optional Shodan service/version evidence, NVD lookup, live FIRST EPSS and CISA KEV refresh.
-- Exact inference on the bounded acyclic graph; Monte Carlo loss distribution, tail percentile, mean confidence interval and separate parameter sensitivity bands.
-- Finite portfolio enumeration, adaptive attacker paths, defender-favorable ties, severity-first baseline and standalone control ROSI.
-- Real QUBO construction with budget slack, exact surrogate enumeration, seeded simulated annealing and a small complex-amplitude QAOA simulator.
-- Computed preview economic contagion and sensitivity remain available in the numerical engine; executive financial headlines use direct risk only.
-- Scheduled refresh while the local service runs, change history, threshold alerts and preview event injection.
-- Numerical self-check and organization-scoped JSON evidence export remain developer API capabilities. The executive UI includes a printable board brief and browser snapshot fallback.
+Admins can sign in once configured. Private organization creation requires PostgreSQL and a preapproved exact domain. Explicit admin refreshes use the existing CT/Shodan/InternetDB/EPSS/KEV/NVD integrations. No background scanning runs. A missing database or credential fails closed.
+
+The previous research pages remain in `src/ui/pages/` for development reference and are not routed in the customer app. Architecture rationale remains in repo documentation.
 
 ## Honesty and methodology
 
 The data contract retains **CITED**, **ASSUMED**, **COMPUTED**, and **PREVIEW** provenance. The executive UI uses plain-language estimate notices and source statuses instead of repeating technical badges on every figure. Financial totals, reduction, and graph probabilities are calculated; many inputs are assumed or illustrative. Computation does not make them empirically validated forecasts. Source status is not a finding about the assessed organization. The brief explicitly flags annual plans whose cost exceeds modeled loss avoided.
 
-Certificate evidence demonstrates issuance of a certificate containing a name. It does **not** establish an active service, a dependency, a vendor relationship or a vulnerability. In the example, only names are observed; CVE associations and supplier relationships are preview scenarios. The default size and cost-per-record values are assumptions, not claimed institutional facts.
+Certificate evidence demonstrates issuance of a certificate containing a name. It does **not** establish an active service, a dependency, a vendor relationship or a vulnerability. In the public demo, no organization-specific names or services are observed; all are fictional. The default size and cost-per-record values are assumptions, not claimed institutional facts.
 
 EPSS is a global thirty-day exploitation signal. The model uses `1 - (1 - p30)^(days/30)` under stationarity and multiplies by an assumed local targeting factor. No-CVE nodes have editable annual baselines. Edge activation is `weight × (1 - exp(-days/mean_wait))`. These transformations have not been calibrated to institution-specific incidents.
 
@@ -79,12 +71,12 @@ The QUBO is a second-order surrogate of the game objective, not an exact reducti
 
 ## Limits and scale path
 
-- Small local prototype, not an authenticated multi-tenant service. It deliberately refuses non-loopback binding. Organization scoping prevents accidental mixing; it is not an authorization boundary against another local OS user.
+- Public/private authorization is implemented for a single admin role. Customer accounts, tenant isolation, SSO/MFA and enterprise access management remain future work.
 - Modeled graph selection is bounded to seven assets by intake; the exact engine rejects more than twelve. The larger certificate inventory is retained, capped and explicitly non-exhaustive. CT results can be paginated. This is not a complete asset-discovery product.
 - No fingerprint key means no real vulnerability correlation. Preview data never becomes a verified institution finding merely because its global EPSS score refreshes.
-- Graph dependencies, loss allocations, targeting, control effectiveness, prices and attacker priors remain assumptions. MITRE ATT&CK does not supply population-level attacker frequencies.
+- Graph dependencies, loss allocations, targeting, control effectiveness and prices remain assumptions; demo attacker weights blend assumed and historical category frequencies. MITRE ATT&CK does not supply population-level attacker frequencies.
 - The stored parameter band explores four leading uncertain parameters with uniform draws; it is not a full uncertainty posterior or an empirically validated interval.
-- The scheduler runs only while this process runs. The exact engine recomputes changed conditional distributions and their descendants while reusing the unaffected joint law. Joint-state aggregation, Monte Carlo and game search still traverse the bounded full instance. This is not a distributed inference engine.
+- Background collection is disabled. The exact engine recomputes changed conditional distributions and their descendants while reusing the unaffected joint law. Joint-state aggregation, Monte Carlo and game search still traverse the bounded full instance. This is not a distributed inference engine.
 - The contagion extension is an additive preview transmission model. No MCA/BSE/NSE corporate network has been ingested and there is no causal stock-price model.
 - Scaling needs authenticated tenancy, a durable job queue, incremental inference, cyclic-graph handling and larger mixed-integer/sampling solvers. See the decision records.
 
@@ -96,7 +88,7 @@ The sole configured Git remote must remain `https://github.com/SamaCodes17/black
 
 ## Current interface
 
-The executive workspace has separate Overview, Evidence, Attack paths, Investment and Board brief pages. Deeper analyses are expandable within the relevant page. Ask BlackStar is a local topic-based explainer grounded in the current assessment, not an external AI integration. See [the workspace decision](docs/adr/005-focused-workspace.md).
+The executive workspace has separate Overview, Evidence, Attack paths, Investment, Board brief and Pricing pages. Deeper analyses are expandable within the relevant page. Ask BlackStar is a local topic-based explainer grounded in the current assessment, not an external AI integration. See [the workspace decision](docs/adr/005-focused-workspace.md).
 
 ## Attack propagation and free-access Shodan path
 

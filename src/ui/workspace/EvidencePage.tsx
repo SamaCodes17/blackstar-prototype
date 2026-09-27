@@ -1,6 +1,7 @@
 import type { WorkspaceProps } from './types';
 import { money } from '../shared';
 import { useState } from 'react';
+import { DemoEvidence } from './DemoEvidence';
 import { LiveSources } from '../executive/LiveSources';
 import { pageHelpers } from './pageHelpers';
 export function EvidencePage(p: WorkspaceProps) {
@@ -14,14 +15,19 @@ export function EvidencePage(p: WorkspaceProps) {
         'Confidence starts with evidence.',
         'See what was observed, where it came from, and what still needs validation.',
       )}
-      <LiveSources
-        org={org}
-        busy={p.busy}
-        offline={p.offline}
-        refresh={p.refresh}
-        update={p.update}
-        shodanConfigured={p.state.integrations?.shodanConfigured}
-      />
+      {p.state.access?.demo ? (
+        <DemoEvidence org={org} />
+      ) : (
+        <LiveSources
+          org={org}
+          busy={p.busy}
+          offline={p.offline}
+          refresh={p.refresh}
+          update={p.update}
+          shodanConfigured={p.state.integrations?.shodanConfigured}
+          collectionEnabled={Boolean(p.state.access?.collectionEnabled)}
+        />
+      )}
       <section className="ws-card">
         <div className="ws-section-top">
           <div>
@@ -66,7 +72,7 @@ export function EvidencePage(p: WorkspaceProps) {
                       <span className="ws-badge">{a.hostTag}</span>
                       <small>
                         {a.product || 'No verified product fingerprint'}
-                        {a.services?.length ? ` · ${a.services.length} indexed services` : ''}
+                        {a.services?.length ? ` · ${a.services.length} listed services` : ''}
                       </small>
                     </td>
                     <td>
@@ -94,10 +100,14 @@ export function EvidencePage(p: WorkspaceProps) {
         ) && <p role="status">No systems match this search.</p>}
       </section>
       <details className="ws-card">
-        <summary>Discovered names · {org.inventory.length}</summary>
+        <summary>
+          {p.state.access?.demo ? 'Fictional system names' : 'Discovered names'} ·{' '}
+          {org.inventory.length}
+        </summary>
         <p>
-          Certificate names are historical observations; they do not establish active services or
-          ownership.
+          {p.state.access?.demo
+            ? 'Reserved example domains generated for this demonstration.'
+            : 'Certificate names are historical observations; they do not establish active services or ownership.'}
         </p>
         <div className="ws-inventory">
           {org.inventory.map((name) => (

@@ -110,6 +110,8 @@ export async function scan(
   input: Organization,
   adapters = { discover, read: publicJson },
 ): Promise<{ org: Organization; changed: string[] }> {
+  if (input.domain.endsWith('.example') || input.domain.endsWith('.invalid'))
+    throw new Error('Fictional organizations cannot be scanned');
   const org = structuredClone(input),
     checkedAt = new Date().toISOString(),
     scans: ScanStatus[] = [],
@@ -124,7 +126,7 @@ export async function scan(
   ) => scans.push({ collector, status: state, count, message, checkedAt, dataAt, issue });
   try {
     const result = await adapters.discover(org.domain);
-    cache(org.id, 'ct', result);
+    await cache(org.id, 'ct', result);
     org.inventory = result.names;
     for (const asset of org.assets)
       if (result.names.includes(asset.hostname)) {
@@ -159,7 +161,7 @@ export async function scan(
       checkedAt,
     );
   } catch {
-    const old = cached(org.id, 'ct');
+    const old = await cached(org.id, 'ct');
     status(
       'Certificate transparency',
       org.inventory.length ? 'SNAPSHOT' : 'UNAVAILABLE',
@@ -323,7 +325,7 @@ export async function scan(
           const data = await adapters.read(
             `https://api.first.org/data/v1/epss?cve=${cves.join(',')}`,
           );
-          cache(org.id, 'epss', data);
+          await cache(org.id, 'epss', data);
           for (const row of data.data ?? [])
             for (const a of org.assets.filter((a) => a.cve === row.cve)) {
               const value = Number(row.epss);
@@ -350,7 +352,7 @@ export async function scan(
             'SNAPSHOT',
             cves.length,
             'Feed unavailable; keeping previously tagged values.',
-            cached(org.id, 'epss')?.at,
+            (await cached(org.id, 'epss'))?.at,
           );
         }
       })(),
@@ -359,7 +361,7 @@ export async function scan(
           const data = await adapters.read(
             'https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json',
           );
-          cache(org.id, 'kev', {
+          await cache(org.id, 'kev', {
             dateReleased: data.dateReleased,
             cves: (data.vulnerabilities ?? []).map((v: any) => v.cveID),
           });
@@ -381,7 +383,7 @@ export async function scan(
             'SNAPSHOT',
             0,
             'Catalog unavailable; keeping prior membership with prior scenario status.',
-            cached(org.id, 'kev')?.at,
+            (await cached(org.id, 'kev'))?.at,
           );
         }
       })(),
@@ -390,7 +392,7 @@ export async function scan(
           const data = await adapters.read(
             `https://services.nvd.nist.gov/rest/json/cves/2.0?cveId=${encodeURIComponent(cves[0])}`,
           );
-          cache(org.id, 'nvd', data);
+          await cache(org.id, 'nvd', data);
           status(
             'NVD / CVE',
             'LIVE',
@@ -404,7 +406,7 @@ export async function scan(
             'SNAPSHOT',
             0,
             'CVE feed unavailable; retaining existing scenario details.',
-            cached(org.id, 'nvd')?.at,
+            (await cached(org.id, 'nvd'))?.at,
           );
         }
       })(),

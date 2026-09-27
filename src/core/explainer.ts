@@ -3,7 +3,7 @@ import { decisionSummary } from './decision';
 const rupees = (n: number) => `₹${Math.round(n).toLocaleString('en-IN')}`;
 export interface Explanation {
   text: string;
-  destination: 'overview' | 'evidence' | 'risk' | 'investment' | 'report';
+  destination: 'overview' | 'evidence' | 'risk' | 'investment' | 'report' | 'pricing';
 }
 /** Deliberately bounded local explainer: it never invents observations or calls an AI service. */
 export function explainAssessment(question: string, state: State, page: string): Explanation {
@@ -14,6 +14,16 @@ export function explainAssessment(question: string, state: State, page: string):
     text,
     destination,
   });
+  if (state.access?.demo && /shodan|shodun|live|dataset|histor|learn|vcdb|fake|dummy/.test(q))
+    return answer(
+      'This public demo uses fictional companies and reserved example addresses. Live scans are disabled. Real VCDB incident counts inform 25% of the scenario attacker mixture after smoothing; the other 75% is assumed. This is not a trained predictor or a measured annual breach rate. Admin-only live collection requires a verified, preapproved domain.',
+      'evidence',
+    );
+  if (/pricing|price|subscription|plan cost/.test(q))
+    return answer(
+      'Proposed monthly pilot prices are ₹4,999 for Startup, ₹14,999 for MSME and ₹49,999 for Business, excluding taxes. Enterprise scope and pricing are agreed by enquiry. These are proposed assisted services; no payment is collected.',
+      'pricing',
+    );
   if (/this page|where.*start|help me|how.*use/.test(q)) {
     const pages: Record<string, string> = {
       overview:
@@ -23,6 +33,8 @@ export function explainAssessment(question: string, state: State, page: string):
       risk: 'Select a graph node to inspect its business impact. Switch between current exposure and recommended protections. Click any node to force a starting breach and see every downstream branch. Replay spread to step through the connections, or explore the explicitly illustrative network.',
       investment:
         'Choose an annual budget and planning period, then select Update plan. Compare the recommendation against current exposure and a severity-first plan. Expand the protection options to see alternatives.',
+      pricing:
+        'Compare proposed pilot plans, then open an email enquiry for a scoped discussion. No subscription is created or payment collected.',
       report:
         'The board brief summarizes the selected plan, its estimated impact and the inputs requiring validation. Use Print / PDF to produce a shareable copy.',
     };

@@ -188,6 +188,13 @@ export interface Output {
   blast: { entry: string; probabilities: number[]; loss: number }[];
 }
 export interface State {
+  access?: {
+    role: 'viewer' | 'admin';
+    demo: boolean;
+    adminConfigured: boolean;
+    storageReady: boolean;
+    collectionEnabled?: boolean;
+  };
   integrations?: { shodanConfigured: boolean };
   org: Organization;
   output: Output;

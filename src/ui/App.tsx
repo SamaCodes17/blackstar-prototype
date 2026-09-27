@@ -3,6 +3,8 @@ import { ArrowUpRight, Building2, Plus, SlidersHorizontal, X } from 'lucide-reac
 import type { State } from '../core/types';
 import { decisionSummary } from '../core/decision';
 import { Modal, fullMoney } from './shared';
+import { AdminLogin } from './workspace/AdminLogin';
+import { PricingPage } from './workspace/PricingPage';
 import { Onboarding } from './Onboarding';
 import { Workspace, type View, viewFromHash } from './workspace/Workspace';
 import { Assistant } from './workspace/Assistant';
@@ -21,6 +23,8 @@ export default function App() {
     window.addEventListener('hashchange', sync);
     return () => window.removeEventListener('hashchange', sync);
   }, []);
+  const [login, setLogin] = useState(false);
+  const scenario = useRef<Record<string, any>>({});
   const [onboarding, setOnboarding] = useState(false);
   const [inputs, setInputs] = useState(false);
   const [explain, setExplain] = useState(false);
@@ -28,20 +32,15 @@ export default function App() {
   const [offline, setOffline] = useState(false);
   const [error, setError] = useState('');
   const requestVersion = useRef(0);
-  const currentOrg = useRef(localStorage.getItem('blackstar.active') ?? 'srmist-example');
+  const currentOrg = useRef('demo-northstar');
   const accept = useCallback((data: State) => {
     setState(data);
     currentOrg.current = data.org.id;
-    try {
-      localStorage.setItem('blackstar.active', data.org.id);
-      localStorage.setItem(`blackstar.snapshot.${data.org.id}`, JSON.stringify(data));
-    } catch {
-      /* The live assessment remains usable if browser storage is full. */
-    }
     setOffline(false);
   }, []);
   const load = useCallback(
     async (id = currentOrg.current) => {
+      scenario.current = {};
       const version = ++requestVersion.current;
       try {
         const response = await fetch(`/api/state?org=${encodeURIComponent(id)}`);
@@ -53,12 +52,7 @@ export default function App() {
         }
       } catch {
         if (version !== requestVersion.current) return;
-        const cached = localStorage.getItem(`blackstar.snapshot.${id}`);
-        if (cached) {
-          setState(JSON.parse(cached));
-          currentOrg.current = id;
-          setOffline(true);
-        } else setError('The local service is unavailable. Start the app, then retry.');
+        setError('The service is unavailable. Please retry shortly.');
       }
     },
     [accept],
@@ -77,14 +71,25 @@ export default function App() {
     setError('');
     ++requestVersion.current;
     try {
+      let requestBody = body;
+      let nextScenario = scenario.current;
+      if (state?.access?.demo && path === '/api/update') {
+        const incoming = body as Record<string, any>;
+        const edits = new Map<string, any>();
+        for (const edit of [...(scenario.current.edits ?? []), ...(incoming.edits ?? [])])
+          edits.set([edit.group, edit.id, edit.key].join(':'), edit);
+        nextScenario = { ...scenario.current, ...incoming, edits: [...edits.values()] };
+        requestBody = nextScenario;
+      }
       const response = await fetch(`${path}?org=${encodeURIComponent(currentOrg.current)}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
+        body: JSON.stringify(requestBody),
       });
       const data = await response.json();
       if (!response.ok) throw new Error(data.error ?? 'The request could not be completed');
       accept(data);
+      scenario.current = nextScenario;
       return true;
     } catch (cause) {
       setError(cause instanceof Error ? cause.message : 'Request failed');
@@ -129,6 +134,7 @@ export default function App() {
               ['risk', 'Attack paths'],
               ['investment', 'Investment'],
               ['report', 'Board brief'],
+              ['pricing', 'Pricing'],
             ] as const
           ).map(([id, label]) => (
             <a key={id} href={'#/' + id} aria-current={view === id ? 'page' : undefined}>
@@ -144,48 +150,59 @@ export default function App() {
         </button>
       </header>
       <main className="exec-main">
-        <div className="exec-org-bar no-print">
-          <div className="exec-org-picker">
-            <Building2 size={20} />
-            <div>
-              <label htmlFor="organization-picker">ORGANIZATION</label>
-              <select
-                id="organization-picker"
-                value={org.id}
-                disabled={busy}
-                onChange={(e) => void load(e.target.value)}
+        {view !== 'pricing' && (
+          <div className="exec-org-bar no-print">
+            <div className="exec-org-picker">
+              <Building2 size={20} />
+              <div>
+                <label htmlFor="organization-picker">ORGANIZATION</label>
+                <select
+                  id="organization-picker"
+                  value={org.id}
+                  disabled={busy}
+                  onChange={(e) => void load(e.target.value)}
+                >
+                  {state.organizations.map((o) => (
+                    <option key={o.id} value={o.id}>
+                      {o.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+            <div className="exec-org-actions">
+              <span className="exec-prototype-pill">
+                {state.access?.demo ? 'Fictional demo' : 'Private assessment'}
+              </span>
+              {state.access?.role === 'admin' && (
+                <button
+                  className="exec-icon-link"
+                  disabled={busy || offline || !state.access?.storageReady}
+                  title={
+                    state.access?.storageReady
+                      ? 'Create a private assessment'
+                      : 'Configure managed PostgreSQL to save private assessments'
+                  }
+                  onClick={() => setOnboarding(true)}
+                  aria-label="Add organization"
+                >
+                  <Plus size={17} />
+                  <span>Add organization</span>
+                </button>
+              )}
+              <button
+                className="exec-icon-link"
+                disabled={busy || offline}
+                onClick={() => setInputs(true)}
+                aria-label="Business inputs"
+                title="Business inputs"
               >
-                {state.organizations.map((o) => (
-                  <option key={o.id} value={o.id}>
-                    {o.name}
-                  </option>
-                ))}
-              </select>
+                <SlidersHorizontal size={17} />
+                <span>Business inputs</span>
+              </button>
             </div>
           </div>
-          <div className="exec-org-actions">
-            <span className="exec-prototype-pill">Prototype</span>
-            <button
-              className="exec-icon-link"
-              disabled={busy || offline}
-              onClick={() => setOnboarding(true)}
-              aria-label="Add organization"
-            >
-              <Plus size={17} />
-              <span>Add organization</span>
-            </button>
-            <button
-              className="exec-icon-link"
-              disabled={busy || offline}
-              onClick={() => setInputs(true)}
-              aria-label="Business inputs"
-              title="Business inputs"
-            >
-              <SlidersHorizontal size={17} />
-              <span>Business inputs</span>
-            </button>
-          </div>
-        </div>
+        )}
         {offline && (
           <div className="exec-offline" role="status">
             Showing a saved assessment. Reconnect to change your plan or refresh sources.
@@ -200,7 +217,19 @@ export default function App() {
             </button>
           </div>
         )}
-        {view === 'report' ? (
+        {view !== 'pricing' && state.access?.demo && (
+          <div className="demo-notice">
+            <strong>Explore safely.</strong> These companies, systems and business inputs are
+            fictional. Calculations are real model outputs; your what-if changes stay in this visit.{' '}
+            <a href="#/evidence">See data sources</a>
+            <button onClick={() => void load(org.id)} disabled={busy}>
+              Reset scenario
+            </button>
+          </div>
+        )}
+        {view === 'pricing' ? (
+          <PricingPage />
+        ) : view === 'report' ? (
           <DecisionBrief state={state} back={() => navigate('overview')} />
         ) : (
           <Workspace
@@ -221,7 +250,18 @@ export default function App() {
           <span>
             BLACKSTAR <span>Quantify. Predict. Optimize.</span>
           </span>
-          <span>Executive risk decisions</span>
+          <span>
+            Executive risk decisions ·{' '}
+            {state.access?.role === 'admin' ? (
+              <button className="ws-text-button" onClick={() => void action('/api/logout')}>
+                Sign out
+              </button>
+            ) : (
+              <button className="ws-text-button" onClick={() => setLogin(true)}>
+                Admin sign in
+              </button>
+            )}
+          </span>
         </footer>
       </main>
       {chat !== null && (
@@ -234,6 +274,17 @@ export default function App() {
           navigate={navigate}
         />
       )}
+      {login && (
+        <AdminLogin
+          configured={Boolean(state.access?.adminConfigured)}
+          close={() => setLogin(false)}
+          accept={(data) => {
+            accept(data);
+            scenario.current = {};
+            setLogin(false);
+          }}
+        />
+      )}
       {inputs && (
         <BusinessInputs
           org={org}
@@ -242,7 +293,7 @@ export default function App() {
           update={(body) => action('/api/update', body)}
         />
       )}
-      {onboarding && (
+      {onboarding && state.access?.role === 'admin' && (
         <Onboarding
           close={() => setOnboarding(false)}
           accept={(data) => {
@@ -285,8 +336,8 @@ export default function App() {
             </p>
             {org.example && (
               <p>
-                The example vulnerability associations are illustrative. They are not confirmed
-                findings about this institution.
+                The example vulnerability associations are illustrative. They are not findings about
+                any real organization.
               </p>
             )}
             <h3>How to use the recommendation</h3>

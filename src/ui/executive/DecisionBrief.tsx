@@ -23,8 +23,17 @@ export function DecisionBrief({ state, back }: { state: State; back: () => void 
           <span className="exec-brief-brand">BLACKSTAR</span>
           <span>SECURITY INVESTMENT BRIEF</span>
         </header>
-        <p className="exec-kicker">{org.example ? 'EXAMPLE ASSESSMENT' : 'PLANNING ASSESSMENT'}</p>
+        <p className="exec-kicker">
+          {org.example ? 'FICTIONAL DEMO ASSESSMENT' : 'PLANNING ASSESSMENT'}
+        </p>
         <h1>{org.name}</h1>
+        {state.access?.demo && (
+          <p>
+            This fictional company has not been scanned. Financial figures are computed scenario
+            estimates, not measured losses. Historical VCDB patterns inform attacker weights;
+            company inputs and connections remain assumptions.
+          </p>
+        )}
         <p data-provenance="COMPUTED">
           Prepared {new Date(output.at).toLocaleString()} ·{' '}
           {org.horizon === 365 ? 'One-year' : `${org.horizon}-day`} planning period

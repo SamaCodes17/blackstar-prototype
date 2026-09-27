@@ -1,8 +1,8 @@
 import type { State } from '../../core/types';
-export type View = 'overview' | 'evidence' | 'risk' | 'investment' | 'report';
+export type View = 'overview' | 'evidence' | 'risk' | 'investment' | 'report' | 'pricing';
 export function viewFromHash(): View {
   const route = window.location.hash.replace('#/', '');
-  return ['overview', 'evidence', 'risk', 'investment', 'report'].includes(route)
+  return ['overview', 'evidence', 'risk', 'investment', 'report', 'pricing'].includes(route)
     ? (route as View)
     : 'overview';
 }

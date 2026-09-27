@@ -54,3 +54,12 @@ Development is exclusively for **SamaCodes17/blackstar-prototype**, branch **pro
 - InternetDB records retain provider identity, unknown transport/observation time, and IP-level CVE candidates separately. A DNS-to-IP match never alone promotes a hostname CVE association.
 - Live verification retrieved 11 observations across five hostnames/seven IPs: one authenticated IP response and six InternetDB responses. Authenticated filtered search remained access-restricted. API keys were not printed or committed.
 - Validation: 37 automated tests, production build, browser node/scenario/replay and real source-refresh checks.
+
+
+## 27 September 2026 — Safe public demo and cloud-ready storage
+
+- Replaced the public real-company default with three fully fictional organizations and isolated what-if calculations. Old SQLite files remain untouched and are not loaded by the new runtime.
+- Added server-enforced single-admin sessions for private reads, organization creation and scans. Exact-domain preapproval and explicit collection enablement replace visitor checkbox authorization.
+- Replaced runtime SQLite with a PostgreSQL adapter; public demo is stateless and works with no DB. Added Docker, Render configuration and account/setup instructions. Provisioning and real PostgreSQL integration are still pending.
+- Imported attributed aggregate VCDB data from a pinned commit, retaining 4,623 qualifying records. Demo actor mixtures blend assumed and smoothed empirical categories, with bias and calibration limitations documented.
+- Added Startup/MSME/Business/Enterprise proposed pricing and an email enquiry workflow, preserving focused executive pages, graph, optimizer, business inputs, report and local guide.

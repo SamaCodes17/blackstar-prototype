@@ -131,12 +131,12 @@ test('unreachable new organization has no fabricated assets or vulnerabilities',
   assert.equal(result.org.assets[0].hostname, 'example.org');
   assert.equal(result.org.assets[0].cve, undefined);
 });
-test('organization-scoped storage and atomic output round trip', () => {
+test('organization-scoped storage and atomic output round trip', async () => {
   const a = createOrganization('Test A', 'example.org', 'msme', 100, []),
     b = createOrganization('Test B', 'example.com', 'other', 400, []);
   const outputA = compute(a),
     outputB = compute(b);
-  save(a, outputA, {
+  await save(a, outputA, {
     at: outputA.at,
     event: 'A test event',
     ale: outputA.risk.ale,
@@ -144,7 +144,7 @@ test('organization-scoped storage and atomic output round trip', () => {
     affected: [],
     alert: false,
   });
-  save(b, outputB, {
+  await save(b, outputB, {
     at: outputB.at,
     event: 'B test event',
     ale: outputB.risk.ale,
@@ -152,9 +152,9 @@ test('organization-scoped storage and atomic output round trip', () => {
     affected: [],
     alert: false,
   });
-  assert.equal(getOrg(a.id).name, 'Test A');
-  assert.equal(getOutput(b.id).risk.ale, outputB.risk.ale);
-  assert.equal(timeline(a.id)[0].event, 'A test event');
+  assert.equal((await getOrg(a.id)).name, 'Test A');
+  assert.equal((await getOutput(b.id)).risk.ale, outputB.risk.ale);
+  assert.equal((await timeline(a.id))[0].event, 'A test event');
 });
 
 test('denied filtered search falls back to DNS and Shodan host lookup without promoting shared-IP CVEs', async () => {
