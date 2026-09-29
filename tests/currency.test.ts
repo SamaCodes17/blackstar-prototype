@@ -3,6 +3,49 @@ import assert from 'node:assert/strict';
 import { formatCurrency, validRates } from '../src/core/currency';
 import { explainAssessment } from '../src/core/explainer';
 import { demoState } from '../server/demo';
+import fallback from '../fixtures/exchange-rates.json';
+test('excluded currencies cannot enter saved or refreshed display rates', () => {
+  const supported = ['INR', 'USD', 'EUR', 'GBP', 'AED', 'SGD', 'JPY', 'AUD', 'CAD', 'CHF'].sort();
+  assert.deepEqual(
+    validRates(fallback.rates)
+      .map((r) => r.quote)
+      .sort(),
+    supported,
+  );
+  assert.ok(fallback.rates.some((r) => r.quote === 'PKR'));
+  assert.ok(!validRates(fallback.rates).some((r) => r.quote === 'PKR'));
+  const row = { date: '2026-09-29', base: 'INR', quote: 'PKR', rate: 3 };
+  assert.deepEqual(
+    validRates([row, { ...row, quote: 'XYZ' }, { ...row, quote: 'USD', rate: 0.012 }]),
+    [{ ...row, quote: 'USD', rate: 0.012 }],
+  );
+});
+test('a saved excluded preference resets to INR and cannot be reselected', async () => {
+  const original = Object.getOwnPropertyDescriptor(globalThis, 'localStorage');
+  let saved = 'PKR';
+  Object.defineProperty(globalThis, 'localStorage', {
+    configurable: true,
+    value: {
+      getItem: () => saved,
+      setItem: (_key: string, value: string) => {
+        saved = value;
+      },
+    },
+  });
+  try {
+    const currency = await import('../src/ui/currency');
+    assert.equal(currency.currencySnapshot().code, 'INR');
+    assert.equal(saved, 'INR');
+    currency.selectCurrency('PKR');
+    assert.equal(currency.currencySnapshot().code, 'INR');
+    currency.selectCurrency('USD');
+    assert.equal(currency.currencySnapshot().code, 'USD');
+    currency.selectCurrency('INR');
+  } finally {
+    if (original) Object.defineProperty(globalThis, 'localStorage', original);
+    else Reflect.deleteProperty(globalThis, 'localStorage');
+  }
+});
 test('display conversions use numeric exchange rates and unambiguous currency codes', () => {
   assert.match(formatCurrency(100000, 'USD', 0.012), /USD\s*1,200\.00/);
   assert.match(formatCurrency(100000, 'EUR', 0.01), /EUR\s*1,000\.00/);

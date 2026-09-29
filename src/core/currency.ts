@@ -4,6 +4,19 @@ export interface ExchangeRate {
   quote: string;
   rate: number;
 }
+// Product availability policy, not a determination of transaction legality.
+const supportedCurrencies = new Set([
+  'INR',
+  'USD',
+  'EUR',
+  'GBP',
+  'AED',
+  'SGD',
+  'JPY',
+  'AUD',
+  'CAD',
+  'CHF',
+]);
 export function validRates(input: unknown): ExchangeRate[] {
   if (!Array.isArray(input)) return [];
   const seen = new Set<string>();
@@ -12,6 +25,7 @@ export function validRates(input: unknown): ExchangeRate[] {
       !row ||
       row.base !== 'INR' ||
       !/^[A-Z]{3}$/.test(row.quote) ||
+      !supportedCurrencies.has(row.quote) ||
       !/^\d{4}-\d{2}-\d{2}$/.test(row.date) ||
       !Number.isFinite(row.rate) ||
       row.rate <= 0 ||

@@ -7,7 +7,14 @@ try {
   /* Optional preference. */
 }
 let rates = validRates(fallback.rates);
-if (code !== 'INR' && !rates.some((r) => r.quote === code)) code = 'INR';
+if (code !== 'INR' && !rates.some((r) => r.quote === code)) {
+  code = 'INR';
+  try {
+    localStorage.setItem('blackstar.currency', code);
+  } catch {
+    /* Preference is optional. */
+  }
+}
 let snapshot = { code, rates, cached: true };
 const listeners = new Set<() => void>();
 export const currencySnapshot = () => snapshot;
