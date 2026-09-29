@@ -1,4 +1,5 @@
 import './config';
+import { exchangeRates } from './exchange';
 import { createServer, type IncomingMessage, type ServerResponse } from 'node:http';
 import { readFile, stat } from 'node:fs/promises';
 import { resolve, extname } from 'node:path';
@@ -156,6 +157,8 @@ const server = createServer(async (req, res) => {
   try {
     if (url.pathname === '/api/health' && req.method === 'GET')
       return json(res, 200, { status: 'ok', demo: true });
+    if (req.method === 'GET' && url.pathname === '/api/exchange-rates')
+      return json(res, 200, await exchangeRates());
     const admin = isAdmin(req.headers.cookie);
     const id = url.searchParams.get('org') ?? demoCatalog[0].id;
     if (req.method === 'GET' && ['/api/state', '/api/export'].includes(url.pathname)) {

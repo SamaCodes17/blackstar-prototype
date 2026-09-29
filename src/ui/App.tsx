@@ -1,4 +1,6 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { CurrencySelector } from './workspace/CurrencySelector';
+import { currencySnapshot, subscribeCurrency, loadCurrencyRates, currencyNote } from './currency';
+import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import { ArrowUpRight, Building2, Plus, SlidersHorizontal, X } from 'lucide-react';
 import type { State } from '../core/types';
 import { decisionSummary } from '../core/decision';
@@ -12,6 +14,10 @@ import { BusinessInputs } from './executive/BusinessInputs';
 import { DecisionBrief } from './executive/DecisionBrief';
 
 export default function App() {
+  useSyncExternalStore(subscribeCurrency, currencySnapshot);
+  useEffect(() => {
+    void loadCurrencyRates();
+  }, []);
   const [state, setState] = useState<State>();
   const [view, setView] = useState<View>(viewFromHash);
   const [chat, setChat] = useState<string | null>(null);
@@ -142,6 +148,7 @@ export default function App() {
             </a>
           ))}
         </nav>
+        <CurrencySelector />
         <button
           className="exec-button secondary"
           onClick={() => setChat('Help me understand this page')}
@@ -251,7 +258,7 @@ export default function App() {
             BLACKSTAR <span>Quantify. Predict. Optimize.</span>
           </span>
           <span>
-            Executive risk decisions ·{' '}
+            {currencyNote()} · Executive risk decisions ·{' '}
             {state.access?.role === 'admin' ? (
               <button className="ws-text-button" onClick={() => void action('/api/logout')}>
                 Sign out

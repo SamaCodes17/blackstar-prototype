@@ -234,8 +234,8 @@ export function DecisionDashboard({
               }}
             />
             <div className="exec-range-labels" data-provenance="ASSUMED">
-              <span>₹0</span>
-              <span>₹10 lakh</span>
+              <span>{money(0)}</span>
+              <span>{money(1000000)}</span>
             </div>
             <div className="exec-budget-bottom">
               <label>

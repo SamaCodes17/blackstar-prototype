@@ -1,14 +1,16 @@
+import { fullMoney } from '../shared';
+import { currencyNote } from '../currency';
 import { useState } from 'react';
 const plans = [
   {
     name: 'Startup',
-    price: '₹4,999',
+    price: 4999,
     audience: 'Small teams finding their first security priorities',
     features: ['One organization', 'Guided risk assessment', 'Budget comparison & board brief'],
   },
   {
     name: 'MSME',
-    price: '₹14,999',
+    price: 14999,
     audience: 'Growing businesses balancing protection and cost',
     features: [
       'Everything in Startup',
@@ -18,7 +20,7 @@ const plans = [
   },
   {
     name: 'Business',
-    price: '₹49,999',
+    price: 49999,
     audience: 'Larger organizations coordinating business units',
     features: [
       'Everything in MSME',
@@ -49,8 +51,11 @@ export function PricingPage() {
         </div>
       </div>
       <p className="demo-notice">
-        <strong>Proposed pilot pricing.</strong> Monthly INR, excluding taxes. Discuss a scoped
-        pilot with us—no payment is collected here.
+        <strong>Proposed pilot pricing.</strong> Monthly, excluding taxes. Discuss a scoped pilot
+        with us—no payment is collected here.
+      </p>
+      <p className="exec-small">
+        {currencyNote()}. Converted prices are indicative; plans are based in INR.
       </p>
       <div className="pricing-grid">
         {plans.map((plan) => (
@@ -64,7 +69,7 @@ export function PricingPage() {
             <h2>{plan.name}</h2>
             <p>{plan.audience}</p>
             <div className="pricing-price">
-              {plan.price}
+              {typeof plan.price === 'number' ? fullMoney(plan.price) : plan.price}
               {plan.name !== 'Enterprise' && <small>/ month</small>}
             </div>
             <ul>
@@ -99,8 +104,8 @@ export function PricingPage() {
           onSubmit={(e) => {
             e.preventDefault();
             const values = new FormData(e.currentTarget);
-            const body = `Plan: ${selected}\nOrganization: ${values.get('organization')}\nApproximate employees: ${values.get('employees')}\nRequirements: ${values.get('requirements')}\n\nPlease help us scope an appropriate BlackStar pilot.`;
-            window.location.href = `mailto:samscollege17@gmail.com?subject=${encodeURIComponent('BlackStar ' + selected + ' enquiry')}&body=${encodeURIComponent(body)}`;
+            const body = `Display currency: ${currencyNote()}\nPlan: ${selected}\nOrganization: ${values.get('organization')}\nApproximate employees: ${values.get('employees')}\nRequirements: ${values.get('requirements')}\n\nPlease help us scope an appropriate BlackStar pilot.`;
+            window.location.href = `mailto:projectblackstar57@gmail.com?subject=${encodeURIComponent('BlackStar ' + selected + ' enquiry')}&body=${encodeURIComponent(body)}`;
           }}
         >
           <label>
@@ -131,7 +136,7 @@ export function PricingPage() {
           <button className="exec-button primary">Open email enquiry</button>
           <small>
             Opens your email app for review. Nothing is sent automatically. You can also email{' '}
-            <a href="mailto:samscollege17@gmail.com">samscollege17@gmail.com</a>.
+            <a href="mailto:projectblackstar57@gmail.com">projectblackstar57@gmail.com</a>.
           </small>
         </form>
       </section>

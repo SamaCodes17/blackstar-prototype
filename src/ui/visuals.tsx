@@ -175,7 +175,7 @@ export function Distribution({ risk }: { risk: Risk }) {
           strokeDasharray="4 4"
         />
         <text x="18" y="172" data-provenance="COMPUTED">
-          ₹0
+          {money(0)}
         </text>
         <text x="510" y="172" textAnchor="end" data-provenance="COMPUTED">
           {money(total)}

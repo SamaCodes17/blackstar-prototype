@@ -55,8 +55,8 @@ export function Budget({
         }}
       />
       <div className="range-limits" data-provenance="ASSUMED">
-        <span>₹0</span>
-        <span>₹10 lakh</span>
+        <span>{money(0)}</span>
+        <span>{money(1000000)}</span>
       </div>
     </div>
   );

@@ -1,13 +1,8 @@
 import { createContext, useContext, useEffect, useRef, type ReactNode } from 'react';
 import { ArrowUpRight, X, Info } from 'lucide-react';
 import type { Tag as TagType } from '../core/types';
-export const money = (n: number) =>
-  Math.abs(n) >= 10000000
-    ? `₹${(n / 10000000).toFixed(2)} Cr`
-    : Math.abs(n) >= 100000
-      ? `₹${(n / 100000).toFixed(2)} L`
-      : `₹${Math.round(n).toLocaleString('en-IN')}`;
-export const fullMoney = (n: number) => `₹${Math.round(n).toLocaleString('en-IN')}`;
+import { money } from './currency';
+export { money, fullMoney } from './currency';
 export const percent = (n: number) => `${(n * 100).toFixed(1)}%`;
 export const human = (s: string) =>
   s.replace(/([A-Z])/g, ' $1').replace(/^./, (c) => c.toUpperCase());

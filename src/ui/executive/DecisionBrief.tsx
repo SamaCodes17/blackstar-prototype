@@ -1,3 +1,4 @@
+import { currencyNote } from '../currency';
 import { ArrowLeft, Printer } from 'lucide-react';
 import type { State } from '../../core/types';
 import { decisionSummary } from '../../core/decision';
@@ -27,6 +28,7 @@ export function DecisionBrief({ state, back }: { state: State; back: () => void 
           {org.example ? 'FICTIONAL DEMO ASSESSMENT' : 'PLANNING ASSESSMENT'}
         </p>
         <h1>{org.name}</h1>
+        <p>{currencyNote()}. Converted figures are indicative.</p>
         {state.access?.demo && (
           <p>
             This fictional company has not been scanned. Financial figures are computed scenario

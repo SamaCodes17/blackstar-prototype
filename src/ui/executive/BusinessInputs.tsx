@@ -1,3 +1,5 @@
+import { currencySnapshot } from '../currency';
+import { formatCurrency } from '../../core/currency';
 import { useState } from 'react';
 import type { Organization } from '../../core/types';
 import { Modal } from '../shared';
@@ -14,6 +16,9 @@ export function BusinessInputs({
   close: () => void;
   update: (body: unknown) => Promise<boolean>;
 }) {
+  const [currency] = useState(currencySnapshot);
+  const rate = currency.rates.find((r) => r.quote === currency.code)?.rate ?? 1;
+  const display = (n: number) => formatCurrency(n, currency.code, rate);
   const [error, setError] = useState('');
   return (
     <Modal title="Business inputs" close={close} wide>
@@ -27,7 +32,7 @@ export function BusinessInputs({
             {
               group: 'assumptions',
               key: 'costPerRecord',
-              value: Number(form.get('costPerRecord')),
+              value: Math.round((Number(form.get('costPerRecord')) / rate) * 100) / 100,
               previous: org.assumptions.costPerRecord.value,
             },
             ...org.assets.map((asset) => ({
@@ -70,14 +75,15 @@ export function BusinessInputs({
           Saving recalculates the plan.
         </p>
         <label className="exec-input-field">
-          Estimated financial impact per lost record (₹)
+          Estimated financial impact per lost record ({currency.code})
           <input
             name="costPerRecord"
             type="number"
-            min="1"
-            max="100000"
+            min={rate}
+            max={100000 * rate}
+            step="any"
             required
-            defaultValue={org.assumptions.costPerRecord.value}
+            defaultValue={org.assumptions.costPerRecord.value * rate}
           />
           <small>
             Include response, recovery and business impact. This is an assumption, not an industry
@@ -108,24 +114,23 @@ export function BusinessInputs({
         </details>
         <h3>Protection costs and effectiveness</h3>
         <p>
-          Annual cost assumptions use increments of ₹25,000. Effectiveness is the assumed reduction
-          in the chance of compromise along the affected access points or paths.
+          Annual cost choices use increments of {display(25000)} (INR 25,000 base). Effectiveness is
+          the assumed reduction in the chance of compromise along the affected access points or
+          paths.
         </p>
         <div className="exec-control-inputs">
           {org.controls.map((c) => (
             <fieldset key={c.id}>
               <legend>{controlCopy[c.id]?.name ?? c.name}</legend>
               <label>
-                Annual cost (₹)
-                <input
-                  name={`cost-${c.id}`}
-                  type="number"
-                  min="25000"
-                  max="1000000"
-                  step="25000"
-                  required
-                  defaultValue={c.cost.value}
-                />
+                Annual cost ({currency.code})
+                <select name={`cost-${c.id}`} defaultValue={c.cost.value} required>
+                  {Array.from({ length: 40 }, (_, i) => (i + 1) * 25000).map((value) => (
+                    <option key={value} value={value}>
+                      {display(value)}
+                    </option>
+                  ))}
+                </select>
               </label>
               <label>
                 Effectiveness (%)

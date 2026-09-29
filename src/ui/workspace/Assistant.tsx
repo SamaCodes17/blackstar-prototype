@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Send, Sparkles, ArrowRight } from 'lucide-react';
 import type { State } from '../../core/types';
 import { explainAssessment } from '../../core/explainer';
+import { fullMoney } from '../currency';
 import { Modal } from '../shared';
 import type { View } from './Workspace';
 export function Assistant({
@@ -43,30 +44,36 @@ export function Assistant({
           Local guide · answers from {state.org.name}’s current assessment. No external AI service.
         </p>
         <div className="ws-chat-log" role="log" aria-live="polite" aria-label="Conversation">
-          {messages.map((m, i) => (
-            <div key={i}>
-              <p className="ws-chat-question">{m.question}</p>
-              <div className="ws-chat-answer">
-                <strong>BLACKSTAR</strong>
-                <p>{m.text}</p>
-                <button
-                  className="ws-text-button"
-                  onClick={() => {
-                    navigate(m.destination);
-                    close();
-                  }}
-                >
-                  Open{' '}
-                  {m.destination === 'risk'
-                    ? 'attack paths'
-                    : m.destination === 'report'
-                      ? 'board brief'
-                      : m.destination}
-                  <ArrowRight size={14} />
-                </button>
+          {messages.map((message, i) => {
+            const m = {
+              question: message.question,
+              ...explainAssessment(message.question, state, view, fullMoney),
+            };
+            return (
+              <div key={i}>
+                <p className="ws-chat-question">{m.question}</p>
+                <div className="ws-chat-answer">
+                  <strong>BLACKSTAR</strong>
+                  <p>{m.text}</p>
+                  <button
+                    className="ws-text-button"
+                    onClick={() => {
+                      navigate(m.destination);
+                      close();
+                    }}
+                  >
+                    Open{' '}
+                    {m.destination === 'risk'
+                      ? 'attack paths'
+                      : m.destination === 'report'
+                        ? 'board brief'
+                        : m.destination}
+                    <ArrowRight size={14} />
+                  </button>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
           <div ref={end} />
         </div>
         <div className="ws-suggestions">

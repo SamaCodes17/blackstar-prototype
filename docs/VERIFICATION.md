@@ -67,7 +67,6 @@ for (const element of document.querySelectorAll('body *')) {
 console.table(missing.filter(Boolean));
 ```
 
-
 ## 27 September 2026 — Public demo and admin boundary
 
 - `npm run check`: 42 tests passed, TypeScript and production Vite build passed.
@@ -77,3 +76,10 @@ console.table(missing.filter(Boolean));
 - Build includes no local database dependency. Existing SQLite is not imported. Runtime requires no historical-source network access in public mode.
 - Not yet verified: actual managed PostgreSQL connection/schema persistence and TLS, Docker image startup (Docker unavailable), cloud deployment, backup/restore, production load or independent penetration testing. The test storage adapter is in-memory; it does not substitute for a PostgreSQL integration test.
 - Email form prepares a `mailto` enquiry for review; no real email was sent during testing.
+
+## 29 September 2026 — Currency and contact
+
+- Replaced the project enquiry email with projectblackstar57@gmail.com. No old email remains in current project text; Git history and prior conversation messages were not rewritten.
+- Added conversion tests for numeric rates, currency formatting/minor units, zero values, invalid/duplicate quotes, assistant figures and invariant source calculations. Full suite: 45 passing tests and production build.
+- Browser verified USD selection changes proposed pricing from INR 4,999 to USD 52.14 at the dated 0.01043 rate. New mailto address is present. No email was sent.
+- FX fetching is distinct from organization collection. A fixed provider endpoint receives no organization inputs. Saved fallback rates are explicitly dated and labeled when the upstream request is unavailable.

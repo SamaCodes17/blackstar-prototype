@@ -6,7 +6,12 @@ export interface Explanation {
   destination: 'overview' | 'evidence' | 'risk' | 'investment' | 'report' | 'pricing';
 }
 /** Deliberately bounded local explainer: it never invents observations or calls an AI service. */
-export function explainAssessment(question: string, state: State, page: string): Explanation {
+export function explainAssessment(
+  question: string,
+  state: State,
+  page: string,
+  formatMoney = rupees,
+): Explanation {
   const q = question.toLowerCase();
   const { org, output } = state;
   const d = decisionSummary(org, output);
@@ -21,7 +26,7 @@ export function explainAssessment(question: string, state: State, page: string):
     );
   if (/pricing|price|subscription|plan cost/.test(q))
     return answer(
-      'Proposed monthly pilot prices are ₹4,999 for Startup, ₹14,999 for MSME and ₹49,999 for Business, excluding taxes. Enterprise scope and pricing are agreed by enquiry. These are proposed assisted services; no payment is collected.',
+      `Proposed monthly pilot prices are ${formatMoney(4999)} for Startup, ${formatMoney(14999)} for MSME and ${formatMoney(49999)} for Business, excluding taxes. Enterprise scope and pricing are agreed by enquiry. These are proposed assisted services; no payment is collected.`,
       'pricing',
     );
   if (/this page|where.*start|help me|how.*use/.test(q)) {
@@ -59,12 +64,12 @@ export function explainAssessment(question: string, state: State, page: string):
     !/p90|uncert|conditional/.test(q)
   )
     return answer(
-      `For ${org.name}, estimated loss is ${rupees(d.before)} over ${org.horizon} days, compared with ${rupees(d.after)} with the selected protections. The difference is ${rupees(d.avoided)}. These figures are calculated, but record counts, financial impact, connections and protection effectiveness include assumptions. They are not observed losses or guaranteed savings. Annual protection cost is ${rupees(d.spend)}.`,
+      `For ${org.name}, estimated loss is ${formatMoney(d.before)} over ${org.horizon} days, compared with ${formatMoney(d.after)} with the selected protections. The difference is ${formatMoney(d.avoided)}. These figures are calculated, but record counts, financial impact, connections and protection effectiveness include assumptions. They are not observed losses or guaranteed savings. Annual protection cost is ${formatMoney(d.spend)}.`,
       'investment',
     );
   if (/p90|uncert|distribution|confidence|simulation/.test(q))
     return answer(
-      `The simulated 90th-percentile loss is ${rupees(output.risk.p90)}: 90% of the ${output.risk.trials.toLocaleString('en-IN')} modeled outcomes are at or below it. That describes this model, not a promise about reality. The simulation’s sampling confidence interval is different from uncertainty in the assumed inputs.`,
+      `The simulated 90th-percentile loss is ${formatMoney(output.risk.p90)}: 90% of the ${output.risk.trials.toLocaleString('en-IN')} modeled outcomes are at or below it. That describes this model, not a promise about reality. The simulation’s sampling confidence interval is different from uncertainty in the assumed inputs.`,
       'risk',
     );
   if (/conditional|blast|compromis|what if/.test(q))
@@ -74,7 +79,7 @@ export function explainAssessment(question: string, state: State, page: string):
     );
   if (/plan|budget|recommend|invest|cost|protect|optim/.test(q))
     return answer(
-      `The plan selects ${d.controls.length} protections for ${rupees(d.spend)} per year within your ${rupees(org.budget)} annual budget. It weighs modeled attacker responses and overlapping protections. It is not simply a ranking of vulnerability severity or a guarantee of maximum cash savings. Loss comparisons cover ${org.horizon} days; prices are annual. Review quotes and effectiveness before approving spend.`,
+      `The plan selects ${d.controls.length} protections for ${formatMoney(d.spend)} per year within your ${formatMoney(org.budget)} annual budget. It weighs modeled attacker responses and overlapping protections. It is not simply a ranking of vulnerability severity or a guarantee of maximum cash savings. Loss comparisons cover ${org.horizon} days; prices are annual. Review quotes and effectiveness before approving spend.`,
       'investment',
     );
   if (/graph|path|connect|attack|edge|node/.test(q))

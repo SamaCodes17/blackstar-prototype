@@ -1216,3 +1216,30 @@ button.ws-stat:hover {
     min-height: 0;
   }
 }
+
+.currency-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  color: #bfb4d0;
+  font-size: 11px;
+}
+.currency-picker select {
+  color: #eee8fa;
+  background: #211a2e;
+  border: 1px solid #514363;
+  border-radius: 7px;
+  padding: 8px;
+  max-width: 130px;
+}
+.executive-app .exec-header {
+  gap: 16px;
+}
+.exec-control-inputs select {
+  width: 100%;
+  padding: 10px;
+  color: inherit;
+  background: #211a2e;
+  border: 1px solid #514363;
+  border-radius: 6px;
+}

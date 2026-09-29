@@ -1,0 +1,1002 @@
+{
+  "source": "https://api.frankfurter.dev/v2/rates?base=INR",
+  "retrievedAt": "2026-09-29",
+  "rates": [
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "AED",
+      "rate": 0.03829
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "AFN",
+      "rate": 0.67786
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "ALL",
+      "rate": 0.84249
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "AMD",
+      "rate": 3.7873
+    },
+    {
+      "date": "2026-09-28",
+      "base": "INR",
+      "quote": "ANG",
+      "rate": 0.01867
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "AOA",
+      "rate": 9.5736
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "ARS",
+      "rate": 15.8938
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "AUD",
+      "rate": 0.01486
+    },
+    {
+      "date": "2026-09-28",
+      "base": "INR",
+      "quote": "AWG",
+      "rate": 0.01869
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "AZN",
+      "rate": 0.01773
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "BAM",
+      "rate": 0.01791
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "BBD",
+      "rate": 0.02136
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "BDT",
+      "rate": 1.2829
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "BHD",
+      "rate": 0.00392
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "BIF",
+      "rate": 31.337
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "BMD",
+      "rate": 0.01043
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "BND",
+      "rate": 0.01332
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "BOB",
+      "rate": 0.12607
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "BRL",
+      "rate": 0.05424
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "BSD",
+      "rate": 0.01054
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "BTN",
+      "rate": 1.0
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "BWP",
+      "rate": 0.13951
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "BYN",
+      "rate": 0.03159
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "BZD",
+      "rate": 0.02118
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "CAD",
+      "rate": 0.01476
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "CDF",
+      "rate": 23.903
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "CHF",
+      "rate": 0.00866
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "CLP",
+      "rate": 10.0722
+    },
+    {
+      "date": "2026-09-28",
+      "base": "INR",
+      "quote": "CMD",
+      "rate": 0.01043
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "CNH",
+      "rate": 0.06996
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "CNY",
+      "rate": 0.06992
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "COP",
+      "rate": 34.686
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "CRC",
+      "rate": 4.7334
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "CUP",
+      "rate": 0.25026
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "CVE",
+      "rate": 1.0097
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "CZK",
+      "rate": 0.22365
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "DJF",
+      "rate": 1.8516
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "DKK",
+      "rate": 0.0685
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "DOP",
+      "rate": 0.62613
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "DZD",
+      "rate": 1.3958
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "EGP",
+      "rate": 0.54219
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "ERN",
+      "rate": 0.15877
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "ETB",
+      "rate": 1.6833
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "EUR",
+      "rate": 0.00916
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "FJD",
+      "rate": 0.02336
+    },
+    {
+      "date": "2026-09-28",
+      "base": "INR",
+      "quote": "FKP",
+      "rate": 0.00786
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "GBP",
+      "rate": 0.00786
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "GEL",
+      "rate": 0.02714
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "GGP",
+      "rate": 0.00786
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "GHS",
+      "rate": 0.1213
+    },
+    {
+      "date": "2026-09-28",
+      "base": "INR",
+      "quote": "GIP",
+      "rate": 0.00797
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "GMD",
+      "rate": 0.7638
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "GNF",
+      "rate": 91.76
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "GTQ",
+      "rate": 0.0797
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "GYD",
+      "rate": 2.2011
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "HKD",
+      "rate": 0.08186
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "HNL",
+      "rate": 0.28035
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "HTG",
+      "rate": 1.3644
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "HUF",
+      "rate": 3.3656
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "IDR",
+      "rate": 187.38
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "ILS",
+      "rate": 0.03194
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "IMP",
+      "rate": 0.00786
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "INR",
+      "rate": 1.0
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "IQD",
+      "rate": 13.6567
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "IRR",
+      "rate": 14266
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "ISK",
+      "rate": 1.256
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "JEP",
+      "rate": 0.00786
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "JMD",
+      "rate": 1.6444
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "JOD",
+      "rate": 0.00739
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "JPY",
+      "rate": 1.6398
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "KES",
+      "rate": 1.3507
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "KGS",
+      "rate": 0.91253
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "KHR",
+      "rate": 42.33
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "KMF",
+      "rate": 4.5185
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "KPW",
+      "rate": 1.3554
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "KRW",
+      "rate": 14.1686
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "KWD",
+      "rate": 0.00321
+    },
+    {
+      "date": "2026-09-28",
+      "base": "INR",
+      "quote": "KYD",
+      "rate": 0.00873
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "KZT",
+      "rate": 4.6008
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "LAK",
+      "rate": 232.11
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "LBP",
+      "rate": 935.27
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "LKR",
+      "rate": 3.4455
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "LRD",
+      "rate": 1.7913
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "LSL",
+      "rate": 0.17105
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "LYD",
+      "rate": 0.06672
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "MAD",
+      "rate": 0.10051
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "MDL",
+      "rate": 0.18467
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "MGA",
+      "rate": 45.811
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "MKD",
+      "rate": 0.56494
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "MMK",
+      "rate": 21.893
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "MNT",
+      "rate": 37.486
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "MOP",
+      "rate": 0.08432
+    },
+    {
+      "date": "2026-09-28",
+      "base": "INR",
+      "quote": "MRO",
+      "rate": 0.41262
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "MRU",
+      "rate": 0.41935
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "MUR",
+      "rate": 0.49513
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "MVR",
+      "rate": 0.16069
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "MWK",
+      "rate": 18.0788
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "MXN",
+      "rate": 0.18581
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "MYR",
+      "rate": 0.04256
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "MZN",
+      "rate": 0.66396
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "NAD",
+      "rate": 0.17093
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "NGN",
+      "rate": 13.8456
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "NIO",
+      "rate": 0.3819
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "NOK",
+      "rate": 0.09929
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "NPR",
+      "rate": 1.6016
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "NZD",
+      "rate": 0.0184
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "OMR",
+      "rate": 0.00401
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "PAB",
+      "rate": 0.01044
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "PEN",
+      "rate": 0.03568
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "PGK",
+      "rate": 0.04689
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "PHP",
+      "rate": 0.65163
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "PKR",
+      "rate": 2.895
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "PLN",
+      "rate": 0.0401
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "PYG",
+      "rate": 61.426
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "QAR",
+      "rate": 0.03796
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "RON",
+      "rate": 0.04841
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "RSD",
+      "rate": 1.0781
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "RUB",
+      "rate": 0.8802
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "RWF",
+      "rate": 15.3862
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "SAR",
+      "rate": 0.0391
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "SBD",
+      "rate": 0.08398
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "SCR",
+      "rate": 0.15221
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "SDG",
+      "rate": 6.2647
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "SEK",
+      "rate": 0.10373
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "SGD",
+      "rate": 0.01332
+    },
+    {
+      "date": "2026-09-28",
+      "base": "INR",
+      "quote": "SHP",
+      "rate": 0.00786
+    },
+    {
+      "date": "2026-09-28",
+      "base": "INR",
+      "quote": "SLE",
+      "rate": 0.25557
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "SOS",
+      "rate": 5.9672
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "SRD",
+      "rate": 0.39307
+    },
+    {
+      "date": "2026-09-28",
+      "base": "INR",
+      "quote": "SSP",
+      "rate": 60.145
+    },
+    {
+      "date": "2026-09-28",
+      "base": "INR",
+      "quote": "STN",
+      "rate": 0.22542
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "SVC",
+      "rate": 0.09136
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "SYP",
+      "rate": 1.273
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "SZL",
+      "rate": 0.17043
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "THB",
+      "rate": 0.35001
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "TJS",
+      "rate": 0.09626
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "TMT",
+      "rate": 0.0365
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "TND",
+      "rate": 0.03086
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "TOP",
+      "rate": 0.02493
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "TRY",
+      "rate": 0.51072
+    },
+    {
+      "date": "2026-09-28",
+      "base": "INR",
+      "quote": "TTD",
+      "rate": 0.07042
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "TWD",
+      "rate": 0.33157
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "TZS",
+      "rate": 27.506
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "UAH",
+      "rate": 0.46794
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "UGX",
+      "rate": 40.797
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "USD",
+      "rate": 0.01043
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "UYU",
+      "rate": 0.41969
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "UZS",
+      "rate": 123.28
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "VES",
+      "rate": 8.9299
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "VND",
+      "rate": 270.17
+    },
+    {
+      "date": "2026-09-28",
+      "base": "INR",
+      "quote": "VUV",
+      "rate": 1.2288
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "WST",
+      "rate": 0.02871
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "XAF",
+      "rate": 6.0069
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "XAG",
+      "rate": 0.00017
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "XAU",
+      "rate": 3e-06
+    },
+    {
+      "date": "2026-09-28",
+      "base": "INR",
+      "quote": "XCD",
+      "rate": 0.02851
+    },
+    {
+      "date": "2026-09-28",
+      "base": "INR",
+      "quote": "XCG",
+      "rate": 0.01881
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "XDR",
+      "rate": 0.00767
+    },
+    {
+      "date": "2026-09-28",
+      "base": "INR",
+      "quote": "XOF",
+      "rate": 6.0005
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "XPD",
+      "rate": 8e-06
+    },
+    {
+      "date": "2026-09-28",
+      "base": "INR",
+      "quote": "XPF",
+      "rate": 1.0949
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "XPT",
+      "rate": 6e-06
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "YER",
+      "rate": 2.4677
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "ZAR",
+      "rate": 0.1707
+    },
+    {
+      "date": "2026-09-29",
+      "base": "INR",
+      "quote": "ZMW",
+      "rate": 0.20336
+    },
+    {
+      "date": "2026-09-28",
+      "base": "INR",
+      "quote": "ZWG",
+      "rate": 0.28001
+    }
+  ]
+}
