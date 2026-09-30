@@ -8,3 +8,4 @@ data/*.json
 artifacts/
 *.log
 .DS_Store
+.vercel/

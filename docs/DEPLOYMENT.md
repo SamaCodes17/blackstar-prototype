@@ -6,7 +6,21 @@ The repository is ready for a provider-hosted Node/Docker service. **No public d
 
 Use only `SamaCodes17/blackstar-prototype`, branch `prototype`. Do not authorize the team repository. Authenticate the personal account through GitHub's normal sign-in/device flow; do not paste a token into chat. Verify the authenticated account and exact repository, review `PUSH_REVIEW.md`, then obtain first-push confirmation. Local commit authorship is not proof of the authenticated GitHub account.
 
-## 2. Public demo on Render
+## 2. Public demo on Vercel
+
+Vercel serves the Vite build from `dist` and routes `/api/*` to `api/[...path].ts`. That entry point uses the same API handler as the local/Docker server, with no Vite server or listening socket inside the function. The public demo needs no database. No Vercel deployment has been verified yet.
+
+1. Sign in to Vercel and import only `SamaCodes17/blackstar-prototype`. Use `prototype` as the production branch, the Vite preset, Node 24, build command `npm run build`, and output directory `dist`.
+2. Keep live collection disabled (`ENABLE_LIVE_COLLECTION=false`). Do not upload `.env`, Shodan credentials, local data, or admin credentials for the public demo.
+3. Vercel's system variables supply the production and deployment origins. Ensure system environment variables are exposed. If using a custom domain, set `PUBLIC_ORIGIN` to its exact HTTPS origin and redeploy. Request headers cannot add trusted origins.
+4. Deploy and check `/api/health`, all three demo organizations, POST scenario/plan updates, report export and currency changes. Confirm private organizations return 404 and unauthenticated organization creation/scan returns 403. Set production deployment access so evaluators can open the public demo without Vercel authentication.
+5. Share the production HTTPS URL shown by Vercel. The laptop is no longer involved. An actual cloud build and these checks must succeed before calling the deployment complete.
+
+Function duration is capped at 60 seconds. Rate limits and update locks are per instance, not distributed; this configuration is for the bounded public demo. Private production workloads still need managed PostgreSQL, distributed coordination/rate limits and load testing. Hosting usage and plan eligibility must be checked in the owner's Vercel account before selecting a plan.
+
+References: https://vercel.com/docs/frameworks/frontend/vite and https://vercel.com/docs/functions/runtimes/node-js.
+
+## Alternative: Public demo on Render
 
 1. Create/sign into https://dashboard.render.com/ with your chosen account. You complete password entry, verification and account terms.
 2. Grant the GitHub integration access to **only the personal prototype repository**. Review the permission screen before accepting it.
