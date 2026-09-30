@@ -8,7 +8,9 @@ This repository contains the working public-demo prototype. It is designed for f
 
 ## Try the demo
 
-**Public link:** deployment to Vercel is in progress. A verified link will be added here once it is live.
+**[Open the live BlackStar demo](https://blackstar-prototype.vercel.app/)**
+
+Hosted on Vercel. Open the link on any device; no local installation is needed.
 
 The demo opens without a login. Choose one of three fictional organizations:
 

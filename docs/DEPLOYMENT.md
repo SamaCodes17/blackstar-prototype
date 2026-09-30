@@ -1,6 +1,6 @@
 # Deploy BlackStar without a laptop dependency
 
-The repository is ready for a provider-hosted Node/Docker service. **No public deployment or managed database has been created yet.** The current preview remains localhost. The first GitHub push requires the owner's explicit confirmation.
+The repository is ready for a provider-hosted Node/Docker service. **Public demo:** https://blackstar-prototype.vercel.app/ (Vercel, production branch `prototype`). Verified on 30 September 2026. No managed database has been created; the public fictional demo does not require one.
 
 ## 1. Personal GitHub setup
 
@@ -8,7 +8,9 @@ Use only `SamaCodes17/blackstar-prototype`, branch `prototype`. Do not authorize
 
 ## 2. Public demo on Vercel
 
-Vercel serves the Vite build from `dist` and routes `/api/*` to `api/[...path].ts`. That entry point uses the same API handler as the local/Docker server, with no Vite server or listening socket inside the function. The public demo needs no database. No Vercel deployment has been verified yet.
+Backend imports use native Node ESM file extensions and JSON import attributes; this avoids runtime failures hidden by the local TypeScript runner.
+
+Vercel serves the Vite build from `dist` and routes `/api/*` to `api/[...path].ts`. That entry point uses the same API handler as the local/Docker server, with no Vite server or listening socket inside the function. The public demo needs no database. The production deployment was verified without authentication: health, three fictional organizations, budget recalculation, currency list, and denial of private reads/admin writes/cross-origin updates. Browser verification confirmed the dashboard and branching scenario changes.
 
 1. Sign in to Vercel and import only `SamaCodes17/blackstar-prototype`. Use `prototype` as the production branch, the Vite preset, Node 24, build command `npm run build`, and output directory `dist`.
 2. Keep live collection disabled (`ENABLE_LIVE_COLLECTION=false`). Do not upload `.env`, Shodan credentials, local data, or admin credentials for the public demo.
