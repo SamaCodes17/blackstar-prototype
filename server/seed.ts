@@ -1,5 +1,5 @@
-import snapshot from '../fixtures/ct-srmist.json';
-import type { Asset, Fact, Organization, Tag } from '../src/core/types';
+import snapshot from '../fixtures/ct-srmist.json' with { type: 'json' };
+import type { Asset, Fact, Organization, Tag } from '../src/core/types.js';
 export const assumed = (
   value: number,
   reason: string,

@@ -1,4 +1,4 @@
-import type { Organization, Output } from './types';
+import type { Organization, Output } from './types.js';
 
 // Presentation arithmetic only. Risk estimates and the selected portfolio come
 // from the stored engine result, so the dashboard and brief use identical values.

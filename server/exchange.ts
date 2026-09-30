@@ -1,5 +1,5 @@
-import fallback from '../fixtures/exchange-rates.json';
-import { validRates } from '../src/core/currency';
+import fallback from '../fixtures/exchange-rates.json' with { type: 'json' };
+import { validRates } from '../src/core/currency.js';
 let cached = { rates: validRates(fallback.rates), source: fallback.source, cached: true };
 let nextAttempt = 0;
 let pending: Promise<typeof cached> | undefined;

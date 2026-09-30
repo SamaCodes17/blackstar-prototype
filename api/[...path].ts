@@ -1,1 +1,1 @@
-export { handleApi as default } from '../server/app';
+export { handleApi as default } from '../server/app.js';

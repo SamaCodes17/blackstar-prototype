@@ -1,6 +1,6 @@
-import './config';
+import './config.js';
 import pg from 'pg';
-import type { Organization, Output, Timeline } from '../src/core/types';
+import type { Organization, Output, Timeline } from '../src/core/types.js';
 
 // The public demo never enters this store. Private assessments require PostgreSQL.
 const testMemory = process.env.BLACKSTAR_DB === ':memory:';

@@ -1,5 +1,5 @@
 import { isIP } from 'node:net';
-import type { Organization } from '../src/core/types';
+import type { Organization } from '../src/core/types.js';
 type Read = (url: string) => Promise<any>;
 /** Only send globally routable IPv4 addresses to the passive host index. */
 export function publicIPv4(ip: unknown): ip is string {

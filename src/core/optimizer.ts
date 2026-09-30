@@ -1,6 +1,6 @@
-import { exact, modelFor } from './risk';
-import type { Model, Organization, Portfolio, Response } from './types';
-import { inferCached } from './incremental';
+import { exact, modelFor } from './risk.js';
+import type { Model, Organization, Portfolio, Response } from './types.js';
+import { inferCached } from './incremental.js';
 
 // Strong Stackelberg tie: attacker utility first, then minimum defender loss.
 export function bestResponse(responses: Response[]): Response {

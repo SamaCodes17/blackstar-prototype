@@ -1,5 +1,5 @@
-import type { Organization, Portfolio, QuboResult } from './types';
-import { random } from './random';
+import type { Organization, Portfolio, QuboResult } from './types.js';
+import { random } from './random.js';
 export interface Qubo {
   n: number;
   linear: number[];

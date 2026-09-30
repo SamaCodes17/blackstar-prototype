@@ -1,7 +1,7 @@
-import { exact, modelFor, riskFor } from './risk';
-import { optimize } from './optimizer';
-import { verifyQuantum } from './quantum';
-import type { Organization, Output } from './types';
+import { exact, modelFor, riskFor } from './risk.js';
+import { optimize } from './optimizer.js';
+import { verifyQuantum } from './quantum.js';
+import type { Organization, Output } from './types.js';
 export const rupees = (value: number) => '₹' + Math.round(value).toLocaleString('en-IN');
 export function compute(org: Organization): Output {
   const { optimal, naive, portfolios } = optimize(org),

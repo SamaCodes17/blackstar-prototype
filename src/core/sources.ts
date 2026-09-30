@@ -1,4 +1,4 @@
-import type { Source } from './types';
+import type { Source } from './types.js';
 export const sources: Source[] = [
   {
     id: 'stackelberg',

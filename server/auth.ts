@@ -1,6 +1,6 @@
-import './config';
+import './config.js';
 import { createHmac, randomBytes, scryptSync, timingSafeEqual } from 'node:crypto';
-import { secureCookies } from './config';
+import { secureCookies } from './config.js';
 
 export function passwordHash(password: string, salt = randomBytes(16).toString('hex')) {
   return `${salt}:${scryptSync(password, salt, 64).toString('hex')}`;

@@ -1,9 +1,9 @@
-import { lookupResolvedHosts } from './shodan';
+import { lookupResolvedHosts } from './shodan.js';
 import { domainToASCII } from 'node:url';
 import { isIP } from 'node:net';
-import { cache, cached } from './store';
-import { assumed, classify } from './seed';
-import type { Organization, ScanStatus } from '../src/core/types';
+import { cache, cached } from './store.js';
+import { assumed, classify } from './seed.js';
+import type { Organization, ScanStatus } from '../src/core/types.js';
 
 const allowedHosts = new Set([
   'crt.sh',

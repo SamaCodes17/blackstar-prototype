@@ -1,10 +1,10 @@
-import './config';
-import { exchangeRates } from './exchange';
+import './config.js';
+import { exchangeRates } from './exchange.js';
 import type { IncomingMessage, ServerResponse } from 'node:http';
-import { compute } from '../src/core/pipeline';
-import { selfcheck } from '../src/core/selfcheck';
-import type { Organization, State, Tag } from '../src/core/types';
-import { createOrganization } from './seed';
+import { compute } from '../src/core/pipeline.js';
+import { selfcheck } from '../src/core/selfcheck.js';
+import type { Organization, State, Tag } from '../src/core/types.js';
+import { createOrganization } from './seed.js';
 import {
   getOrg,
   getOutput,
@@ -13,12 +13,12 @@ import {
   timeline,
   initializeStore,
   persistentStorage,
-} from './store';
-import { normalizeDomain, scan } from './collectors';
-import { applyEdits, number } from './validation';
-import { demoState, demoCatalog, isDemo } from './demo';
-import { configured, checkPassword, isAdmin, sessionCookie, logoutCookie, allowed } from './auth';
-import { publicOrigin, allowedOrigins } from './config';
+} from './store.js';
+import { normalizeDomain, scan } from './collectors.js';
+import { applyEdits, number } from './validation.js';
+import { demoState, demoCatalog, isDemo } from './demo.js';
+import { configured, checkPassword, isAdmin, sessionCookie, logoutCookie, allowed } from './auth.js';
+import { publicOrigin, allowedOrigins } from './config.js';
 
 let initialization: Promise<void> | undefined;
 async function commit(org: Organization, event: string, tag: Tag = 'COMPUTED') {

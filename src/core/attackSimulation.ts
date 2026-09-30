@@ -1,6 +1,6 @@
-import { exact, modelFor } from './risk';
-import { responsesFor } from './optimizer';
-import type { Edge, Organization } from './types';
+import { exact, modelFor } from './risk.js';
+import { responsesFor } from './optimizer.js';
+import type { Edge, Organization } from './types.js';
 export function compromiseImpact(org: Organization, entry: string, mask = 0) {
   const model = modelFor(org, mask);
   if (!model.ids.includes(entry)) throw new Error('Unknown starting system');

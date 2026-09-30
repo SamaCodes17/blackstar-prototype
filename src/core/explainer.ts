@@ -1,5 +1,5 @@
-import type { State } from './types';
-import { decisionSummary } from './decision';
+import type { State } from './types.js';
+import { decisionSummary } from './decision.js';
 const rupees = (n: number) => `₹${Math.round(n).toLocaleString('en-IN')}`;
 export interface Explanation {
   text: string;

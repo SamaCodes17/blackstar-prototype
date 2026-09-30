@@ -1,4 +1,4 @@
-import type { Model } from './types';
+import type { Model } from './types.js';
 
 // A changed conditional distribution only invalidates itself and descendants.
 // Unaffected nodes have the same joint law, even when they are correlated.

@@ -1,6 +1,6 @@
-import type { Model, Organization, Risk } from './types';
-import { quantile, random } from './random';
-import { infer, inferCached } from './incremental';
+import type { Model, Organization, Risk } from './types.js';
+import { quantile, random } from './random.js';
+import { infer, inferCached } from './incremental.js';
 export const clamp = (x: number) => Math.min(1, Math.max(0, x));
 export const epssToHorizon = (p: number, days = 365) => 1 - Math.pow(1 - clamp(p), days / 30);
 

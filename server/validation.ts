@@ -1,4 +1,4 @@
-import type { Fact, Organization } from '../src/core/types';
+import type { Fact, Organization } from '../src/core/types.js';
 export function number(value: unknown, min: number, max: number) {
   if (typeof value !== 'number' || !Number.isFinite(value) || value < min || value > max)
     throw new Error(`Value must be between ${min} and ${max}`);

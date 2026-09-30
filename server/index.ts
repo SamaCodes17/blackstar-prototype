@@ -1,11 +1,11 @@
-import './config';
+import './config.js';
 import { createServer } from 'node:http';
 import { readFile, stat } from 'node:fs/promises';
 import { resolve, extname } from 'node:path';
 import { createServer as createViteServer } from 'vite';
-import { handleApi } from './app';
-import { closeStore } from './store';
-import { publicOrigin, allowedOrigins } from './config';
+import { handleApi } from './app.js';
+import { closeStore } from './store.js';
+import { publicOrigin, allowedOrigins } from './config.js';
 const port = Number(process.env.PORT ?? 4173),
   host = process.env.HOST ?? '127.0.0.1';
 if (!['127.0.0.1', 'localhost', '::1'].includes(host) && !process.env.PUBLIC_ORIGIN)

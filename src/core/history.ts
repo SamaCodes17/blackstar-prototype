@@ -1,5 +1,5 @@
-import data from '../../fixtures/vcdb-aggregate.json';
-import type { Organization } from './types';
+import data from '../../fixtures/vcdb-aggregate.json' with { type: 'json' };
+import type { Organization } from './types.js';
 
 export function historicalContext(sector: string) {
   const code = ({ financial: '52', education: '61', government: '92' } as Record<string, string>)[

@@ -1,7 +1,7 @@
-import { exact, epssToHorizon, simulate, forward } from './risk';
-import { bestResponse, optimize, score } from './optimizer';
-import { energy, formulate, qaoaProbabilities, verifyQuantum } from './quantum';
-import type { Model, Organization, Output, Response } from './types';
+import { exact, epssToHorizon, simulate, forward } from './risk.js';
+import { bestResponse, optimize, score } from './optimizer.js';
+import { energy, formulate, qaoaProbabilities, verifyQuantum } from './quantum.js';
+import type { Model, Organization, Output, Response } from './types.js';
 export interface Check {
   name: string;
   passed: boolean;

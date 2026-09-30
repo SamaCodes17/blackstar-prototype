@@ -1,9 +1,9 @@
-import { createOrganization } from './seed';
-import { illustrativeNetwork } from '../src/core/attackSimulation';
-import { compute } from '../src/core/pipeline';
-import { applyEdits } from './validation';
-import { applyHistoricalPriors } from '../src/core/history';
-import type { State, Organization } from '../src/core/types';
+import { createOrganization } from './seed.js';
+import { illustrativeNetwork } from '../src/core/attackSimulation.js';
+import { compute } from '../src/core/pipeline.js';
+import { applyEdits } from './validation.js';
+import { applyHistoricalPriors } from '../src/core/history.js';
+import type { State, Organization } from '../src/core/types.js';
 
 export const demoCatalog = [
   {
